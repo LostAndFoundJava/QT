@@ -18,13 +18,13 @@ Widget::Widget(QWidget *parent) :
     ui(new Ui::Widget)
 {
     //操作数据库，读取相关保存信息，封装函数
-    qDebug()<<"///////////////////////////////////////////////";
-    SQLITE * sqlite = new SQLITE;
-    sqlite->openDatabase();
+    //qDebug()<<"///////////////////////////////////////////////";
+    //SQLITE * sqlite = new SQLITE;
+    //sqlite->openDatabase();
     //sqlite->insert("food",1,-50,-50,100,100,-50,0,50,0,0,1300,0);
-    JuXingKuang *jxk = sqlite->query("food",1);
-    qDebug()<<"///////////////////////////////////////////////";
-    sqlite->closeDatabase();
+    //JuXingKuang *jxk = sqlite->query("food",1);
+    //qDebug()<<"///////////////////////////////////////////////";
+    //sqlite->closeDatabase();
     //假设为这么多，以后从文件中读取
     ui->setupUi(this);
 
@@ -38,9 +38,9 @@ Widget::Widget(QWidget *parent) :
     //定义子widget
     SUBWIDGET *sub =new SUBWIDGET(this);
 
-    //sub->initiation(0,1300,-20,0,20,0,40,40,0,-20,-20);
-    sub->initiation(jxk->getK1Q(),jxk->getK2Q(),jxk->getB1Q(),jxk->getB2Q(),jxk->getB3Q(),jxk->getB4Q(),
-                    jxk->getLen1Q(),jxk->getLen2Q(),jxk->getDegreeQ(),jxk->getxQ(),jxk->getyQ());
+    sub->initiation(0,1300,-20,0,20,0,40,40,0,-20,-20);
+    //sub->initiation(jxk->getK1Q(),jxk->getK2Q(),jxk->getB1Q(),jxk->getB2Q(),jxk->getB3Q(),jxk->getB4Q(),
+                   // jxk->getLen1Q(),jxk->getLen2Q(),jxk->getDegreeQ(),jxk->getxQ(),jxk->getyQ());
     //定义子widget背景色
     sub->setGeometryByUser(271,30,450,200);
     Pal.setColor(QPalette::Background, "#FFFFF0");

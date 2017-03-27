@@ -1,0 +1,4 @@
+/debug/*
+/release/*
+Bofeng.pro.user
+*.o

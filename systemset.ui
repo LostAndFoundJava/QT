@@ -80,14 +80,23 @@
   <property name="styleSheet">
    <string notr="true"/>
   </property>
-  <widget class="QLabel" name="label">
+  <widget class="QLabel" name="SystemLabel">
    <property name="geometry">
     <rect>
-     <x>40</x>
-     <y>12</y>
+     <x>10</x>
+     <y>10</y>
      <width>41</width>
      <height>20</height>
     </rect>
+   </property>
+   <property name="font">
+    <font>
+     <family>微软雅黑</family>
+     <pointsize>14</pointsize>
+    </font>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">border:none;</string>
    </property>
    <property name="frameShape">
     <enum>QFrame::Box</enum>
@@ -101,9 +110,20 @@
     <rect>
      <x>330</x>
      <y>10</y>
-     <width>91</width>
+     <width>101</width>
      <height>31</height>
     </rect>
+   </property>
+   <property name="font">
+    <font>
+     <family>幼圆</family>
+     <pointsize>12</pointsize>
+    </font>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">background-color: rgb(83, 148, 160);
+color: rgb(255, 250, 240);
+border-radius:5px;</string>
    </property>
    <property name="text">
     <string>权限/用户名</string>
@@ -112,20 +132,29 @@
   <widget class="QLabel" name="DateTime">
    <property name="geometry">
     <rect>
-     <x>570</x>
+     <x>574</x>
      <y>10</y>
-     <width>161</width>
-     <height>20</height>
+     <width>176</width>
+     <height>31</height>
     </rect>
+   </property>
+   <property name="font">
+    <font>
+     <family>微软雅黑</family>
+     <pointsize>14</pointsize>
+    </font>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">border:none;</string>
    </property>
    <property name="frameShape">
     <enum>QFrame::Box</enum>
    </property>
    <property name="text">
-    <string>2017年02月01日星期日 13:28</string>
+    <string>2017/02/01 13:28</string>
    </property>
   </widget>
-  <widget class="QPushButton" name="pushButton_1">
+  <widget class="QPushButton" name="power">
    <property name="geometry">
     <rect>
      <x>40</x>
@@ -133,6 +162,17 @@
      <width>90</width>
      <height>30</height>
     </rect>
+   </property>
+   <property name="font">
+    <font>
+     <family>幼圆</family>
+     <pointsize>12</pointsize>
+    </font>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">background-color: rgb(83, 148, 160);
+color: rgb(255, 250, 240);
+border-radius:5px;</string>
    </property>
    <property name="text">
     <string>权限</string>
@@ -141,11 +181,22 @@
   <widget class="QPushButton" name="pushButton_2">
    <property name="geometry">
     <rect>
-     <x>130</x>
+     <x>150</x>
      <y>50</y>
      <width>90</width>
      <height>30</height>
     </rect>
+   </property>
+   <property name="font">
+    <font>
+     <family>幼圆</family>
+     <pointsize>12</pointsize>
+    </font>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">background-color: rgb(83, 148, 160);
+color: rgb(255, 250, 240);
+border-radius:5px;</string>
    </property>
    <property name="text">
     <string>语言</string>
@@ -154,11 +205,22 @@
   <widget class="QPushButton" name="pushButton_3">
    <property name="geometry">
     <rect>
-     <x>220</x>
+     <x>260</x>
      <y>50</y>
      <width>90</width>
      <height>30</height>
     </rect>
+   </property>
+   <property name="font">
+    <font>
+     <family>幼圆</family>
+     <pointsize>12</pointsize>
+    </font>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">background-color: rgb(83, 148, 160);
+color: rgb(255, 250, 240);
+border-radius:5px;</string>
    </property>
    <property name="text">
     <string>自检</string>
@@ -167,11 +229,22 @@
   <widget class="QPushButton" name="pushButton_4">
    <property name="geometry">
     <rect>
-     <x>310</x>
+     <x>380</x>
      <y>50</y>
-     <width>90</width>
+     <width>97</width>
      <height>30</height>
     </rect>
+   </property>
+   <property name="font">
+    <font>
+     <family>幼圆</family>
+     <pointsize>12</pointsize>
+    </font>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">background-color: rgb(83, 148, 160);
+color: rgb(255, 250, 240);
+border-radius:5px;</string>
    </property>
    <property name="text">
     <string>屏幕与显示</string>
@@ -180,11 +253,22 @@
   <widget class="QPushButton" name="pushButton_5">
    <property name="geometry">
     <rect>
-     <x>400</x>
+     <x>500</x>
      <y>50</y>
      <width>90</width>
      <height>30</height>
     </rect>
+   </property>
+   <property name="font">
+    <font>
+     <family>幼圆</family>
+     <pointsize>12</pointsize>
+    </font>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">background-color: rgb(83, 148, 160);
+color: rgb(255, 250, 240);
+border-radius:5px;</string>
    </property>
    <property name="text">
     <string>图形清空</string>
@@ -193,230 +277,122 @@
   <widget class="QPushButton" name="pushButton_6">
    <property name="geometry">
     <rect>
-     <x>490</x>
+     <x>610</x>
      <y>50</y>
      <width>90</width>
      <height>30</height>
     </rect>
+   </property>
+   <property name="font">
+    <font>
+     <family>幼圆</family>
+     <pointsize>12</pointsize>
+    </font>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">background-color: rgb(83, 148, 160);
+color: rgb(255, 250, 240);
+border-radius:5px;</string>
    </property>
    <property name="text">
     <string>联网</string>
    </property>
   </widget>
-  <widget class="QPushButton" name="pushButton_7">
-   <property name="geometry">
-    <rect>
-     <x>580</x>
-     <y>50</y>
-     <width>90</width>
-     <height>30</height>
-    </rect>
-   </property>
-   <property name="text">
-    <string>输入输出</string>
-   </property>
-  </widget>
-  <widget class="QPushButton" name="pushButton_8">
-   <property name="geometry">
-    <rect>
-     <x>40</x>
-     <y>80</y>
-     <width>90</width>
-     <height>30</height>
-    </rect>
-   </property>
-   <property name="text">
-    <string>设备参数</string>
-   </property>
-  </widget>
   <widget class="QPushButton" name="pushButton_9">
    <property name="geometry">
     <rect>
-     <x>130</x>
-     <y>80</y>
+     <x>260</x>
+     <y>100</y>
      <width>90</width>
      <height>30</height>
     </rect>
+   </property>
+   <property name="font">
+    <font>
+     <family>幼圆</family>
+     <pointsize>12</pointsize>
+    </font>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">background-color: rgb(83, 148, 160);
+color: rgb(255, 250, 240);
+border-radius:5px;</string>
    </property>
    <property name="text">
     <string>更新</string>
    </property>
   </widget>
-  <widget class="QPushButton" name="pushButton_10">
+  <widget class="QPushButton" name="setting">
    <property name="geometry">
     <rect>
-     <x>220</x>
-     <y>80</y>
-     <width>90</width>
+     <x>380</x>
+     <y>100</y>
+     <width>117</width>
      <height>30</height>
     </rect>
+   </property>
+   <property name="font">
+    <font>
+     <family>幼圆</family>
+     <pointsize>12</pointsize>
+    </font>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">background-color: rgb(83, 148, 160);
+color: rgb(255, 250, 240);
+border-radius:5px;</string>
    </property>
    <property name="text">
     <string>恢复出厂设置</string>
    </property>
   </widget>
-  <widget class="QStackedWidget" name="stackedWidget">
+  <widget class="QPushButton" name="pushButton_8">
    <property name="geometry">
     <rect>
-     <x>50</x>
-     <y>120</y>
-     <width>671</width>
-     <height>281</height>
+     <x>150</x>
+     <y>100</y>
+     <width>90</width>
+     <height>30</height>
     </rect>
    </property>
-   <property name="currentIndex">
-    <number>9</number>
+   <property name="font">
+    <font>
+     <family>幼圆</family>
+     <pointsize>12</pointsize>
+    </font>
    </property>
-   <widget class="QWidget" name="page1">
-    <widget class="QLabel" name="label_2">
-     <property name="geometry">
-      <rect>
-       <x>30</x>
-       <y>20</y>
-       <width>54</width>
-       <height>12</height>
-      </rect>
-     </property>
-     <property name="text">
-      <string>1</string>
-     </property>
-    </widget>
-   </widget>
-   <widget class="QWidget" name="page2">
-    <widget class="QLabel" name="label_3">
-     <property name="geometry">
-      <rect>
-       <x>30</x>
-       <y>20</y>
-       <width>54</width>
-       <height>12</height>
-      </rect>
-     </property>
-     <property name="text">
-      <string>2</string>
-     </property>
-    </widget>
-   </widget>
-   <widget class="QWidget" name="page3">
-    <widget class="QLabel" name="label_4">
-     <property name="geometry">
-      <rect>
-       <x>20</x>
-       <y>20</y>
-       <width>54</width>
-       <height>12</height>
-      </rect>
-     </property>
-     <property name="text">
-      <string>3</string>
-     </property>
-    </widget>
-   </widget>
-   <widget class="QWidget" name="page4">
-    <widget class="QLabel" name="label_5">
-     <property name="geometry">
-      <rect>
-       <x>30</x>
-       <y>20</y>
-       <width>54</width>
-       <height>12</height>
-      </rect>
-     </property>
-     <property name="text">
-      <string>4</string>
-     </property>
-    </widget>
-   </widget>
-   <widget class="QWidget" name="page5">
-    <widget class="QLabel" name="label_6">
-     <property name="geometry">
-      <rect>
-       <x>30</x>
-       <y>20</y>
-       <width>54</width>
-       <height>12</height>
-      </rect>
-     </property>
-     <property name="text">
-      <string>5</string>
-     </property>
-    </widget>
-   </widget>
-   <widget class="QWidget" name="page6">
-    <widget class="QLabel" name="label_7">
-     <property name="geometry">
-      <rect>
-       <x>30</x>
-       <y>20</y>
-       <width>54</width>
-       <height>12</height>
-      </rect>
-     </property>
-     <property name="text">
-      <string>6</string>
-     </property>
-    </widget>
-   </widget>
-   <widget class="QWidget" name="page7">
-    <widget class="QLabel" name="label_8">
-     <property name="geometry">
-      <rect>
-       <x>30</x>
-       <y>20</y>
-       <width>54</width>
-       <height>12</height>
-      </rect>
-     </property>
-     <property name="text">
-      <string>7</string>
-     </property>
-    </widget>
-   </widget>
-   <widget class="QWidget" name="page8">
-    <widget class="QLabel" name="label_9">
-     <property name="geometry">
-      <rect>
-       <x>40</x>
-       <y>20</y>
-       <width>54</width>
-       <height>12</height>
-      </rect>
-     </property>
-     <property name="text">
-      <string>8</string>
-     </property>
-    </widget>
-   </widget>
-   <widget class="QWidget" name="page9">
-    <widget class="QLabel" name="label_10">
-     <property name="geometry">
-      <rect>
-       <x>30</x>
-       <y>20</y>
-       <width>54</width>
-       <height>12</height>
-      </rect>
-     </property>
-     <property name="text">
-      <string>9</string>
-     </property>
-    </widget>
-   </widget>
-   <widget class="QWidget" name="page10">
-    <widget class="QLabel" name="label_11">
-     <property name="geometry">
-      <rect>
-       <x>30</x>
-       <y>20</y>
-       <width>54</width>
-       <height>12</height>
-      </rect>
-     </property>
-     <property name="text">
-      <string>10</string>
-     </property>
-    </widget>
-   </widget>
+   <property name="styleSheet">
+    <string notr="true">background-color: rgb(83, 148, 160);
+color: rgb(255, 250, 240);
+border-radius:5px;</string>
+   </property>
+   <property name="text">
+    <string>设备参数</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="pushButton_7">
+   <property name="geometry">
+    <rect>
+     <x>40</x>
+     <y>100</y>
+     <width>90</width>
+     <height>30</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <family>幼圆</family>
+     <pointsize>12</pointsize>
+    </font>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">background-color: rgb(83, 148, 160);
+color: rgb(255, 250, 240);
+border-radius:5px;</string>
+   </property>
+   <property name="text">
+    <string>输入输出</string>
+   </property>
   </widget>
  </widget>
  <resources/>

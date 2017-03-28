@@ -29,6 +29,8 @@ private:
 public slots:
     void ShowTime(void);
     void on_DropOut_clicked();
+private slots:
+    void on_SetZero_clicked();
 };
 
 #endif // VARIFY_H

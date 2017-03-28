@@ -41,13 +41,13 @@ void learn::ShowTime()
 {
      QDateTime time = QDateTime(QDateTime::currentDateTime());
      QString text = time.toString(tr("yyyy/M/d"));
-     if(time.date().dayOfWeek() == 1) text=text+tr("星期一");
-     else if(time.date().dayOfWeek() == 2) text=text+tr("星期二");
-     else if(time.date().dayOfWeek() == 3) text=text+tr("星期三");
-     else if(time.date().dayOfWeek() == 4) text=text+tr("星期四");
-     else if(time.date().dayOfWeek() == 5) text=text+tr("星期五");
-     else if(time.date().dayOfWeek() == 6) text=text+tr("星期六");
-     else if(time.date().dayOfWeek() == 7) text=text+tr("星期日");
+//     if(time.date().dayOfWeek() == 1) text=text+tr("星期一");
+//     else if(time.date().dayOfWeek() == 2) text=text+tr("星期二");
+//     else if(time.date().dayOfWeek() == 3) text=text+tr("星期三");
+//     else if(time.date().dayOfWeek() == 4) text=text+tr("星期四");
+//     else if(time.date().dayOfWeek() == 5) text=text+tr("星期五");
+//     else if(time.date().dayOfWeek() == 6) text=text+tr("星期六");
+//     else if(time.date().dayOfWeek() == 7) text=text+tr("星期日");
      ui->DateTime->setText((text+time.toString(" hh:mm")));
 
 }

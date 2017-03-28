@@ -79,13 +79,13 @@ void MainWindow::ShowTime()
 {
      QDateTime time = QDateTime(QDateTime::currentDateTime());
      QString text = time.toString(tr("yyyy/M/d"));
-     if(time.date().dayOfWeek() == 1) text=text+tr("星期一");
-     else if(time.date().dayOfWeek() == 2) text=text+tr("星期二");
-     else if(time.date().dayOfWeek() == 3) text=text+tr("星期三");
-     else if(time.date().dayOfWeek() == 4) text=text+tr("星期四");
-     else if(time.date().dayOfWeek() == 5) text=text+tr("星期五");
-     else if(time.date().dayOfWeek() == 6) text=text+tr("星期六");
-     else if(time.date().dayOfWeek() == 7) text=text+tr("星期日");
+//     if(time.date().dayOfWeek() == 1) text=text+tr("星期一");
+//     else if(time.date().dayOfWeek() == 2) text=text+tr("星期二");
+//     else if(time.date().dayOfWeek() == 3) text=text+tr("星期三");
+//     else if(time.date().dayOfWeek() == 4) text=text+tr("星期四");
+//     else if(time.date().dayOfWeek() == 5) text=text+tr("星期五");
+//     else if(time.date().dayOfWeek() == 6) text=text+tr("星期六");
+//     else if(time.date().dayOfWeek() == 7) text=text+tr("星期日");
      ui->DateTime->setText((text+time.toString(" hh:mm")));
 }
 
@@ -179,13 +179,13 @@ bool MainWindow::eventFilter(QObject *watched,QEvent *event)
 //点击和释放对应不同的颜色处理
 void MainWindow::Button_AMP_1(QPushButton *button)
 {
-    button->setStyleSheet("QPushButton{background-color:#b8dedf;color:#000;}");
+    button->setStyleSheet("QPushButton{background-color:#b8dedf;color:#000;border-radius:5px;}");
 }
 
 void MainWindow::Button_AMP_0(QPushButton *button)
 {
 
-    button->setStyleSheet("QPushButton{background-color:#5394a0;color:#fff;}");
+    button->setStyleSheet("QPushButton{background-color:#5394a0;color:#fff;border-radius:5px;}");
 
 }
 

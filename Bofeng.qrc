@@ -3,5 +3,7 @@
         <file>image/Bofeng.png</file>
         <file>image/Keyboard.png</file>
         <file>image/slider.png</file>
+        <file>image/circle_green.png</file>
+        <file>image/circle_red.png</file>
     </qresource>
 </RCC>

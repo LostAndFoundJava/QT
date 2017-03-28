@@ -69,9 +69,9 @@
   <widget class="QLabel" name="DateTime">
    <property name="geometry">
     <rect>
-     <x>515</x>
+     <x>574</x>
      <y>10</y>
-     <width>230</width>
+     <width>176</width>
      <height>31</height>
     </rect>
    </property>
@@ -85,7 +85,7 @@
     <string notr="true">Jur_And_User</string>
    </property>
    <property name="text">
-    <string>2017/02/01 星期日 13:28</string>
+    <string>2017/02/01  13:28</string>
    </property>
   </widget>
   <widget class="QPushButton" name="Jur_And_User">
@@ -105,7 +105,8 @@
    </property>
    <property name="styleSheet">
     <string notr="true">background-color: rgb(83, 148, 160);
-color: rgb(255, 250, 240);</string>
+color: rgb(255, 250, 240);
+border-radius:5px;</string>
    </property>
    <property name="text">
     <string>权限/用户名</string>
@@ -214,7 +215,8 @@ color: rgb(255, 250, 240);</string>
    </property>
    <property name="styleSheet">
     <string notr="true">background-color: rgb(83, 148, 160);
-color: rgb(255, 250, 240);</string>
+color: rgb(255, 250, 240);
+border-radius:5px;</string>
    </property>
    <property name="text">
     <string>开始</string>
@@ -237,7 +239,8 @@ color: rgb(255, 250, 240);</string>
    </property>
    <property name="styleSheet">
     <string notr="true">background-color: rgb(83, 148, 160);
-color: rgb(255, 250, 240);</string>
+color: rgb(255, 250, 240);
+border-radius:5px;</string>
    </property>
    <property name="text">
     <string>完成</string>
@@ -260,7 +263,8 @@ color: rgb(255, 250, 240);</string>
    </property>
    <property name="styleSheet">
     <string notr="true">background-color: rgb(83, 148, 160);
-color: rgb(255, 250, 240);</string>
+color: rgb(255, 250, 240);
+border-radius:5px;</string>
    </property>
    <property name="text">
     <string>灵敏度</string>
@@ -283,7 +287,8 @@ color: rgb(255, 250, 240);</string>
    </property>
    <property name="styleSheet">
     <string notr="true">background-color: rgb(83, 148, 160);
-color: rgb(255, 250, 240);</string>
+color: rgb(255, 250, 240);
+border-radius:5px;</string>
    </property>
    <property name="text">
     <string>相位</string>
@@ -306,7 +311,8 @@ color: rgb(255, 250, 240);</string>
    </property>
    <property name="styleSheet">
     <string notr="true">background-color: rgb(83, 148, 160);
-color: rgb(255, 250, 240);</string>
+color: rgb(255, 250, 240);
+border-radius:5px;</string>
    </property>
    <property name="text">
     <string>模式</string>

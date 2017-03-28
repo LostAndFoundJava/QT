@@ -30,7 +30,8 @@
    </property>
    <property name="styleSheet">
     <string notr="true">background-color: rgb(83, 148, 160);
-color: rgb(255, 250, 240);</string>
+color: rgb(255, 250, 240);
+border-radius:5px;</string>
    </property>
    <property name="text">
     <string>权限/用户名</string>
@@ -129,7 +130,8 @@ color: rgb(255, 250, 240);</string>
    </property>
    <property name="styleSheet">
     <string notr="true">background-color: rgb(83, 148, 160);
-color: rgb(255, 250, 240);</string>
+color: rgb(255, 250, 240);
+border-radius:5px;</string>
    </property>
    <property name="text">
     <string>清零</string>
@@ -152,7 +154,8 @@ color: rgb(255, 250, 240);</string>
    </property>
    <property name="styleSheet">
     <string notr="true">background-color: rgb(83, 148, 160);
-color: rgb(255, 250, 240);</string>
+color: rgb(255, 250, 240);
+border-radius:5px;</string>
    </property>
    <property name="text">
     <string>学习验证</string>
@@ -175,7 +178,8 @@ color: rgb(255, 250, 240);</string>
    </property>
    <property name="styleSheet">
     <string notr="true">background-color: rgb(83, 148, 160);
-color: rgb(255, 250, 240);</string>
+color: rgb(255, 250, 240);
+border-radius:5px;</string>
    </property>
    <property name="text">
     <string>退出</string>
@@ -198,7 +202,8 @@ color: rgb(255, 250, 240);</string>
    </property>
    <property name="styleSheet">
     <string notr="true">background-color: rgb(83, 148, 160);
-color: rgb(255, 250, 240);</string>
+color: rgb(255, 250, 240);
+border-radius:5px;</string>
    </property>
    <property name="text">
     <string>灵敏度</string>
@@ -221,7 +226,8 @@ color: rgb(255, 250, 240);</string>
    </property>
    <property name="styleSheet">
     <string notr="true">background-color: rgb(83, 148, 160);
-color: rgb(255, 250, 240);</string>
+color: rgb(255, 250, 240);
+border-radius:5px;</string>
    </property>
    <property name="text">
     <string>相位</string>
@@ -244,7 +250,8 @@ color: rgb(255, 250, 240);</string>
    </property>
    <property name="styleSheet">
     <string notr="true">background-color: rgb(83, 148, 160);
-color: rgb(255, 250, 240);</string>
+color: rgb(255, 250, 240);
+border-radius:5px;</string>
    </property>
    <property name="text">
     <string>模式</string>
@@ -291,9 +298,9 @@ color: rgb(255, 250, 240);</string>
   <widget class="QLabel" name="DateTime">
    <property name="geometry">
     <rect>
-     <x>512</x>
+     <x>574</x>
      <y>10</y>
-     <width>228</width>
+     <width>176</width>
      <height>31</height>
     </rect>
    </property>
@@ -304,7 +311,7 @@ color: rgb(255, 250, 240);</string>
     </font>
    </property>
    <property name="text">
-    <string>2017/3/26 星期日 18：48</string>
+    <string>2017/3/26  18：48</string>
    </property>
   </widget>
   <widget class="QLabel" name="NoPassNum">

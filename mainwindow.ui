@@ -298,7 +298,8 @@
     </property>
     <property name="styleSheet">
      <string notr="true">background-color: rgb(83, 148, 160);
-color: rgb(255, 250, 240);</string>
+color: rgb(255, 250, 240);
+border-radius:5px;</string>
     </property>
     <property name="text">
      <string>计数清零</string>
@@ -321,7 +322,8 @@ color: rgb(255, 250, 240);</string>
     </property>
     <property name="styleSheet">
      <string notr="true">background-color: rgb(83, 148, 160);
-color: rgb(255, 250, 240);</string>
+color: rgb(255, 250, 240);
+border-radius:5px;</string>
     </property>
     <property name="text">
      <string>产品管理</string>
@@ -344,7 +346,8 @@ color: rgb(255, 250, 240);</string>
     </property>
     <property name="styleSheet">
      <string notr="true">background-color: rgb(83, 148, 160);
-color: rgb(255, 250, 240);</string>
+color: rgb(255, 250, 240);
+border-radius:5px;</string>
     </property>
     <property name="text">
      <string>灵敏度</string>
@@ -367,7 +370,8 @@ color: rgb(255, 250, 240);</string>
     </property>
     <property name="styleSheet">
      <string notr="true">background-color: rgb(83, 148, 160);
-color: rgb(255, 250, 240);</string>
+color: rgb(255, 250, 240);
+border-radius:5px;</string>
     </property>
     <property name="text">
      <string>相位</string>
@@ -390,7 +394,8 @@ color: rgb(255, 250, 240);</string>
     </property>
     <property name="styleSheet">
      <string notr="true">background-color: rgb(83, 148, 160);
-color: rgb(255, 250, 240);</string>
+color: rgb(255, 250, 240);
+border-radius:5px;</string>
     </property>
     <property name="text">
      <string>日志</string>
@@ -413,7 +418,8 @@ color: rgb(255, 250, 240);</string>
     </property>
     <property name="styleSheet">
      <string notr="true">background-color: rgb(83, 148, 160);
-color: rgb(255, 250, 240);</string>
+color: rgb(255, 250, 240);
+border-radius:5px;</string>
     </property>
     <property name="text">
      <string>系统设置</string>
@@ -422,9 +428,9 @@ color: rgb(255, 250, 240);</string>
    <widget class="QLabel" name="DateTime">
     <property name="geometry">
      <rect>
-      <x>512</x>
+      <x>567</x>
       <y>10</y>
-      <width>228</width>
+      <width>179</width>
       <height>31</height>
      </rect>
     </property>
@@ -441,7 +447,7 @@ color: rgb(255, 250, 240);</string>
      <enum>QFrame::NoFrame</enum>
     </property>
     <property name="text">
-     <string>2017/02/01 星期日 13:28</string>
+     <string>2017/02/01  13:28</string>
     </property>
    </widget>
    <widget class="QLabel" name="SpeedDisLabel">
@@ -543,7 +549,8 @@ color: rgb(255, 250, 240);</string>
     </property>
     <property name="styleSheet">
      <string notr="true">background-color: rgb(83, 148, 160);
-color: rgb(255, 250, 240);</string>
+color: rgb(255, 250, 240);
+border-radius:5px;</string>
     </property>
     <property name="text">
      <string>权限/用户名</string>

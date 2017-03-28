@@ -424,7 +424,8 @@
    </property>
    <property name="styleSheet">
     <string notr="true">background-color: rgb(83, 148, 160);
-color: rgb(255, 250, 240);</string>
+color: rgb(255, 250, 240);
+border-radius:5px;</string>
    </property>
    <property name="text">
     <string>clear</string>

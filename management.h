@@ -23,16 +23,25 @@ public:
 
 private slots:
 
-    void on_buttonBox_1_clicked(QAbstractButton *button);
+    //void on_buttonBox_1_clicked(QAbstractButton *button);
 
     void on_AluminizerButton_clicked(bool checked);
 
-    void on_bulkButton_clicked();
 
     void on_packButton_clicked(bool checked);
      void on_LearningButton_clicked();
 
     //void myEditClicked1();
+
+     void on_bulkButton_clicked(bool checked);
+
+     void on_FinishButton_clicked(bool checked);
+
+     void on_OddRmove_clicked(bool checked);
+
+     void on_AutoStart_clicked(bool checked);
+
+     void on_Light_clicked(bool checked);
 
 private:
     Ui::Management *ui;
@@ -47,3 +56,8 @@ public slots:
 };
 
 #endif // MANAGEMENT_H
+
+
+
+
+

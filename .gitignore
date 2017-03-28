@@ -2,3 +2,4 @@
 /release/*
 Bofeng.pro.user
 *.o
+ui_*

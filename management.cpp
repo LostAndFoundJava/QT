@@ -46,10 +46,19 @@ Management::Management(QWidget *parent) :
     //镀铝膜隐藏
     ui->AluminizerButton->hide();
 
+    //弹出键盘
     ui->NumEdit->installEventFilter(this);
     ui->NameEdit->installEventFilter(this);
     ui->LengthEdit->installEventFilter(this);
     ui->SpeedEdit->installEventFilter(this);
+
+    ui->lineEdit->installEventFilter(this);
+    ui->lineEdit_2->installEventFilter(this);
+    ui->lineEdit_3->installEventFilter(this);
+    ui->lineEdit_4->installEventFilter(this);
+    ui->lineEdit_5->installEventFilter(this);
+    ui->lineEdit_6->installEventFilter(this);
+    //弹出图片选择
     ui->label_14->installEventFilter(this);
     ui->label_15->installEventFilter(this);
     ui->label_18->installEventFilter(this);
@@ -59,14 +68,33 @@ Management::Management(QWidget *parent) :
     ui->label_31->installEventFilter(this);
     ui->label_32->installEventFilter(this);
     ui->label_33->installEventFilter(this);
+
+
     //时间显示
     valueInt();
     QTimer *timer = new QTimer(this);
     this->setFocusPolicy(Qt::NoFocus);
     connect(timer, SIGNAL(timeout()), this, SLOT(ShowTime()));
     timer->start(500);
+
     //新建学习界面
     Learn = new learn();
+
+    //tablewidget设置数据
+    ui->tableWidget->setRowHeight(0,30);
+
+    ui->tableWidget->setColumnWidth(0,120);
+    ui->tableWidget->setColumnWidth(1,120);
+    ui->tableWidget->setColumnWidth(2,120);
+    ui->tableWidget->setRowCount(1);
+    ui->tableWidget->setColumnCount(3);
+
+    ui->tableWidget->setItem(0,0,new QTableWidgetItem("1"));
+    ui->tableWidget->setItem(0,1,new QTableWidgetItem("#123"));
+    ui->tableWidget->setItem(0,2,new QTableWidgetItem("food"));
+
+    //tabwidget设置数据
+
 }
 
 bool Management::eventFilter(QObject *watched,QEvent *event)
@@ -101,11 +129,58 @@ bool Management::eventFilter(QObject *watched,QEvent *event)
             Window_show.ShowKeyBoard(this,false,ui->SpeedEdit,x,y);
         }
     }
+
+
+    if(watched==ui->lineEdit)
+    {
+        if(event->type()==QEvent::MouseButtonPress)
+        {
+            Window_show.ShowKeyBoard(this,false,ui->lineEdit,x,y);
+        }
+    }
+    if(watched==ui->lineEdit_2)
+    {
+        if(event->type()==QEvent::MouseButtonPress)
+        {
+            Window_show.ShowKeyBoard(this,false,ui->lineEdit_2,x,y);
+        }
+    }
+    if(watched==ui->lineEdit_3)
+    {
+        if(event->type()==QEvent::MouseButtonPress)
+        {
+            Window_show.ShowKeyBoard(this,false,ui->lineEdit_3,x,y);
+        }
+    }
+    if(watched==ui->lineEdit_4)
+    {
+        if(event->type()==QEvent::MouseButtonPress)
+        {
+            Window_show.ShowKeyBoard(this,false,ui->lineEdit_4,x,y);
+        }
+    }
+    if(watched==ui->lineEdit_5)
+    {
+        if(event->type()==QEvent::MouseButtonPress)
+        {
+
+            Window_show.ShowKeyBoard(this,false,ui->lineEdit_5,x,y);
+        }
+    }
+    if(watched==ui->lineEdit_6)
+    {
+        if(event->type()==QEvent::MouseButtonPress)
+        {
+            Window_show.ShowKeyBoard(this,false,ui->lineEdit_6,x,y);
+        }
+    }
+
+
     if(watched==ui->label_14)
     {
         if(event->type()==QEvent::MouseButtonPress)
         {
-            QString name=QFileDialog::getOpenFileName(0,"Image",QDir::currentPath()+"/image");
+            QString name=QFileDialog::getOpenFileName(0,"Image",QDir::currentPath()+"/image", tr("Images (*.png)"));
             ui->label_14->setPixmap(name);
         }
     }
@@ -113,7 +188,7 @@ bool Management::eventFilter(QObject *watched,QEvent *event)
     {
         if(event->type()==QEvent::MouseButtonPress)
         {
-            QString name=QFileDialog::getOpenFileName(0,"Image",QDir::currentPath()+"/image");
+            QString name=QFileDialog::getOpenFileName(0,"Image",QDir::currentPath()+"/image", tr("Images (*.png)"));
             ui->label_15->setPixmap(name);
         }
     }
@@ -121,7 +196,7 @@ bool Management::eventFilter(QObject *watched,QEvent *event)
     {
         if(event->type()==QEvent::MouseButtonPress)
         {
-            QString name=QFileDialog::getOpenFileName(0,"Image",QDir::currentPath()+"/image");
+            QString name=QFileDialog::getOpenFileName(0,"Image",QDir::currentPath()+"/image", tr("Images (*.png)"));
             ui->label_18->setPixmap(name);
         }
     }
@@ -129,7 +204,7 @@ bool Management::eventFilter(QObject *watched,QEvent *event)
     {
         if(event->type()==QEvent::MouseButtonPress)
         {
-            QString name=QFileDialog::getOpenFileName(0,"Image",QDir::currentPath()+"/image");
+            QString name=QFileDialog::getOpenFileName(0,"Image",QDir::currentPath()+"/image", tr("Images (*.png)"));
             ui->label_20->setPixmap(name);
         }
     }
@@ -137,7 +212,7 @@ bool Management::eventFilter(QObject *watched,QEvent *event)
     {
         if(event->type()==QEvent::MouseButtonPress)
         {
-            QString name=QFileDialog::getOpenFileName(0,"Image",QDir::currentPath()+"/image");
+            QString name=QFileDialog::getOpenFileName(0,"Image",QDir::currentPath()+"/image", tr("Images (*.png)"));
             ui->label_29->setPixmap(name);
         }
     }
@@ -145,7 +220,7 @@ bool Management::eventFilter(QObject *watched,QEvent *event)
     {
         if(event->type()==QEvent::MouseButtonPress)
         {
-            QString name=QFileDialog::getOpenFileName(0,"Image",QDir::currentPath()+"/image");
+            QString name=QFileDialog::getOpenFileName(0,"Image",QDir::currentPath()+"/image", tr("Images (*.png)"));
             ui->label_30->setPixmap(name);
         }
     }
@@ -153,7 +228,7 @@ bool Management::eventFilter(QObject *watched,QEvent *event)
     {
         if(event->type()==QEvent::MouseButtonPress)
         {
-            QString name=QFileDialog::getOpenFileName(0,"Image",QDir::currentPath()+"/image");
+            QString name=QFileDialog::getOpenFileName(0,"Image",QDir::currentPath()+"/image", tr("Images (*.png)"));
             ui->label_31->setPixmap(name);
         }
     }
@@ -161,7 +236,7 @@ bool Management::eventFilter(QObject *watched,QEvent *event)
     {
         if(event->type()==QEvent::MouseButtonPress)
         {
-            QString name=QFileDialog::getOpenFileName(0,"Image",QDir::currentPath()+"/image");
+            QString name=QFileDialog::getOpenFileName(0,"Image",QDir::currentPath()+"/image", tr("Images (*.png)"));
             ui->label_32->setPixmap(name);
         }
     }
@@ -169,7 +244,7 @@ bool Management::eventFilter(QObject *watched,QEvent *event)
     {
         if(event->type()==QEvent::MouseButtonPress)
         {
-            QString name=QFileDialog::getOpenFileName(0,"Image",QDir::currentPath()+"/image");
+            QString name=QFileDialog::getOpenFileName(0,"Image",QDir::currentPath()+"/image", tr("Images (*.png)"));
             ui->label_33->setPixmap(name);
         }
     }

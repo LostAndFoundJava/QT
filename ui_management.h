@@ -1,7 +1,7 @@
 /********************************************************************************
 ** Form generated from reading UI file 'management.ui'
 **
-** Created: Mon Mar 27 20:07:06 2017
+** Created: Tue Mar 28 18:06:27 2017
 **      by: Qt User Interface Compiler version 4.8.1
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
@@ -525,7 +525,7 @@ public:
 
         retranslateUi(Management);
 
-        tabWidget->setCurrentIndex(0);
+        tabWidget->setCurrentIndex(1);
 
 
         QMetaObject::connectSlotsByName(Management);

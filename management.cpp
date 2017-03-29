@@ -41,7 +41,7 @@ Management::Management(QWidget *parent) :
     ui->tabWidget->setCurrentIndex(0);
     ui->tabWidget->setStyleSheet("QTabBar::tab{width:122px}");
     ui->line_1->setFixedHeight(1);
-     ui->line_2->setFixedHeight(1);
+    ui->line_2->setFixedHeight(1);
 
     //镀铝膜隐藏
     ui->AluminizerButton->hide();
@@ -425,6 +425,14 @@ void Management::on_LearningButton_clicked()
     Learn->show();
     Learn->move(pos().x(),pos().y());
     this->hide();
+
+    QString aa = ui->NumEdit->text();
+    QString str;
+    str = str.fromLocal8Bit(aa.toLocal8Bit().data());
+    qDebug()<<str;
+    QString xx;
+    xx = xx.fromLocal8Bit("哈哈后");
+    qDebug()<<xx;
 }
 //剔除完成
 void Management::on_FinishButton_clicked(bool checked)

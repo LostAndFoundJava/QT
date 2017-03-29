@@ -1,7 +1,7 @@
 /****************************************************************************
 ** Meta object code from reading C++ file 'management.h'
 **
-** Created: Mon Mar 27 20:29:35 2017
+** Created: Wed Mar 29 20:40:55 2017
 **      by: The Qt Meta Object Compiler version 63 (Qt 4.8.1)
 **
 ** WARNING! All changes made in this file will be lost!
@@ -23,7 +23,7 @@ static const uint qt_meta_data_Management[] = {
        6,       // revision
        0,       // classname
        0,    0, // classinfo
-       6,   14, // methods
+       9,   14, // methods
        0,    0, // properties
        0,    0, // enums/sets
        0,    0, // constructors
@@ -31,23 +31,29 @@ static const uint qt_meta_data_Management[] = {
        0,       // signalCount
 
  // slots: signature, parameters, type, tag, flags
-      19,   12,   11,   11, 0x08,
-      68,   60,   11,   11, 0x08,
-     102,   11,   11,   11, 0x08,
-     126,   60,   11,   11, 0x08,
-     154,   11,   11,   11, 0x08,
-     182,   11,   11,   11, 0x0a,
+      20,   12,   11,   11, 0x08,
+      54,   12,   11,   11, 0x08,
+      82,   11,   11,   11, 0x08,
+     110,   12,   11,   11, 0x08,
+     138,   12,   11,   11, 0x08,
+     168,   12,   11,   11, 0x08,
+     194,   12,   11,   11, 0x08,
+     221,   12,   11,   11, 0x08,
+     244,   11,   11,   11, 0x0a,
 
        0        // eod
 };
 
 static const char qt_meta_stringdata_Management[] = {
-    "Management\0\0button\0"
-    "on_buttonBox_1_clicked(QAbstractButton*)\0"
-    "checked\0on_AluminizerButton_clicked(bool)\0"
-    "on_bulkButton_clicked()\0"
+    "Management\0\0checked\0"
+    "on_AluminizerButton_clicked(bool)\0"
     "on_packButton_clicked(bool)\0"
-    "on_LearningButton_clicked()\0ShowTime()\0"
+    "on_LearningButton_clicked()\0"
+    "on_bulkButton_clicked(bool)\0"
+    "on_FinishButton_clicked(bool)\0"
+    "on_OddRmove_clicked(bool)\0"
+    "on_AutoStart_clicked(bool)\0"
+    "on_Light_clicked(bool)\0ShowTime()\0"
 };
 
 void Management::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, void **_a)
@@ -56,12 +62,15 @@ void Management::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, 
         Q_ASSERT(staticMetaObject.cast(_o));
         Management *_t = static_cast<Management *>(_o);
         switch (_id) {
-        case 0: _t->on_buttonBox_1_clicked((*reinterpret_cast< QAbstractButton*(*)>(_a[1]))); break;
-        case 1: _t->on_AluminizerButton_clicked((*reinterpret_cast< bool(*)>(_a[1]))); break;
-        case 2: _t->on_bulkButton_clicked(); break;
-        case 3: _t->on_packButton_clicked((*reinterpret_cast< bool(*)>(_a[1]))); break;
-        case 4: _t->on_LearningButton_clicked(); break;
-        case 5: _t->ShowTime(); break;
+        case 0: _t->on_AluminizerButton_clicked((*reinterpret_cast< bool(*)>(_a[1]))); break;
+        case 1: _t->on_packButton_clicked((*reinterpret_cast< bool(*)>(_a[1]))); break;
+        case 2: _t->on_LearningButton_clicked(); break;
+        case 3: _t->on_bulkButton_clicked((*reinterpret_cast< bool(*)>(_a[1]))); break;
+        case 4: _t->on_FinishButton_clicked((*reinterpret_cast< bool(*)>(_a[1]))); break;
+        case 5: _t->on_OddRmove_clicked((*reinterpret_cast< bool(*)>(_a[1]))); break;
+        case 6: _t->on_AutoStart_clicked((*reinterpret_cast< bool(*)>(_a[1]))); break;
+        case 7: _t->on_Light_clicked((*reinterpret_cast< bool(*)>(_a[1]))); break;
+        case 8: _t->ShowTime(); break;
         default: ;
         }
     }
@@ -99,9 +108,9 @@ int Management::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
     if (_id < 0)
         return _id;
     if (_c == QMetaObject::InvokeMetaMethod) {
-        if (_id < 6)
+        if (_id < 9)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 6;
+        _id -= 9;
     }
     return _id;
 }

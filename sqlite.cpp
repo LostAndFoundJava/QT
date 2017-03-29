@@ -100,7 +100,9 @@ void SQLITE::insert(QString typeQ,int numberQ,double xQ,double yQ,double len1Q,d
 JuXingKuang *SQLITE::query(QString typeQ,int numberQ)
 {
     JuXingKuang *jxk = new JuXingKuang;
-    QString select_all_sql = "select * from juxingkang";
+    qDebug()<<numberQ;
+    QString select_all_sql = "select * from juxingkang where type='"+typeQ+"' and number="+QString::number(numberQ, 10);
+    qDebug()<<select_all_sql;
     sql_query->prepare(select_all_sql);
 
     if(!sql_query->exec())

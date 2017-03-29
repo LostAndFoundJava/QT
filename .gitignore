@@ -3,3 +3,4 @@
 Bofeng.pro.user
 *.o
 ui_*
+moc*

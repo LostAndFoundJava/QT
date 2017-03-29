@@ -1,7 +1,7 @@
 /********************************************************************************
 ** Form generated from reading UI file 'widget.ui'
 **
-** Created: Mon Mar 27 20:07:06 2017
+** Created: Wed Mar 29 20:40:13 2017
 **      by: Qt User Interface Compiler version 4.8.1
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
@@ -160,7 +160,8 @@ public:
         pushButton->setObjectName(QString::fromUtf8("pushButton"));
         pushButton->setGeometry(QRect(570, 240, 98, 27));
         pushButton->setStyleSheet(QString::fromUtf8("background-color: rgb(83, 148, 160);\n"
-"color: rgb(255, 250, 240);"));
+"color: rgb(255, 250, 240);\n"
+"border-radius:5px;"));
         label_21 = new QLabel(Widget);
         label_21->setObjectName(QString::fromUtf8("label_21"));
         label_21->setGeometry(QRect(10, 190, 91, 17));

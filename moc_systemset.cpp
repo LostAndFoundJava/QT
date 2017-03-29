@@ -1,7 +1,7 @@
 /****************************************************************************
 ** Meta object code from reading C++ file 'systemset.h'
 **
-** Created: Mon Mar 27 20:07:45 2017
+** Created: Wed Mar 29 20:40:58 2017
 **      by: The Qt Meta Object Compiler version 63 (Qt 4.8.1)
 **
 ** WARNING! All changes made in this file will be lost!
@@ -31,13 +31,13 @@ static const uint qt_meta_data_Systemset[] = {
        0,       // signalCount
 
  // slots: signature, parameters, type, tag, flags
-      11,   10,   10,   10, 0x08,
+      11,   10,   10,   10, 0x0a,
 
        0        // eod
 };
 
 static const char qt_meta_stringdata_Systemset[] = {
-    "Systemset\0\0buttonJudge(int)\0"
+    "Systemset\0\0ShowTime()\0"
 };
 
 void Systemset::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, void **_a)
@@ -46,10 +46,11 @@ void Systemset::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, v
         Q_ASSERT(staticMetaObject.cast(_o));
         Systemset *_t = static_cast<Systemset *>(_o);
         switch (_id) {
-        case 0: _t->buttonJudge((*reinterpret_cast< int(*)>(_a[1]))); break;
+        case 0: _t->ShowTime(); break;
         default: ;
         }
     }
+    Q_UNUSED(_a);
 }
 
 const QMetaObjectExtraData Systemset::staticMetaObjectExtraData = {

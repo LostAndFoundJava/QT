@@ -267,14 +267,14 @@ void SUBWIDGET::paintEvent(QPaintEvent *event)
 
     QPen pen5(Qt::black,2);
     painter.setPen(pen5);
-    qDebug()<<"++++++++++++++++++++++++++++++++";
+    //qDebug()<<"++++++++++++++++++++++++++++++++";
     for (int i =0 ;i < allDots.length();i ++)
     {
         //todo 待优化，可能多画了几次
         painter.drawPoint(i-2,i+20);
     }
     painter.drawPoint(0,0);
-    qDebug()<<"++++++++++++++++++++++++++++++++";
+    //qDebug()<<"++++++++++++++++++++++++++++++++";
     qsrand(QTime(0,0,0).secsTo(QTime::currentTime()));
 }
 

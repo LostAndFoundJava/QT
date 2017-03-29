@@ -55,14 +55,7 @@ Management::Management(QWidget *parent) :
     ui->LengthEdit->installEventFilter(this);
     ui->SpeedEdit->installEventFilter(this);
 
-     //学习
 
-    ui->lineEdit->installEventFilter(this);
-    ui->lineEdit_2->installEventFilter(this);
-    ui->lineEdit_3->installEventFilter(this);
-    ui->lineEdit_4->installEventFilter(this);
-    ui->lineEdit_5->installEventFilter(this);
-    ui->lineEdit_6->installEventFilter(this);
     //弹出图片选择
 
     ui->label_14->installEventFilter(this);
@@ -149,51 +142,6 @@ bool Management::eventFilter(QObject *watched,QEvent *event)
         if(event->type()==QEvent::MouseButtonPress)
         {
             Window_show.ShowKeyBoard(this,false,ui->SpeedEdit,x,y);
-        }
-    }
-
-
-    if(watched==ui->lineEdit)
-    {
-        if(event->type()==QEvent::MouseButtonPress)
-        {
-            Window_show.ShowKeyBoard(this,false,ui->lineEdit,x,y);
-        }
-    }
-    if(watched==ui->lineEdit_2)
-    {
-        if(event->type()==QEvent::MouseButtonPress)
-        {
-            Window_show.ShowKeyBoard(this,false,ui->lineEdit_2,x,y);
-        }
-    }
-    if(watched==ui->lineEdit_3)
-    {
-        if(event->type()==QEvent::MouseButtonPress)
-        {
-            Window_show.ShowKeyBoard(this,false,ui->lineEdit_3,x,y);
-        }
-    }
-    if(watched==ui->lineEdit_4)
-    {
-        if(event->type()==QEvent::MouseButtonPress)
-        {
-            Window_show.ShowKeyBoard(this,false,ui->lineEdit_4,x,y);
-        }
-    }
-    if(watched==ui->lineEdit_5)
-    {
-        if(event->type()==QEvent::MouseButtonPress)
-        {
-
-            Window_show.ShowKeyBoard(this,false,ui->lineEdit_5,x,y);
-        }
-    }
-    if(watched==ui->lineEdit_6)
-    {
-        if(event->type()==QEvent::MouseButtonPress)
-        {
-            Window_show.ShowKeyBoard(this,false,ui->lineEdit_6,x,y);
         }
     }
 

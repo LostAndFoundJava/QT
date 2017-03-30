@@ -113,6 +113,50 @@ Management::Management(QWidget *parent) :
     PNTestFlag = 0;
     ui->PositiveTest->setStyleSheet("QPushButton{background-color:#b8dedf;color:#000;border-radius:5px;}");
     ui->NagtiveTest->setStyleSheet("QPushButton{background-color:#5394a0;color:#fff;border-radius:5px;}");
+    //包装
+    ui->packButton->setChecked(true);
+    ui->AluminizerButton->show();
+    PackFlag=0;
+    //输送带自动往复
+    AutoFlag=1;
+    //剔除
+        ui->RemovedButton->setStyleSheet("QPushButton{background-color:#b8dedf;color:#000;border-radius:5px;}");
+        ui->StopButton->setStyleSheet("QPushButton{background-color:#5394A0;color:#fff;border-radius:5px;}");
+        ui->BackButton->setStyleSheet("QPushButton{background-color:#5394A0;color:#fff;border-radius:5px;}");
+        //剔除设置
+        ui->RmoveTime->setDisabled(false);
+        ui->RmoveTime->installEventFilter(this);
+        ui->RmoveTime->setStyleSheet("border:none;border-bottom:1px solid #000");
+        ui->label_26->setStyleSheet("color: rgb(33, 28, 23);");
+         ui->label_21->setStyleSheet("color: rgb(33, 28, 23);");
+
+        ui->RmoveKeep->setDisabled(false);
+        ui->RmoveKeep->installEventFilter(this);
+        ui->RmoveKeep->setStyleSheet("border:none;border-bottom:1px solid #000");
+        ui->label_16->setStyleSheet("color: rgb(33, 28, 23);");
+        ui->label_22->setStyleSheet("color: rgb(33, 28, 23);");
+
+        ui->OddRmove->setDisabled(false);
+        ui->OddRmove->setStyleSheet("color: rgb(33, 28, 23);");
+        //停机设置
+        ui->StopTime->setDisabled(true);
+        ui->StopTime->removeEventFilter(this);
+        ui->StopTime->setStyleSheet("border:none;border-bottom:1px solid #a1a3a6");
+        ui->label_17->setStyleSheet("color:#a1a3a6");
+        ui->label_23->setStyleSheet("color:#a1a3a6");
+
+        ui->AutoStart->setDisabled(true);
+        ui->StartTime->setStyleSheet("border:none;border-bottom:1px solid #a1a3a6");
+        ui->label_24->setStyleSheet("color:#a1a3a6");
+        //倒带设置
+        ui->BackTime->setDisabled(true);
+        ui->BackTime->removeEventFilter(this);
+        ui->BackTime->setStyleSheet("border:none;border-bottom:1px solid #a1a3a6");
+        ui->label_19->setStyleSheet("color:#a1a3a6");
+        ui->label_25->setStyleSheet("color:#a1a3a6");
+
+        ui->Light->setDisabled(true);
+
 }
 
 bool Management::eventFilter(QObject *watched,QEvent *event)
@@ -237,10 +281,6 @@ bool Management::eventFilter(QObject *watched,QEvent *event)
             ui->PositiveTest->setStyleSheet("QPushButton{background-color:#b8dedf;color:#000;border-radius:5px;}");
             ui->NagtiveTest->setStyleSheet("QPushButton{background-color:#5394a0;color:#fff;border-radius:5px;}");
         }
-//        else if(event->type()==QEvent::FocusOut)
-//        {
-//            ui->PositiveTest->setStyleSheet("QPushButton{background-color:#5394a0;color:#fff;border-radius:5px;}");
-//        }
     }
     if(watched==ui->NagtiveTest)
     {
@@ -250,10 +290,6 @@ bool Management::eventFilter(QObject *watched,QEvent *event)
             ui->NagtiveTest->setStyleSheet("QPushButton{background-color:#b8dedf;color:#000;border-radius:5px;}");
             ui->PositiveTest->setStyleSheet("QPushButton{background-color:#5394a0;color:#fff;border-radius:5px;}");
         }
-//        else if(event->type()==QEvent::FocusOut)
-//        {
-//            ui->NagtiveTest->setStyleSheet("QPushButton{background-color:#5394a0;color:#fff;border-radius:5px;}");
-//        }
     }
     if(watched==ui->RmoveTime)
     {
@@ -290,39 +326,95 @@ bool Management::eventFilter(QObject *watched,QEvent *event)
              Window_show.ShowKeyBoard(this,false,ui->BackTime,x,y);
         }
     }
-//剔除
+//剔除设置
 if(watched==ui->RemovedButton)
 {
     if(event->type() == QEvent::MouseButtonPress)
     {
+
         ui->RemovedButton->setStyleSheet("QPushButton{background-color:#b8dedf;color:#000;border-radius:5px;}");
         ui->StopButton->setStyleSheet("QPushButton{background-color:#5394A0;color:#fff;border-radius:5px;}");
         ui->BackButton->setStyleSheet("QPushButton{background-color:#5394A0;color:#fff;border-radius:5px;}");
+        //剔除设置
         ui->RmoveTime->setDisabled(false);
+        ui->RmoveTime->installEventFilter(this);
+        ui->RmoveTime->setStyleSheet("border:none;border-bottom:1px solid #000");
+        ui->label_26->setStyleSheet("color: rgb(33, 28, 23);");
+         ui->label_21->setStyleSheet("color: rgb(33, 28, 23);");
+
         ui->RmoveKeep->setDisabled(false);
+        ui->RmoveKeep->installEventFilter(this);
+        ui->RmoveKeep->setStyleSheet("border:none;border-bottom:1px solid #000");
+        ui->label_16->setStyleSheet("color: rgb(33, 28, 23);");
+        ui->label_22->setStyleSheet("color: rgb(33, 28, 23);");
+
         ui->OddRmove->setDisabled(false);
+        ui->OddRmove->setStyleSheet("color: rgb(33, 28, 23);");
+        //停机设置
         ui->StopTime->setDisabled(true);
+        ui->StopTime->removeEventFilter(this);
+        ui->StopTime->setStyleSheet("border:none;border-bottom:1px solid #a1a3a6");
+        ui->label_17->setStyleSheet("color:#a1a3a6");
+        ui->label_23->setStyleSheet("color:#a1a3a6");
+
         ui->AutoStart->setDisabled(true);
+        ui->StartTime->setStyleSheet("border:none;border-bottom:1px solid #a1a3a6");
+        ui->label_24->setStyleSheet("color:#a1a3a6");
+        //倒带设置
         ui->BackTime->setDisabled(true);
+        ui->BackTime->removeEventFilter(this);
+        ui->BackTime->setStyleSheet("border:none;border-bottom:1px solid #a1a3a6");
+        ui->label_19->setStyleSheet("color:#a1a3a6");
+        ui->label_25->setStyleSheet("color:#a1a3a6");
+
         ui->Light->setDisabled(true);
     }
 }
+//停机设置
 if(watched==ui->StopButton)
 {
     if(event->type() == QEvent::MouseButtonPress)
     {
+
         ui->StopButton->setStyleSheet("QPushButton{background-color:#b8dedf;color:#000;border-radius:5px;}");
         ui->RemovedButton->setStyleSheet("QPushButton{background-color:#5394A0;color:#fff;border-radius:5px;}");
         ui->BackButton->setStyleSheet("QPushButton{background-color:#5394A0;color:#fff;border-radius:5px;}");
+        //剔除设置
         ui->RmoveTime->setDisabled(true);
+        ui->RmoveTime->removeEventFilter(this);
+        ui->RmoveTime->setStyleSheet("border:none;border-bottom:1px solid #a1a3a6");
+        ui->label_26->setStyleSheet("color: #a1a3a6;");
+        ui->label_21->setStyleSheet("color: #a1a3a6;");
+
         ui->RmoveKeep->setDisabled(true);
+        ui->RmoveKeep->removeEventFilter(this);
+        ui->RmoveKeep->setStyleSheet("border:none;border-bottom:1px solid  #a1a3a6");
+        ui->label_16->setStyleSheet("color: #a1a3a6;");
+        ui->label_22->setStyleSheet("color: #a1a3a6;");
+
         ui->OddRmove->setDisabled(true);
+        ui->OddRmove->setStyleSheet("color: #a1a3a6;");
+        //停机设置
         ui->StopTime->setDisabled(false);
+        ui->StopTime->installEventFilter(this);
+        ui->StopTime->setStyleSheet("border:none;border-bottom:1px solid #000");
+        ui->label_17->setStyleSheet("color:rgb(33, 28, 23);");
+        ui->label_23->setStyleSheet("color:rgb(33, 28, 23);");
+
         ui->AutoStart->setDisabled(false);
+        ui->StartTime->setStyleSheet("border:none;border-bottom:1px solid #000");
+        ui->label_24->setStyleSheet("color:rgb(33, 28, 23);");
+        //倒带设置
         ui->BackTime->setDisabled(true);
+        ui->BackTime->removeEventFilter(this);
+        ui->BackTime->setStyleSheet("border:none;border-bottom:1px solid #a1a3a6");
+        ui->label_19->setStyleSheet("color:#a1a3a6");
+        ui->label_25->setStyleSheet("color:#a1a3a6");
+
         ui->Light->setDisabled(true);
     }
 }
+//倒带设置
 if(watched==ui->BackButton)
 {
     if(event->type() == QEvent::MouseButtonPress)
@@ -330,12 +422,39 @@ if(watched==ui->BackButton)
         ui->BackButton->setStyleSheet("QPushButton{background-color:#b8dedf;color:#000;border-radius:5px;}");
         ui->StopButton->setStyleSheet("QPushButton{background-color:#5394A0;color:#fff;border-radius:5px;}");
         ui->RemovedButton->setStyleSheet("QPushButton{background-color:#5394A0;color:#fff;border-radius:5px;}");
+        //剔除设置
         ui->RmoveTime->setDisabled(true);
+        ui->RmoveTime->removeEventFilter(this);
+        ui->RmoveTime->setStyleSheet("border:none;border-bottom:1px solid #a1a3a6");
+        ui->label_26->setStyleSheet("color: #a1a3a6;");
+        ui->label_21->setStyleSheet("color: #a1a3a6;");
+
         ui->RmoveKeep->setDisabled(true);
+        ui->RmoveKeep->removeEventFilter(this);
+        ui->RmoveKeep->setStyleSheet("border:none;border-bottom:1px solid  #a1a3a6");
+        ui->label_16->setStyleSheet("color: #a1a3a6;");
+        ui->label_22->setStyleSheet("color: #a1a3a6;");
+
         ui->OddRmove->setDisabled(true);
+        ui->OddRmove->setStyleSheet("color: #a1a3a6;");
+        //停机设置
+        //停机设置
         ui->StopTime->setDisabled(true);
+        ui->StopTime->removeEventFilter(this);
+        ui->StopTime->setStyleSheet("border:none;border-bottom:1px solid #a1a3a6");
+        ui->label_17->setStyleSheet("color:#a1a3a6");
+        ui->label_23->setStyleSheet("color:#a1a3a6");
+
         ui->AutoStart->setDisabled(true);
+        ui->StartTime->setStyleSheet("border:none;border-bottom:1px solid #a1a3a6");
+        ui->label_24->setStyleSheet("color:#a1a3a6");
+         //倒带设置
         ui->BackTime->setDisabled(false);
+        ui->BackTime->installEventFilter(this);
+        ui->BackTime->setStyleSheet("border:none;border-bottom:1px solid #000");
+        ui->label_19->setStyleSheet("color:rgb(33, 28, 23);");
+        ui->label_25->setStyleSheet("color:rgb(33, 28, 23);");
+
         ui->Light->setDisabled(false);
     }
 }
@@ -390,61 +509,53 @@ void Management::on_AluminizerButton_clicked(bool checked)
 
     if(checked==true)
     {
-        ui->bulkButton->setEnabled(false);
+        PackFlag=2;
+        ui->bulkButton->setDisabled(true);
+        ui->bulkButton->setStyleSheet("color:#a1a3a6");
+
+        ui->label_14->removeEventFilter(this);
+        ui->label_14->setStyleSheet("background-color:#d9d6c3");
+        ui->label_15->removeEventFilter(this);
+        ui->label_15->setStyleSheet("background-color:#d9d6c3");
+        ui->label_18->removeEventFilter(this);
+        ui->label_18->setStyleSheet("background-color:#d9d6c3");
+        ui->label_20->removeEventFilter(this);
+        ui->label_20->setStyleSheet("background-color:#d9d6c3");
+        ui->label_29->removeEventFilter(this);
+        ui->label_29->setStyleSheet("background-color:#d9d6c3");
+        ui->label_30->removeEventFilter(this);
+        ui->label_30->setStyleSheet("background-color:#d9d6c3");
+        ui->label_31->removeEventFilter(this);
+        ui->label_31->setStyleSheet("background-color:#d9d6c3");
+        ui->label_32->removeEventFilter(this);
+        ui->label_32->setStyleSheet("background-color:#d9d6c3");
+        ui->label_33->removeEventFilter(this);
+        ui->label_33->setStyleSheet("background-color:#d9d6c3");
     }
     else if(checked==false)
     {
-        ui->bulkButton->setEnabled(true);
-    }
-
-    if(checked == true)
-    {
-        //ui->AluminizerButton->hide();
-        ui->BackButton->setDisabled(true);
-        ui->LengthEdit->setDisabled(true);
-        ui->LengthEdit->removeEventFilter(this);
-
-        ui->label_14->removeEventFilter(this);
-        ui->label_14->setDisabled(true);
-        ui->label_15->removeEventFilter(this);
-        ui->label_15->setDisabled(true);
-        ui->label_18->removeEventFilter(this);
-        ui->label_18->setDisabled(true);
-        ui->label_20->removeEventFilter(this);
-        ui->label_20->setDisabled(true);
-        ui->label_29->removeEventFilter(this);
-        ui->label_29->setDisabled(true);
-        ui->label_30->removeEventFilter(this);
-        ui->label_30->setDisabled(true);
-        ui->label_31->removeEventFilter(this);
-        ui->label_31->setDisabled(true);
-        ui->label_32->removeEventFilter(this);
-        ui->label_32->setDisabled(true);
-        ui->label_33->removeEventFilter(this);
-        ui->label_33->setDisabled(true);
-    }else if(checked == false){
-        ui->LengthEdit->setDisabled(false);
-        ui->BackButton->setDisabled(false);
-        ui->LengthEdit->installEventFilter(this);
+        PackFlag=0;
+        ui->bulkButton->setDisabled(false);
+        ui->bulkButton->setStyleSheet("color: rgb(33, 28, 23);");
 
         ui->label_14->installEventFilter(this);
-        ui->label_14->setDisabled(false);
+        ui->label_14->setStyleSheet("background-color: rgb(237, 237, 237);");
         ui->label_15->installEventFilter(this);
-        ui->label_15->setDisabled(false);
+        ui->label_15->setStyleSheet("background-color: rgb(237, 237, 237);");
         ui->label_18->installEventFilter(this);
-        ui->label_18->setDisabled(false);
+        ui->label_18->setStyleSheet("background-color: rgb(237, 237, 237);");
         ui->label_20->installEventFilter(this);
-        ui->label_20->setDisabled(false);
+        ui->label_20->setStyleSheet("background-color: rgb(237, 237, 237);");
         ui->label_29->installEventFilter(this);
-        ui->label_29->setDisabled(false);
+        ui->label_29->setStyleSheet("background-color: rgb(237, 237, 237);");
         ui->label_30->installEventFilter(this);
-        ui->label_30->setDisabled(false);
+        ui->label_30->setStyleSheet("background-color: rgb(237, 237, 237);");
         ui->label_31->installEventFilter(this);
-        ui->label_31->setDisabled(false);
+        ui->label_31->setStyleSheet("background-color: rgb(237, 237, 237);");
         ui->label_32->installEventFilter(this);
-        ui->label_32->setDisabled(false);
+        ui->label_32->setStyleSheet("background-color: rgb(237, 237, 237);");
         ui->label_33->installEventFilter(this);
-        ui->label_33->setDisabled(false);
+        ui->label_33->setStyleSheet("background-color: rgb(237, 237, 237);");
     }
 }
 //散装逻辑
@@ -452,13 +563,18 @@ void Management::on_bulkButton_clicked(bool checked)
 {
     if(checked == true)
     {
+        PackFlag=1;
         ui->AluminizerButton->hide();
         //长度禁止
         ui->LengthEdit->setDisabled(true);
         ui->LengthEdit->removeEventFilter(this);
+        ui->LengthEdit->setStyleSheet("border:none;border-bottom:1px solid #a1a3a6");
+        ui->label_2->setStyleSheet("color:#a1a3a6");
+         ui->label_27->setStyleSheet("color:#a1a3a6");
         //反检测禁止
         ui->NagtiveTest->removeEventFilter(this);
-        ui->NagtiveTest->setDisabled(true);
+        ui->NagtiveTest->setStyleSheet("background-color:#a1a3a6;border-radius:5px");
+        ui->PositiveTest->removeEventFilter(this);
     }
 }
 
@@ -467,23 +583,77 @@ void Management::on_packButton_clicked(bool checked)
 {
     if(checked == true)
     {
+        PackFlag=0;
         ui->AluminizerButton->show();
         ui->LengthEdit->setDisabled(false);
         ui->LengthEdit->installEventFilter(this);
-    }
-    else if(checked == false)
-    {
-        ui->AluminizerButton->hide();
-        ui->AluminizerButton->setChecked(false);
+        ui->LengthEdit->setStyleSheet("border:none;border-bottom:1px solid #000");
+        ui->label_2->setStyleSheet("color: rgb(33, 28, 23);");
+         ui->label_27->setStyleSheet("color: rgb(33, 28, 23);");
+        //反检测禁止
+        ui->NagtiveTest->installEventFilter(this);
+        ui->NagtiveTest->setStyleSheet("background-color: rgb(83, 148, 160);border-radius:5px;color:rgb(255, 250, 240)");
+        ui->PositiveTest->installEventFilter(this);
     }
 }
 
 //产品学习弹出
 void Management::on_LearningButton_clicked()
 {
-    Learn->show();
-    Learn->move(pos().x(),pos().y());
-    this->hide();
+    if(!(ui->NumEdit->text().isEmpty())&&!(ui->NameEdit->text().isEmpty())&&!(ui->SpeedEdit->text().isEmpty())&&!(ui->LightTime->text().isEmpty()))
+    {
+        if(PackFlag==0||PackFlag==1)
+        {
+            if(!(ui->LengthEdit->text().isEmpty()&&!(ui->label_14->text().isEmpty())&&!(ui->label_15->text().isEmpty())&&!(ui->label_18->text().isEmpty())
+                 &&!(ui->label_20->text().isEmpty())&&!(ui->label_29->text().isEmpty())&&!(ui->label_30->text().isEmpty())&&!(ui->label_31->text().isEmpty())
+                 &&!(ui->label_33->text().isEmpty())&&!(ui->label_32->text().isEmpty())))
+            {
+                SaveData();
+                Learn->show();
+                Learn->move(pos().x(),pos().y());
+                this->hide();
+            }
+        }else if(PackFlag==2&&!(ui->LengthEdit->text().isEmpty()))
+        {
+            SaveData();
+            Learn->show();
+            Learn->move(pos().x(),pos().y());
+            this->hide();
+        }
+    }else{
+
+    }
+}
+void Management::SaveData(){
+    Product *p = new Product;
+    p->setProductNumber(ui->NumEdit->text());
+    p->setProductName(ui->NameEdit->text());
+    p->setProductSpeed(ui->SpeedEdit->text());
+    p->setProductPhotoelectricTime(ui->LightTime->text());
+    QString autoflag=tr("%1").arg(AutoFlag);
+    p->setProductAutomaticFlag(autoflag);
+    QString packflag=tr("%1").arg(PackFlag);
+    p->setProductPackage(packflag);
+    QString pntestflag=tr("%1").arg(PNTestFlag);
+    p->setProductDetect(pntestflag);
+    if(PackFlag==0)
+    {
+        p->setProductLength(ui->LengthEdit->text());
+        p->setProductFeatures("1/2/3/4/5/6/7/8/9");
+    }else if(PackFlag==1)
+    {
+         p->setProductFeatures("1/2/3/4/5/6/7/8/9");
+    }else if(PackFlag==2)
+    {
+      p->setProductLength(ui->LengthEdit->text());
+    }
+
+    SQLITE * sqlite = new SQLITE;
+    sqlite->openDatabase();
+    sqlite->insertProduct(p->getProductName(),p->getProductName(),p->getProductLength(),p->getProductSpeed()
+                          ,p->getProductPackage(),p->getProductFeatures(),p->getProductDetect()
+                          ,p->getProductPhotoelectricTime(),p->getProductAutomaticFlag(),p->getProductExcluseiveSetting());
+    sqlite->closeDatabase();
 }
 //剔除完成
 void Management::on_FinishButton_clicked(bool checked)
@@ -526,5 +696,16 @@ void Management::on_Light_clicked(bool checked)
     }else{
         ui->red->hide();
         ui->green->show();
+    }
+}
+//输送带自动往复
+void Management::on_radioButton_clicked(bool checked)
+{
+    if(checked == true)
+    {
+        AutoFlag=0;
+    }else if(checked == false)
+    {
+        AutoFlag=1;
     }
 }

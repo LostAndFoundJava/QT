@@ -24,12 +24,14 @@ HEADERS += can.h \
     varify.h \
     sqlite.h \
     juxingkuang.h \
-    product.h
+    product.h \
+    notice.h
 FORMS += log.ui mainwindow.ui management.ui systemset.ui \
     keyboard.ui \
     widget.ui \
     learn.ui \
-    varify.ui
+    varify.ui \
+    notice.ui
 SOURCES += can.cpp \
            cmysplashscreen.cpp \
            globl_data.cpp \
@@ -47,7 +49,8 @@ SOURCES += can.cpp \
     varify.cpp \
     sqlite.cpp \
     juxingkuang.cpp \
-    product.cpp
+    product.cpp \
+    notice.cpp
 RESOURCES += Bofeng.qrc
 
 OTHER_FILES +=

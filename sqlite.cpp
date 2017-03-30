@@ -1,4 +1,4 @@
-#include "sqlite.h"
+﻿#include "sqlite.h"
 #include <QtSql/QSqlQuery>
 
 
@@ -100,7 +100,7 @@ void SQLITE::insert(QString typeQ,int numberQ,double xQ,double yQ,double len1Q,d
 JuXingKuang *SQLITE::query(QString typeQ,int numberQ)
 {
     JuXingKuang *jxk = new JuXingKuang;
-    qDebug()<<numberQ;
+    //qDebug()<<numberQ;
     QString select_all_sql = "select * from juxingkang where type='"+typeQ+"' and number="+QString::number(numberQ, 10);
     qDebug()<<select_all_sql;
     sql_query->prepare(select_all_sql);
@@ -136,4 +136,105 @@ JuXingKuang *SQLITE::query(QString typeQ,int numberQ)
 }
 
 
+void SQLITE::insertProduct(QString productNumber1,QString productName1,QString productLength1,QString productSpeed1,
+                           QString productPackage1,QString productFeatures1,QString productDetect1,QString productPhotoelectricTime1,
+                           QString productAutomaticFlag1,QString productExcluseiveSetting1)
+{
+    QString insert_sql = "insert into product (productNumber,productName,productLength,productSpeed,productPackage,productFeatures,productDetect,productPhotoelectricTime,productAutomaticFlag,productExcluseiveSetting) values (?,?,?,?,?,?,?,?,?,?)";
 
+    sql_query->prepare(insert_sql);
+
+//    QVariantList id;
+//    id.append();
+
+    QVariantList productNumber;
+    productNumber.append(productNumber1);
+
+    QVariantList productName;
+    productName.append(productName1);
+
+    QVariantList productLength;
+    productLength.append(productLength1);
+
+    QVariantList productSpeed;
+    productSpeed.append(productSpeed1);
+
+    QVariantList productPackage;
+    productPackage.append(productPackage1);
+
+    QVariantList productFeatures;
+    productFeatures.append(productFeatures1);
+
+    QVariantList productDetect;
+    productDetect.append(productDetect1);
+
+    QVariantList productPhotoelectricTime;
+    productPhotoelectricTime.append(productPhotoelectricTime1);
+
+    QVariantList productAutomaticFlag;
+    productAutomaticFlag.append(productAutomaticFlag1);
+
+    QVariantList productExcluseiveSetting;
+    productExcluseiveSetting.append(productExcluseiveSetting1);
+
+
+    //sql_query->addBindValue(id);
+    sql_query->addBindValue(productNumber);
+    sql_query->addBindValue(productName);
+    sql_query->addBindValue(productLength);
+    sql_query->addBindValue(productSpeed);
+    sql_query->addBindValue(productPackage);
+    sql_query->addBindValue(productFeatures);
+    sql_query->addBindValue(productDetect);
+    sql_query->addBindValue(productPhotoelectricTime);
+    sql_query->addBindValue(productAutomaticFlag);
+    sql_query->addBindValue(productExcluseiveSetting);
+
+
+    if(!sql_query->execBatch())
+    {
+        qDebug()<<sql_query->lastError();
+    }
+    else
+    {
+        qDebug()<<"success";
+    }
+}
+
+//JuXingKuang *SQLITE::queryProduct(QString typeQ,int numberQ)
+//{
+//    JuXingKuang *jxk = new JuXingKuang;
+//    //qDebug()<<numberQ;
+//    QString select_all_sql = "select * from juxingkang where type='"+typeQ+"' and number="+QString::number(numberQ, 10);
+//    qDebug()<<select_all_sql;
+//    sql_query->prepare(select_all_sql);
+
+//    if(!sql_query->exec())
+//    {
+//        qDebug()<<sql_query->lastError();
+//    }
+//    else
+//    {
+//        while(sql_query->next())
+//        {
+//            //int id = sql_query->value(0).toInt();
+
+//            jxk->setTypeQ(sql_query->value(1).toString());
+//            jxk->setNumberQ(sql_query->value(2).toInt());
+//            jxk->setxQ(sql_query->value(3).toString().toDouble());
+//            jxk->setyQ(sql_query->value(4).toString().toDouble());
+//            jxk->setLen1Q(sql_query->value(5).toString().toDouble());
+//            jxk->setLen2Q(sql_query->value(6).toString().toDouble());
+//            jxk->setB1Q(sql_query->value(7).toString().toDouble());
+//            jxk->setB2Q(sql_query->value(8).toString().toDouble());
+//            jxk->setB3Q(sql_query->value(9).toString().toDouble());
+//            jxk->setB4Q(sql_query->value(10).toString().toDouble());
+//            jxk->setK1Q(sql_query->value(11).toString().toDouble());
+//            jxk->setK2Q(sql_query->value(12).toString().toDouble());
+//            jxk->setDegreeQ(sql_query->value(13).toString().toDouble());
+
+//            //qDebug()<<QString("type:%1").arg(id).arg(name).arg(address);
+//            return jxk;
+//        }
+//    }
+//}

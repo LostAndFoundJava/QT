@@ -1,4 +1,4 @@
-#ifndef PRODUCT_H
+﻿#ifndef PRODUCT_H
 #define PRODUCT_H
 
 #include <QObject>
@@ -20,6 +20,9 @@ public:
     QString getProductLength() ;
 
     void setProductLength(QString productLength) ;
+    QString getProductSpeed() ;
+
+    void setProductSpeed(QString productSpeed) ;
     QString getProductPackage() ;
 
     void setProductPackage(QString productPackage);
@@ -47,6 +50,7 @@ private:
     QString productNumber;
     QString productName;
     QString productLength;
+    QString productSpeed;
     QString productPackage; //0为包装 1为散装 2为包装-镀铝膜
     QString productFeatures;//1/2/3/4/5/6/7/8/9（产品特征图片标志位，从上到下，从左到右）
     QString productDetect; //0正检测 1反检测
@@ -58,3 +62,19 @@ private:
 };
 
 #endif // PRODUCT_H
+/*
+create table product(
+    id integer PRIMARY KEY autoincrement,
+    productNumber varchar (50), //产品编号
+    productName varchar(10),    //产品名称
+    productLength varchar(50),
+    productSpeed varchar(50),
+    productPackage varchar(50),
+    productFeatures varchar(50),
+    productDetect varchar(50),
+    productPhotoelectricTime varchar(50),
+    productAutomaticFlag varchar(50),
+    productExcluseiveSetting varchar(50),
+    createdate datetime default (datetime('now', 'localtime'))
+);
+  */

@@ -1,4 +1,4 @@
-#include "product.h"
+﻿#include "product.h"
 
 Product::Product(QObject *parent) :
     QObject(parent)
@@ -25,11 +25,15 @@ void Product::setProductName(QString productName) {
 QString Product::getProductLength() {
     return productLength;
 }
-
 void Product::setProductLength(QString productLength) {
     this->productLength = productLength;
 }
-
+QString Product::getProductSpeed() {
+    return productSpeed;
+}
+void Product::setProductSpeed(QString productSpeed) {
+    this->productSpeed = productSpeed;
+}
 QString Product::getProductPackage() {
     return productPackage;
 }

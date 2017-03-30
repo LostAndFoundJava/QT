@@ -375,18 +375,17 @@ void Management::ShowTime()
 //    }
 //    Window_show.CloseKeyBoard();
 //}
-
+//镀铝膜
 void Management::on_AluminizerButton_clicked(bool checked)
 {
 
-    if(checked == true)
+    if(checked==true)
     {
-        ui->AluminizerButton->hide();
-        ui->LengthEdit->setDisabled(true);
-        ui->LengthEdit->removeEventFilter(this);
-    }else if(checked == false){
-        ui->LengthEdit->setDisabled(false);
-        ui->LengthEdit->installEventFilter(this);
+        ui->bulkButton->setEnabled(false);
+    }
+    else if(checked==false)
+    {
+        ui->bulkButton->setEnabled(true);
     }
 }
 //散装逻辑

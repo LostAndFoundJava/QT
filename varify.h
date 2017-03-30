@@ -2,7 +2,6 @@
 #define VARIFY_H
 
 #include <QWidget>
-
 #include <QAbstractButton>
 #include <qmyedit.h>
 #include <config.h>

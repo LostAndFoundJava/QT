@@ -48,7 +48,9 @@ private:
     QButtonGroup *PackingStyleGroup;
     class learn *Learn;
     void valueInt(void);
-    //QMyEdit *qme1;
+
+    //正反检测标志位
+    int PNTestFlag;
 protected:
     bool eventFilter(QObject *, QEvent *);
 public slots:

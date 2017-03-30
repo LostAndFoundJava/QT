@@ -648,12 +648,12 @@ void Management::SaveData(){
       p->setProductLength(ui->LengthEdit->text());
     }
 
-    SQLITE * sqlite = new SQLITE;
-    sqlite->openDatabase();
-    sqlite->insertProduct(p->getProductName(),p->getProductName(),p->getProductLength(),p->getProductSpeed()
+    SQLITE sqlite;
+    sqlite.openDatabase();
+    sqlite.insertProduct(p->getProductName(),p->getProductName(),p->getProductLength(),p->getProductSpeed()
                           ,p->getProductPackage(),p->getProductFeatures(),p->getProductDetect()
                           ,p->getProductPhotoelectricTime(),p->getProductAutomaticFlag(),p->getProductExcluseiveSetting());
-    sqlite->closeDatabase();
+    sqlite.closeDatabase();
 }
 //剔除完成
 void Management::on_FinishButton_clicked(bool checked)

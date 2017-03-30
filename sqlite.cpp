@@ -19,6 +19,7 @@ bool SQLITE::openDatabase()
 bool SQLITE::closeDatabase()
 {
     database.close();
+    delete sql_query;
 }
 
 void SQLITE::insert(QString typeQ,int numberQ,double xQ,double yQ,double len1Q,double len2Q,double b1Q,double b2Q,double b3Q,

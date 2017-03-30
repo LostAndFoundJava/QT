@@ -395,6 +395,7 @@ void Management::on_AluminizerButton_clicked(bool checked)
     else if(checked==false)
     {
         ui->bulkButton->setEnabled(true);
+    }
 
     if(checked == true)
     {
@@ -458,11 +459,9 @@ void Management::on_bulkButton_clicked(bool checked)
         //反检测禁止
         ui->NagtiveTest->removeEventFilter(this);
         ui->NagtiveTest->setDisabled(true);
-    }/*else if(checked == false){
-        ui->LengthEdit->setDisabled(false);
-        ui->LengthEdit->installEventFilter(this);
-    }*/
+    }
 }
+
 //包装逻辑
 void Management::on_packButton_clicked(bool checked)
 {

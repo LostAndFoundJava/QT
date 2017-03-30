@@ -15,10 +15,10 @@ int main(int argc, char *argv[])
 //    QTextCodec::setCodecForLocale(QTextCodec::codecForLocale());
 //    QTextCodec::setCodecForCStrings(QTextCodec::codecForLocale());
 
-    QTextCodec *codec = QTextCodec::codecForName("GB2312");
+    //QTextCodec *codec = QTextCodec::codecForName("GB2312");
     QTextCodec *codec1 = QTextCodec::codecForName("UTF-8");
-    QTextCodec::setCodecForLocale(codec);
-    QTextCodec::setCodecForCStrings(codec);
+    QTextCodec::setCodecForLocale(codec1);
+    QTextCodec::setCodecForCStrings(codec1);
     QTextCodec::setCodecForTr(codec1);
 
     QPixmap pixmap(":/new/prefix1/image/Bofeng.png");

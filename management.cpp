@@ -41,7 +41,7 @@ Management::Management(QWidget *parent) :
     ui->tabWidget->setCurrentIndex(0);
     ui->tabWidget->setStyleSheet("QTabBar::tab{width:122px}");
     ui->line_1->setFixedHeight(1);
-     ui->line_2->setFixedHeight(1);
+    ui->line_2->setFixedHeight(1);
 
     //镀铝膜隐藏
     ui->AluminizerButton->hide();
@@ -57,7 +57,6 @@ Management::Management(QWidget *parent) :
 
 
     //弹出图片选择
-
     ui->label_14->installEventFilter(this);
     ui->label_15->installEventFilter(this);
     ui->label_18->installEventFilter(this);
@@ -110,6 +109,10 @@ Management::Management(QWidget *parent) :
 
     //tabwidget设置数据
 
+    //设置正反检测 0：正 1：反
+    PNTestFlag = 0;
+    ui->PositiveTest->setStyleSheet("QPushButton{background-color:#b8dedf;color:#000;border-radius:5px;}");
+    ui->NagtiveTest->setStyleSheet("QPushButton{background-color:#5394a0;color:#fff;border-radius:5px;}");
 }
 
 bool Management::eventFilter(QObject *watched,QEvent *event)
@@ -227,25 +230,30 @@ bool Management::eventFilter(QObject *watched,QEvent *event)
     }
     if(watched==ui->PositiveTest)
     {
-        if(event->type()==QEvent::FocusIn)
+
+        if(event->type()==QEvent::MouseButtonPress)
         {
+            PNTestFlag = 0;
             ui->PositiveTest->setStyleSheet("QPushButton{background-color:#b8dedf;color:#000;border-radius:5px;}");
+            ui->NagtiveTest->setStyleSheet("QPushButton{background-color:#5394a0;color:#fff;border-radius:5px;}");
         }
-        else if(event->type()==QEvent::FocusOut)
-        {
-            ui->PositiveTest->setStyleSheet("QPushButton{background-color:#5394a0;color:#fff;border-radius:5px;}");
-        }
+//        else if(event->type()==QEvent::FocusOut)
+//        {
+//            ui->PositiveTest->setStyleSheet("QPushButton{background-color:#5394a0;color:#fff;border-radius:5px;}");
+//        }
     }
     if(watched==ui->NagtiveTest)
     {
-        if(event->type()==QEvent::FocusIn)
+        if(event->type()==QEvent::MouseButtonPress)
         {
+            PNTestFlag = 1;
             ui->NagtiveTest->setStyleSheet("QPushButton{background-color:#b8dedf;color:#000;border-radius:5px;}");
+            ui->PositiveTest->setStyleSheet("QPushButton{background-color:#5394a0;color:#fff;border-radius:5px;}");
         }
-        else if(event->type()==QEvent::FocusOut)
-        {
-            ui->NagtiveTest->setStyleSheet("QPushButton{background-color:#5394a0;color:#fff;border-radius:5px;}");
-        }
+//        else if(event->type()==QEvent::FocusOut)
+//        {
+//            ui->NagtiveTest->setStyleSheet("QPushButton{background-color:#5394a0;color:#fff;border-radius:5px;}");
+//        }
     }
     if(watched==ui->RmoveTime)
     {
@@ -379,6 +387,7 @@ void Management::ShowTime()
 void Management::on_AluminizerButton_clicked(bool checked)
 {
 
+
     if(checked==true)
     {
         ui->bulkButton->setEnabled(false);
@@ -386,6 +395,55 @@ void Management::on_AluminizerButton_clicked(bool checked)
     else if(checked==false)
     {
         ui->bulkButton->setEnabled(true);
+
+    if(checked == true)
+    {
+        //ui->AluminizerButton->hide();
+        ui->BackButton->setDisabled(true);
+        ui->LengthEdit->setDisabled(true);
+        ui->LengthEdit->removeEventFilter(this);
+
+        ui->label_14->removeEventFilter(this);
+        ui->label_14->setDisabled(true);
+        ui->label_15->removeEventFilter(this);
+        ui->label_15->setDisabled(true);
+        ui->label_18->removeEventFilter(this);
+        ui->label_18->setDisabled(true);
+        ui->label_20->removeEventFilter(this);
+        ui->label_20->setDisabled(true);
+        ui->label_29->removeEventFilter(this);
+        ui->label_29->setDisabled(true);
+        ui->label_30->removeEventFilter(this);
+        ui->label_30->setDisabled(true);
+        ui->label_31->removeEventFilter(this);
+        ui->label_31->setDisabled(true);
+        ui->label_32->removeEventFilter(this);
+        ui->label_32->setDisabled(true);
+        ui->label_33->removeEventFilter(this);
+        ui->label_33->setDisabled(true);
+    }else if(checked == false){
+        ui->LengthEdit->setDisabled(false);
+        ui->BackButton->setDisabled(false);
+        ui->LengthEdit->installEventFilter(this);
+
+        ui->label_14->installEventFilter(this);
+        ui->label_14->setDisabled(false);
+        ui->label_15->installEventFilter(this);
+        ui->label_15->setDisabled(false);
+        ui->label_18->installEventFilter(this);
+        ui->label_18->setDisabled(false);
+        ui->label_20->installEventFilter(this);
+        ui->label_20->setDisabled(false);
+        ui->label_29->installEventFilter(this);
+        ui->label_29->setDisabled(false);
+        ui->label_30->installEventFilter(this);
+        ui->label_30->setDisabled(false);
+        ui->label_31->installEventFilter(this);
+        ui->label_31->setDisabled(false);
+        ui->label_32->installEventFilter(this);
+        ui->label_32->setDisabled(false);
+        ui->label_33->installEventFilter(this);
+        ui->label_33->setDisabled(false);
     }
 }
 //散装逻辑
@@ -394,12 +452,16 @@ void Management::on_bulkButton_clicked(bool checked)
     if(checked == true)
     {
         ui->AluminizerButton->hide();
+        //长度禁止
         ui->LengthEdit->setDisabled(true);
         ui->LengthEdit->removeEventFilter(this);
-    }else if(checked == false){
+        //反检测禁止
+        ui->NagtiveTest->removeEventFilter(this);
+        ui->NagtiveTest->setDisabled(true);
+    }/*else if(checked == false){
         ui->LengthEdit->setDisabled(false);
         ui->LengthEdit->installEventFilter(this);
-    }
+    }*/
 }
 //包装逻辑
 void Management::on_packButton_clicked(bool checked)
@@ -420,7 +482,6 @@ void Management::on_packButton_clicked(bool checked)
 //产品学习弹出
 void Management::on_LearningButton_clicked()
 {
-
     Learn->show();
     Learn->move(pos().x(),pos().y());
     this->hide();

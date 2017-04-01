@@ -5,6 +5,8 @@
 #include <sys/time.h>
 #include <time.h>
 #include <globl_data.h>
+#include <QDialog>
+#include <QDialog>
 Management::Management(QWidget *parent) :
     QWidget(parent),
     ui(new Ui::Management)
@@ -621,6 +623,10 @@ void Management::on_LearningButton_clicked()
             this->hide();
         }
     }else{
+        Notice=new notice();
+        Notice->show();
+       Notice->move(pos().x(),pos().y());
+
 
     }
 }

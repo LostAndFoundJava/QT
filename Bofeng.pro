@@ -25,13 +25,15 @@ HEADERS += can.h \
     sqlite.h \
     juxingkuang.h \
     product.h \
-    notice.h
+    notice.h \
+    dataset.h
 FORMS += log.ui mainwindow.ui management.ui systemset.ui \
     keyboard.ui \
     widget.ui \
     learn.ui \
     varify.ui \
-    notice.ui
+    notice.ui \
+    dataset.ui
 SOURCES += can.cpp \
            cmysplashscreen.cpp \
            globl_data.cpp \
@@ -50,7 +52,8 @@ SOURCES += can.cpp \
     sqlite.cpp \
     juxingkuang.cpp \
     product.cpp \
-    notice.cpp
+    notice.cpp \
+    dataset.cpp
 RESOURCES += Bofeng.qrc
 
 OTHER_FILES +=

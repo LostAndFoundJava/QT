@@ -34,14 +34,14 @@ Systemset::Systemset(QWidget *parent) :
 //    buttonGroup->addButton(ui->pushButton_10,10);
 //    connect(buttonGroup,SIGNAL(buttonClicked(int)),this,SLOT(buttonJudge(int)));
     ui->power->installEventFilter(this);
-    ui->pushButton_2->installEventFilter(this);
-    ui->pushButton_3->installEventFilter(this);
-    ui->pushButton_4->installEventFilter(this);
-    ui->pushButton_5->installEventFilter(this);
-    ui->pushButton_6->installEventFilter(this);
-    ui->pushButton_7->installEventFilter(this);
-    ui->pushButton_8->installEventFilter(this);
-    ui->pushButton_9->installEventFilter(this);
+    ui->language->installEventFilter(this);
+    ui->check->installEventFilter(this);
+    ui->screen_display->installEventFilter(this);
+    ui->graphics_clear->installEventFilter(this);
+    ui->network->installEventFilter(this);
+    ui->in_out->installEventFilter(this);
+    ui->parameter->installEventFilter(this);
+    ui->update->installEventFilter(this);
     ui->setting->installEventFilter(this);
 
     //时间显示
@@ -51,6 +51,13 @@ Systemset::Systemset(QWidget *parent) :
     connect(timer, SIGNAL(timeout()), this, SLOT(ShowTime()));
     timer->start(500);
 
+    ui->Powerwidget->show();
+    //ui->Powerwidget->setFixedSize(701,251);
+    ui->Powerwidget->setGeometry(0,0,701,251);
+    ui->Languagewidget->hide();
+    ui->Screenwidget->hide();
+    ui->Graphicswidget->hide();
+    Button_AMP_1(ui->power);
 }
 
 Systemset::~Systemset()
@@ -83,103 +90,189 @@ bool Systemset::eventFilter(QObject *watched, QEvent *event)
 {
     if(watched == ui->power)
     {
-        if(event->type() == QEvent::FocusIn)
+        if(event->type() == QEvent::MouseButtonPress)
           {
                 Button_AMP_1(ui->power);
+                Button_AMP_0(ui->language);
+                Button_AMP_0(ui->check);
+                Button_AMP_0(ui->screen_display);
+                Button_AMP_0(ui->graphics_clear);
+                Button_AMP_0(ui->network);
+                Button_AMP_0(ui->in_out);
+                Button_AMP_0(ui->parameter);
+                Button_AMP_0(ui->update);
+                Button_AMP_0(ui->setting);
+
+                ui->Powerwidget->show();
+                 ui->Powerwidget->setGeometry(0,0,701,251);
+                ui->Languagewidget->hide();
+                ui->Screenwidget->hide();
+                ui->Graphicswidget->hide();
            }
-        else if(event->type() == QEvent::FocusOut)
-            {
-              Button_AMP_0(ui->power);
-           }
     }
-    if(watched == ui->pushButton_2)
+    if(watched == ui->language)
     {
-        if(event->type() == QEvent::FocusIn)
+        if(event->type() == QEvent::MouseButtonPress)
         {
-           Button_AMP_1(ui->pushButton_2);
-        }else if(event->type() == QEvent::FocusOut)
-        {
-             Button_AMP_0(ui->pushButton_2);
+            Button_AMP_0(ui->power);
+            Button_AMP_1(ui->language);
+            Button_AMP_0(ui->check);
+            Button_AMP_0(ui->screen_display);
+            Button_AMP_0(ui->graphics_clear);
+            Button_AMP_0(ui->network);
+            Button_AMP_0(ui->in_out);
+            Button_AMP_0(ui->parameter);
+            Button_AMP_0(ui->update);
+            Button_AMP_0(ui->setting);
+
+            ui->Powerwidget->hide();            
+            ui->Languagewidget->show();
+             ui->Languagewidget->setGeometry(0,0,701,251);
+            ui->Screenwidget->hide();
+            ui->Graphicswidget->hide();
         }
     }
-    if(watched == ui->pushButton_3)
+    if(watched == ui->check)
     {
-        if(event->type() == QEvent::FocusIn)
+        if(event->type() == QEvent::MouseButtonPress)
         {
-            Button_AMP_1(ui->pushButton_3);
-        }else if(event->type() == QEvent::FocusOut)
-        {
-           Button_AMP_0(ui->pushButton_3);
+            Button_AMP_0(ui->power);
+            Button_AMP_0(ui->language);
+            Button_AMP_1(ui->check);
+            Button_AMP_0(ui->screen_display);
+            Button_AMP_0(ui->graphics_clear);
+            Button_AMP_0(ui->network);
+            Button_AMP_0(ui->in_out);
+            Button_AMP_0(ui->parameter);
+            Button_AMP_0(ui->update);
+            Button_AMP_0(ui->setting);
+
+
         }
     }
-    if(watched == ui->pushButton_4)
+    if(watched == ui->screen_display)
     {
-        if(event->type() == QEvent::FocusIn)
+        if(event->type() == QEvent::MouseButtonPress)
         {
-           Button_AMP_1(ui->pushButton_4);
-        }else if(event->type() == QEvent::FocusOut)
-        {
-            Button_AMP_0(ui->pushButton_4);
+            Button_AMP_0(ui->power);
+            Button_AMP_0(ui->language);
+            Button_AMP_0(ui->check);
+            Button_AMP_1(ui->screen_display);
+            Button_AMP_0(ui->graphics_clear);
+            Button_AMP_0(ui->network);
+            Button_AMP_0(ui->in_out);
+            Button_AMP_0(ui->parameter);
+            Button_AMP_0(ui->update);
+            Button_AMP_0(ui->setting);
+
+            ui->Powerwidget->hide();
+            ui->Languagewidget->hide();
+            ui->Screenwidget->show();
+            ui->Screenwidget->setGeometry(0,0,701,251);
+            ui->Graphicswidget->hide();
         }
     }
-    if(watched == ui->pushButton_5)
+    if(watched == ui->graphics_clear)
     {
-        if(event->type() == QEvent::FocusIn)
+        if(event->type() == QEvent::MouseButtonPress)
         {
-          Button_AMP_1(ui->pushButton_5);
-        }else if(event->type() == QEvent::FocusOut)
-        {
-           Button_AMP_0(ui->pushButton_5);
+            Button_AMP_0(ui->power);
+            Button_AMP_0(ui->language);
+            Button_AMP_0(ui->check);
+            Button_AMP_0(ui->screen_display);
+            Button_AMP_1(ui->graphics_clear);
+            Button_AMP_0(ui->network);
+            Button_AMP_0(ui->in_out);
+            Button_AMP_0(ui->parameter);
+            Button_AMP_0(ui->update);
+            Button_AMP_0(ui->setting);
+
+            ui->Powerwidget->hide();
+            ui->Languagewidget->hide();
+            ui->Screenwidget->hide();
+            ui->Graphicswidget->show();
+            ui->Graphicswidget->setGeometry(0,0,701,251);
+
         }
     }
-    if(watched == ui->pushButton_6)
+    if(watched == ui->network)
     {
-        if(event->type() == QEvent::FocusIn)
+        if(event->type() == QEvent::MouseButtonPress)
         {
-           Button_AMP_1(ui->pushButton_6);
-        }else if(event->type() == QEvent::FocusOut)
-        {
-            Button_AMP_0(ui->pushButton_6);
+            Button_AMP_0(ui->power);
+            Button_AMP_0(ui->language);
+            Button_AMP_0(ui->check);
+            Button_AMP_0(ui->screen_display);
+            Button_AMP_0(ui->graphics_clear);
+            Button_AMP_1(ui->network);
+            Button_AMP_0(ui->in_out);
+            Button_AMP_0(ui->parameter);
+            Button_AMP_0(ui->update);
+            Button_AMP_0(ui->setting);
         }
     }
-    if(watched==ui->pushButton_7)
+    if(watched==ui->in_out)
     {
-        if(event->type() == QEvent::FocusIn)
+        if(event->type() == QEvent::MouseButtonPress)
         {
-           Button_AMP_1(ui->pushButton_7);
-        }else if(event->type() == QEvent::FocusOut)
-        {
-            Button_AMP_0(ui->pushButton_7);
+            Button_AMP_0(ui->power);
+            Button_AMP_0(ui->language);
+            Button_AMP_0(ui->check);
+            Button_AMP_0(ui->screen_display);
+            Button_AMP_0(ui->graphics_clear);
+            Button_AMP_0(ui->network);
+            Button_AMP_1(ui->in_out);
+            Button_AMP_0(ui->parameter);
+            Button_AMP_0(ui->update);
+            Button_AMP_0(ui->setting);
         }
     }
-    if(watched==ui->pushButton_8)
+    if(watched==ui->parameter)
     {
-        if(event->type() == QEvent::FocusIn)
+        if(event->type() == QEvent::MouseButtonPress)
         {
-           Button_AMP_1(ui->pushButton_8);
-        }else if(event->type() == QEvent::FocusOut)
-        {
-           Button_AMP_0(ui->pushButton_8);
+            Button_AMP_0(ui->power);
+            Button_AMP_0(ui->language);
+            Button_AMP_0(ui->check);
+            Button_AMP_0(ui->screen_display);
+            Button_AMP_0(ui->graphics_clear);
+            Button_AMP_0(ui->network);
+            Button_AMP_0(ui->in_out);
+            Button_AMP_1(ui->parameter);
+            Button_AMP_0(ui->update);
+            Button_AMP_0(ui->setting);
         }
     }
-    if(watched==ui->pushButton_9)
+    if(watched==ui->update)
     {
-        if(event->type() == QEvent::FocusIn)
+        if(event->type() == QEvent::MouseButtonPress)
         {
-           Button_AMP_1(ui->pushButton_9);
-        }else if(event->type() == QEvent::FocusOut)
-        {
-           Button_AMP_0(ui->pushButton_9);
+            Button_AMP_0(ui->power);
+            Button_AMP_0(ui->language);
+            Button_AMP_0(ui->check);
+            Button_AMP_0(ui->screen_display);
+            Button_AMP_0(ui->graphics_clear);
+            Button_AMP_0(ui->network);
+            Button_AMP_0(ui->in_out);
+            Button_AMP_0(ui->parameter);
+            Button_AMP_1(ui->update);
+            Button_AMP_0(ui->setting);
         }
     }
     if(watched==ui->setting)
     {
-        if(event->type() == QEvent::FocusIn)
+        if(event->type() == QEvent::MouseButtonPress)
         {
+            Button_AMP_0(ui->power);
+            Button_AMP_0(ui->language);
+            Button_AMP_0(ui->check);
+            Button_AMP_0(ui->screen_display);
+            Button_AMP_0(ui->graphics_clear);
+            Button_AMP_0(ui->network);
+            Button_AMP_0(ui->in_out);
+            Button_AMP_0(ui->parameter);
+            Button_AMP_0(ui->update);
             Button_AMP_1(ui->setting);
-        }else if(event->type() == QEvent::FocusOut)
-        {
-            Button_AMP_0(ui->setting);
         }
     }
  return QWidget::eventFilter(watched,event);
@@ -197,3 +290,10 @@ void Systemset::Button_AMP_0(QPushButton *button)
 
 }
 
+
+void Systemset::on_dataset_clicked()
+{
+    Dataset=new dataset();
+    Dataset->show();
+   Dataset->move(pos().x(),pos().y());
+}

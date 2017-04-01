@@ -10,6 +10,7 @@
 #include <learn.h>
 #include "product.h"
 #include <notice.h>
+#include <QDialog>
 class verify;
 namespace Ui {
 class Management;
@@ -51,6 +52,7 @@ private:
     Ui::Management *ui;
     QButtonGroup *PackingStyleGroup;
     class learn *Learn;
+    notice *Notice;
     void valueInt(void);
 
     //正反检测标志位

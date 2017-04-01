@@ -20,12 +20,12 @@ dataset::~dataset()
 
 void dataset::on_save_clicked()
 {
-    QString str;
-    QString str1;
-    str=QString::number(ui->dateEdit->date().year())+"."+QString::number(ui->dateEdit->date().month())+"."+QString::number(ui->dateEdit->date().day())
-        +"-"+QString::number(ui->timeEdit->time().hour())+":"+QString::number(ui->timeEdit->time().minute())+":"+QString::number(ui->timeEdit->time().second());
-    str1="date "+str;
-    QProcess::execute(str1.toLatin1().data());
+//    QString str;
+//    QString str1;
+//    str=QString::number(ui->dateEdit->date().year())+"."+QString::number(ui->dateEdit->date().month())+"."+QString::number(ui->dateEdit->date().day())
+//        +"-"+QString::number(ui->timeEdit->time().hour())+":"+QString::number(ui->timeEdit->time().minute())+":"+QString::number(ui->timeEdit->time().second());
+//    str1="date "+str;
+//    QProcess::execute(str1.toLatin1().data());
 }
 
 void dataset::on_cancel_clicked()

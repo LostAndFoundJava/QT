@@ -19,13 +19,13 @@ Widget::Widget(QWidget *parent) :
 {
     //操作数据库，读取相关保存信息，封装函数
     qDebug()<<"///////////////////////////////////////////////";
-    SQLITE sqlite;
-    sqlite.openDatabase();
-    sqlite.insert("你好11",1,-50,-50,100,100,-50,0,50,0,0,1300,0);
-    JuXingKuang *jxk = sqlite.query("你好",1);
-    qDebug()<<jxk->getTypeQ();
-    qDebug()<<"///////////////////////////////////////////////";
-    sqlite.closeDatabase();
+    //SQLITE sqlite;
+    //sqlite.openDatabase();
+    //sqlite.insert("你好11",1,-50,-50,100,100,-50,0,50,0,0,1300,0);
+    //JuXingKuang *jxk = sqlite.query("你好",1);
+    //qDebug()<<jxk->getTypeQ();
+    //qDebug()<<"///////////////////////////////////////////////";
+    //sqlite.closeDatabase();
     //假设为这么多，以后从文件中读取
     ui->setupUi(this);
 

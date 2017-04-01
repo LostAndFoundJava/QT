@@ -97,18 +97,38 @@ Management::Management(QWidget *parent) :
     Learn = new learn();
 
     //tablewidget设置数据
-    ui->tableWidget->setRowHeight(0,30);
+    //从数据库读出已存入的基本信息
+    ui->tableWidget->setEditTriggers(QAbstractItemView::NoEditTriggers);
 
-    ui->tableWidget->setColumnWidth(0,120);
-    ui->tableWidget->setColumnWidth(1,120);
-    ui->tableWidget->setColumnWidth(2,120);
-    ui->tableWidget->setRowCount(1);
+    SQLITE sqlite;
+    sqlite.openDatabase();
+    QList<Product*> *ql = sqlite.queryProduct();
+
+    ui->tableWidget->setRowCount(ql->size());
     ui->tableWidget->setColumnCount(3);
 
-    ui->tableWidget->setItem(0,0,new QTableWidgetItem("1"));
-    ui->tableWidget->setItem(0,1,new QTableWidgetItem("#123"));
-    ui->tableWidget->setItem(0,2,new QTableWidgetItem("food"));
+    for(int i = 0;i < ql->size();i++)
+    {
+        Product *p = ql->at(i);
+        //qDebug()<<"+++++++++++++++++++";
+        //qDebug()<<p->getProductNumber();
+        //qDebug()<<"+++++++++++++++++++";
+        ui->tableWidget->setRowHeight(i,30);
+        ui->tableWidget->setColumnWidth(0,120);
+        ui->tableWidget->setColumnWidth(1,120);
+        ui->tableWidget->setColumnWidth(2,120);
 
+
+        ui->tableWidget->setItem(i,0,new QTableWidgetItem(QString("%1").arg(i)));
+        ui->tableWidget->setItem(i,1,new QTableWidgetItem(p->getProductNumber()));
+        ui->tableWidget->setItem(i,2,new QTableWidgetItem(p->getProductName()));
+    }
+
+    sqlite.closeDatabase();
+
+
+    ////////////////////////////////////////////////////////////////////////////////////
+    connect(ui->tableWidget,SIGNAL(clicked(QModelIndex)),this,SLOT(tableWidgtShowInformation(QModelIndex)));
     //tabwidget设置数据
 
     //设置正反检测 0：正 1：反
@@ -122,42 +142,42 @@ Management::Management(QWidget *parent) :
     //输送带自动往复
     AutoFlag=1;
     //剔除
-        ui->RemovedButton->setStyleSheet("QPushButton{background-color:#b8dedf;color:#000;border-radius:5px;}");
-        ui->StopButton->setStyleSheet("QPushButton{background-color:#5394A0;color:#fff;border-radius:5px;}");
-        ui->BackButton->setStyleSheet("QPushButton{background-color:#5394A0;color:#fff;border-radius:5px;}");
-        //剔除设置
-        ui->RmoveTime->setDisabled(false);
-        ui->RmoveTime->installEventFilter(this);
-        ui->RmoveTime->setStyleSheet("border:none;border-bottom:1px solid #000");
-        ui->label_26->setStyleSheet("color: rgb(33, 28, 23);");
-         ui->label_21->setStyleSheet("color: rgb(33, 28, 23);");
+    ui->RemovedButton->setStyleSheet("QPushButton{background-color:#b8dedf;color:#000;border-radius:5px;}");
+    ui->StopButton->setStyleSheet("QPushButton{background-color:#5394A0;color:#fff;border-radius:5px;}");
+    ui->BackButton->setStyleSheet("QPushButton{background-color:#5394A0;color:#fff;border-radius:5px;}");
+    //剔除设置
+    ui->RmoveTime->setDisabled(false);
+    ui->RmoveTime->installEventFilter(this);
+    ui->RmoveTime->setStyleSheet("border:none;border-bottom:1px solid #000");
+    ui->label_26->setStyleSheet("color: rgb(33, 28, 23);");
+     ui->label_21->setStyleSheet("color: rgb(33, 28, 23);");
 
-        ui->RmoveKeep->setDisabled(false);
-        ui->RmoveKeep->installEventFilter(this);
-        ui->RmoveKeep->setStyleSheet("border:none;border-bottom:1px solid #000");
-        ui->label_16->setStyleSheet("color: rgb(33, 28, 23);");
-        ui->label_22->setStyleSheet("color: rgb(33, 28, 23);");
+    ui->RmoveKeep->setDisabled(false);
+    ui->RmoveKeep->installEventFilter(this);
+    ui->RmoveKeep->setStyleSheet("border:none;border-bottom:1px solid #000");
+    ui->label_16->setStyleSheet("color: rgb(33, 28, 23);");
+    ui->label_22->setStyleSheet("color: rgb(33, 28, 23);");
 
-        ui->OddRmove->setDisabled(false);
-        ui->OddRmove->setStyleSheet("color: rgb(33, 28, 23);");
-        //停机设置
-        ui->StopTime->setDisabled(true);
-        ui->StopTime->removeEventFilter(this);
-        ui->StopTime->setStyleSheet("border:none;border-bottom:1px solid #a1a3a6");
-        ui->label_17->setStyleSheet("color:#a1a3a6");
-        ui->label_23->setStyleSheet("color:#a1a3a6");
+    ui->OddRmove->setDisabled(false);
+    ui->OddRmove->setStyleSheet("color: rgb(33, 28, 23);");
+    //停机设置
+    ui->StopTime->setDisabled(true);
+    ui->StopTime->removeEventFilter(this);
+    ui->StopTime->setStyleSheet("border:none;border-bottom:1px solid #a1a3a6");
+    ui->label_17->setStyleSheet("color:#a1a3a6");
+    ui->label_23->setStyleSheet("color:#a1a3a6");
 
-        ui->AutoStart->setDisabled(true);
-        ui->StartTime->setStyleSheet("border:none;border-bottom:1px solid #a1a3a6");
-        ui->label_24->setStyleSheet("color:#a1a3a6");
-        //倒带设置
-        ui->BackTime->setDisabled(true);
-        ui->BackTime->removeEventFilter(this);
-        ui->BackTime->setStyleSheet("border:none;border-bottom:1px solid #a1a3a6");
-        ui->label_19->setStyleSheet("color:#a1a3a6");
-        ui->label_25->setStyleSheet("color:#a1a3a6");
+    ui->AutoStart->setDisabled(true);
+    ui->StartTime->setStyleSheet("border:none;border-bottom:1px solid #a1a3a6");
+    ui->label_24->setStyleSheet("color:#a1a3a6");
+    //倒带设置
+    ui->BackTime->setDisabled(true);
+    ui->BackTime->removeEventFilter(this);
+    ui->BackTime->setStyleSheet("border:none;border-bottom:1px solid #a1a3a6");
+    ui->label_19->setStyleSheet("color:#a1a3a6");
+    ui->label_25->setStyleSheet("color:#a1a3a6");
 
-        ui->Light->setDisabled(true);
+    ui->Light->setDisabled(true);
 
 }
 
@@ -623,11 +643,27 @@ void Management::on_LearningButton_clicked()
             this->hide();
         }
     }else{
-        Notice=new notice();
-        Notice->show();
-       Notice->move(pos().x(),pos().y());
+//        Notice=new notice();
+//        Notice->show();
+//       Notice->move(pos().x(),pos().y());
 
+//        QDialog *dlg = new QDialog(this);
 
+//        dlg->resize(400,200);
+
+//        QLabel *ql = new QLabel(dlg);
+//        ql->setGeometry(110,10,250,100);
+//        ql->setText(tr("信息未填写完整！！"));
+
+//        QPushButton *qb = new QPushButton(dlg);
+//        qb->setGeometry(250,120,60,25);
+//        qb->setText(tr("确定"));
+
+//        connect(qb,SIGNAL(clicked()),dlg,SLOT(close()));
+//        dlg->exec();
+        Learn->show();
+        Learn->move(pos().x(),pos().y());
+        this->hide();
     }
 }
 void Management::SaveData(){
@@ -660,6 +696,20 @@ void Management::SaveData(){
                           ,p->getProductPackage(),p->getProductFeatures(),p->getProductDetect()
                           ,p->getProductPhotoelectricTime(),p->getProductAutomaticFlag(),p->getProductExcluseiveSetting());
     sqlite.closeDatabase();
+    int row = ui->tableWidget->rowCount();
+
+    ui->tableWidget->setRowCount(row+1);
+    ui->tableWidget->setColumnCount(3);
+
+    ui->tableWidget->setRowHeight(row,30);
+    ui->tableWidget->setColumnWidth(0,120);
+    ui->tableWidget->setColumnWidth(1,120);
+    ui->tableWidget->setColumnWidth(2,120);
+
+
+    ui->tableWidget->setItem(row,0,new QTableWidgetItem(QString("%1").arg(row)));
+    ui->tableWidget->setItem(row,1,new QTableWidgetItem(p->getProductNumber()));
+    ui->tableWidget->setItem(row,2,new QTableWidgetItem(p->getProductName()));
 }
 //剔除完成
 void Management::on_FinishButton_clicked(bool checked)
@@ -714,4 +764,11 @@ void Management::on_radioButton_clicked(bool checked)
     {
         AutoFlag=1;
     }
+}
+
+//tableWidget 点击事件
+void Management::tableWidgtShowInformation(QModelIndex qmi)
+{
+    //qDebug()<<qmi.row();
+    //qDebug()<<qmi.column();
 }

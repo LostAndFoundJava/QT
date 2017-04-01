@@ -11,6 +11,7 @@
 #include "product.h"
 #include <notice.h>
 #include <QDialog>
+#include <QMessageBox>
 class verify;
 namespace Ui {
 class Management;
@@ -65,6 +66,7 @@ protected:
 public slots:
     void ShowTime(void);
     void SaveData(void);
+    void tableWidgtShowInformation(QModelIndex);
 };
 
 #endif // MANAGEMENT_H

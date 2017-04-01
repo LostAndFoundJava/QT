@@ -28,7 +28,7 @@ public:
                                QString productAutomaticFlag1,QString productExcluseiveSetting1);
 
     JuXingKuang *query(QString typeQ,int numberQ);
-
+    QList<Product*> *queryProduct();
     QSqlDatabase database;
 
 

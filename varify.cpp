@@ -21,6 +21,24 @@ varify::varify(QWidget *parent) :
     this->setFocusPolicy(Qt::NoFocus);
     connect(timer, SIGNAL(timeout()), this, SLOT(ShowTime()));
     timer->start(500);
+
+    valueInt();
+    //设置背景色
+    QPalette Pal1(palette());
+    Pal1.setColor(QPalette::Background, "#D4E6CA");
+    this->setAutoFillBackground(true);
+    this->setPalette(Pal1);
+    //struct timespec slptm;
+    //slptm.tv_sec=1.5;
+    //slptm.tv_nsec=0;
+    QTime t;
+    t.start();
+    while(t.elapsed()<System_InitTime)
+        QCoreApplication::processEvents();
+
+
+    Widget *w1 = new Widget(this);
+    w1->show();
 }
 
 varify::~varify()

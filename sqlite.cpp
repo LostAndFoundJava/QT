@@ -202,40 +202,26 @@ void SQLITE::insertProduct(QString productNumber1,QString productName1,QString p
     }
 }
 
-//JuXingKuang *SQLITE::queryProduct(QString typeQ,int numberQ)
-//{
-//    JuXingKuang *jxk = new JuXingKuang;
-//    //qDebug()<<numberQ;
-//    QString select_all_sql = "select * from juxingkang where type='"+typeQ+"' and number="+QString::number(numberQ, 10);
-//    qDebug()<<select_all_sql;
-//    sql_query->prepare(select_all_sql);
+QList<Product*> *SQLITE::queryProduct()
+{
+    QList<Product*> *ql = new QList<Product*>;
+    QString select_all_sql = "select * from product";
+    sql_query->prepare(select_all_sql);
 
-//    if(!sql_query->exec())
-//    {
-//        qDebug()<<sql_query->lastError();
-//    }
-//    else
-//    {
-//        while(sql_query->next())
-//        {
-//            //int id = sql_query->value(0).toInt();
-
-//            jxk->setTypeQ(sql_query->value(1).toString());
-//            jxk->setNumberQ(sql_query->value(2).toInt());
-//            jxk->setxQ(sql_query->value(3).toString().toDouble());
-//            jxk->setyQ(sql_query->value(4).toString().toDouble());
-//            jxk->setLen1Q(sql_query->value(5).toString().toDouble());
-//            jxk->setLen2Q(sql_query->value(6).toString().toDouble());
-//            jxk->setB1Q(sql_query->value(7).toString().toDouble());
-//            jxk->setB2Q(sql_query->value(8).toString().toDouble());
-//            jxk->setB3Q(sql_query->value(9).toString().toDouble());
-//            jxk->setB4Q(sql_query->value(10).toString().toDouble());
-//            jxk->setK1Q(sql_query->value(11).toString().toDouble());
-//            jxk->setK2Q(sql_query->value(12).toString().toDouble());
-//            jxk->setDegreeQ(sql_query->value(13).toString().toDouble());
-
-//            //qDebug()<<QString("type:%1").arg(id).arg(name).arg(address);
-//            return jxk;
-//        }
-//    }
-//}
+    if(!sql_query->exec())
+    {
+        qDebug()<<sql_query->lastError();
+    }
+    else
+    {
+        while(sql_query->next())
+        {
+            Product *p = new Product;
+            p->setProductName(sql_query->value(2).toString());
+            p->setProductNumber(sql_query->value(1).toString());
+            qDebug()<<sql_query->value(2).toString();
+            ql->append(p);
+        }
+    }
+    return ql;
+}

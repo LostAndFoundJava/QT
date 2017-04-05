@@ -73,9 +73,9 @@
   <widget class="QLabel" name="label_4">
    <property name="geometry">
     <rect>
-     <x>340</x>
+     <x>330</x>
      <y>260</y>
-     <width>81</width>
+     <width>101</width>
      <height>20</height>
     </rect>
    </property>
@@ -428,7 +428,7 @@ color: rgb(255, 250, 240);
 border-radius:5px;</string>
    </property>
    <property name="text">
-    <string>clear</string>
+    <string>清除检测点</string>
    </property>
   </widget>
   <widget class="QLabel" name="label_21">

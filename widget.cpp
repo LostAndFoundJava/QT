@@ -13,7 +13,7 @@
 #define WIDTH_X  800
 class SUBWIDGET;
 
-Widget::Widget(QWidget *parent) :
+Widget::Widget(QWidget *parent,bool status) :
     QWidget(parent),
     ui(new Ui::Widget)
 {
@@ -50,8 +50,11 @@ Widget::Widget(QWidget *parent) :
 
     ui->label_3->setText("0");
 
+    //test测试产生的点
     generateDots();
 
+    if(status == false)
+        showCorridateAndPhase();
 
     //this->resize(WIDTH_X,HEIGHT_Y);
     //定义进度条样式
@@ -126,4 +129,24 @@ void Widget::generateDots()
         emit dotsSignal(dot);
         dot.clear();
     }
+}
+
+void Widget::showCorridateAndPhase()
+{
+    ui->label_6->hide();
+    ui->label_7->hide();
+    ui->label_8->hide();
+    ui->label_9->hide();
+    ui->label_10->hide();
+    ui->label_11->hide();
+    ui->label_12->hide();
+    ui->label_13->hide();
+    ui->label_14->hide();
+    ui->label_15->hide();
+    ui->label_16->hide();
+    ui->label_17->hide();
+    ui->label_18->hide();
+    ui->label_19->hide();
+    ui->label_20->hide();
+    ui->label_21->hide();
 }

@@ -51,7 +51,7 @@ MainWindow::MainWindow(QWidget *parent) :
 //    QWidget::setTabOrder(ui->Log,ui->System_set);
 //    QWidget::setTabOrder(ui->System_set,ui->Detect);
 
-    Widget *w1 = new Widget(this);
+    Widget *w1 = new Widget(this,false);
     w1->show();
 
     QTimer *timer = new QTimer(this);

@@ -16,7 +16,7 @@ class Widget : public QWidget
     Q_OBJECT
     
 public:
-    explicit Widget(QWidget *parent = 0);
+    explicit Widget(QWidget *parent = 0,bool status = true);
     ~Widget();
     //后期定义为槽函数，由传入的点数据触发该事件
     void generateDots();
@@ -36,6 +36,7 @@ signals:
 private:
 
     QList<double> dot;
+    void showCorridateAndPhase();
 
 private slots:
     void getData(double ,double ,double ,double ,double ,double ,

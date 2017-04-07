@@ -6,7 +6,7 @@
 #include <time.h>
 #include <globl_data.h>
 #include <QDialog>
-#include <QDialog>
+#include <QColor>
 Management::Management(QWidget *parent) :
     QWidget(parent),
     ui(new Ui::Management)
@@ -21,7 +21,6 @@ Management::Management(QWidget *parent) :
     //标签页
     ui->tableWidget->setColumnWidth(0,200);
     ui->tableWidget->setColumnWidth(1,200);
-    ui->tableWidget->setColumnWidth(2,200);
     ui->tableWidget->setWindowFlags(Qt::FramelessWindowHint);
 
 
@@ -41,7 +40,7 @@ Management::Management(QWidget *parent) :
 //    ui->buttonBox_1->button(QDialogButtonBox::Cancel)->setText(tr("取消"));
 
     ui->tabWidget->setCurrentIndex(0);
-    ui->tabWidget->setStyleSheet("QTabBar::tab{width:122px}");
+    ui->tabWidget->setStyleSheet("QTabBar::tab{width:167px}");
     ui->line_1->setFixedHeight(1);
     ui->line_2->setFixedHeight(1);
 
@@ -59,17 +58,19 @@ Management::Management(QWidget *parent) :
 
 
     //弹出图片选择
-    ui->label_14->installEventFilter(this);
-    ui->label_15->installEventFilter(this);
-    ui->label_18->installEventFilter(this);
-    ui->label_20->installEventFilter(this);
-    ui->label_29->installEventFilter(this);
-    ui->label_30->installEventFilter(this);
-    ui->label_31->installEventFilter(this);
-    ui->label_32->installEventFilter(this);
-    ui->label_33->installEventFilter(this);
-
-
+//    ui->label_14->installEventFilter(this);
+//    ui->label_15->installEventFilter(this);
+//    ui->label_18->installEventFilter(this);
+//    ui->label_20->installEventFilter(this);
+//    ui->label_29->installEventFilter(this);
+//    ui->label_30->installEventFilter(this);
+//    ui->label_31->installEventFilter(this);
+//    ui->label_32->installEventFilter(this);
+//    ui->label_33->installEventFilter(this);
+    //学习
+        ui->Slider1->setStyleSheet("\ QSlider::groove:Horizontal \  {\ background:qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0,stop:0 rgba(255,255,255),stop:0.3 rgba(255,255,204),stop:0.33 rgba(153,160,51),stop:0.6 rgba(153,153,51),stop:0.63 rgba(150,0,0),stop:1.000 rgba(139,0,0));\  height:6px;\ }\ QSlider::handle:Horizontal \ {\ height: 12px;\width:12px;\ border-image: url(image/slider.png);\ margin: -2 0px; \}");
+        ui->Slider2->setStyleSheet("\ QSlider::groove:Horizontal \  {\ background:qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0,stop:0 rgba(255,255,255),stop:0.3 rgba(255,255,204),stop:0.33 rgba(153,160,51),stop:0.6 rgba(153,153,51),stop:0.63 rgba(150,0,0),stop:1.000 rgba(139,0,0));\  height:6px;\ }\ QSlider::handle:Horizontal \ {\ height: 12px;\width:12px;\ border-image: url(image/slider.png);\ margin: -2 0px; \}");
+        ui->Slider3->setStyleSheet("\ QSlider::groove:Horizontal \  {\ background:qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0,stop:0 rgba(255,255,255),stop:0.3 rgba(255,255,204),stop:0.33 rgba(153,160,51),stop:0.6 rgba(153,153,51),stop:0.63 rgba(150,0,0),stop:1.000 rgba(139,0,0));\  height:6px;\ }\ QSlider::handle:Horizontal \ {\ height: 12px;\width:12px;\ border-image: url(image/slider.png);\ margin: -2 0px; \}");
     ui->LightTime->installEventFilter(this);
     ui->PositiveTest->installEventFilter(this);
     ui->NagtiveTest->installEventFilter(this);
@@ -105,7 +106,7 @@ Management::Management(QWidget *parent) :
     QList<Product*> *ql = sqlite.queryProduct();
 
     ui->tableWidget->setRowCount(ql->size());
-    ui->tableWidget->setColumnCount(3);
+    ui->tableWidget->setColumnCount(2);
 
     for(int i = 0;i < ql->size();i++)
     {
@@ -116,12 +117,12 @@ Management::Management(QWidget *parent) :
         ui->tableWidget->setRowHeight(i,30);
         ui->tableWidget->setColumnWidth(0,120);
         ui->tableWidget->setColumnWidth(1,120);
-        ui->tableWidget->setColumnWidth(2,120);
+
 
 
         ui->tableWidget->setItem(i,0,new QTableWidgetItem(QString("%1").arg(i)));
-        ui->tableWidget->setItem(i,1,new QTableWidgetItem(p->getProductNumber()));
-        ui->tableWidget->setItem(i,2,new QTableWidgetItem(p->getProductName()));
+        ui->tableWidget->setItem(i,1,new QTableWidgetItem(p->getProductName()));
+
     }
 
     sqlite.closeDatabase();
@@ -215,78 +216,78 @@ bool Management::eventFilter(QObject *watched,QEvent *event)
     }
 
 
-    if(watched==ui->label_14)
-    {
-        if(event->type()==QEvent::MouseButtonPress)
-        {
-            QString name=QFileDialog::getOpenFileName(0,"Image",QDir::currentPath()+"/image", tr("Images (*.png)"));
-            ui->label_14->setPixmap(name);
-        }
-    }
-    if(watched==ui->label_15)
-    {
-        if(event->type()==QEvent::MouseButtonPress)
-        {
-            QString name=QFileDialog::getOpenFileName(0,"Image",QDir::currentPath()+"/image", tr("Images (*.png)"));
-            ui->label_15->setPixmap(name);
-        }
-    }
-    if(watched==ui->label_18)
-    {
-        if(event->type()==QEvent::MouseButtonPress)
-        {
-            QString name=QFileDialog::getOpenFileName(0,"Image",QDir::currentPath()+"/image", tr("Images (*.png)"));
-            ui->label_18->setPixmap(name);
-        }
-    }
-    if(watched==ui->label_20)
-    {
-        if(event->type()==QEvent::MouseButtonPress)
-        {
-            QString name=QFileDialog::getOpenFileName(0,"Image",QDir::currentPath()+"/image", tr("Images (*.png)"));
-            ui->label_20->setPixmap(name);
-        }
-    }
-    if(watched==ui->label_29)
-    {
-        if(event->type()==QEvent::MouseButtonPress)
-        {
-            QString name=QFileDialog::getOpenFileName(0,"Image",QDir::currentPath()+"/image", tr("Images (*.png)"));
-            ui->label_29->setPixmap(name);
-        }
-    }
-    if(watched==ui->label_30)
-    {
-        if(event->type()==QEvent::MouseButtonPress)
-        {
-            QString name=QFileDialog::getOpenFileName(0,"Image",QDir::currentPath()+"/image", tr("Images (*.png)"));
-            ui->label_30->setPixmap(name);
-        }
-    }
-    if(watched==ui->label_31)
-    {
-        if(event->type()==QEvent::MouseButtonPress)
-        {
-            QString name=QFileDialog::getOpenFileName(0,"Image",QDir::currentPath()+"/image", tr("Images (*.png)"));
-            ui->label_31->setPixmap(name);
-        }
-    }
-    if(watched==ui->label_32)
-    {
-        if(event->type()==QEvent::MouseButtonPress)
-        {
-            QString name=QFileDialog::getOpenFileName(0,"Image",QDir::currentPath()+"/image", tr("Images (*.png)"));
-            ui->label_32->setPixmap(name);
-        }
-    }
-    if(watched==ui->label_33)
-    {
-        if(event->type()==QEvent::MouseButtonPress)
-        {
-            QString name=QFileDialog::getOpenFileName(0,"Image",QDir::currentPath()+"/image", tr("Images (*.png)"));
-            ui->label_33->setPixmap(name);
-        }
-    }
+//    if(watched==ui->label_14)
+//    {
+//        if(event->type()==QEvent::MouseButtonPress)
+//        {
+//            QString name=QFileDialog::getOpenFileName(0,"Image",QDir::currentPath()+"/image", tr("Images (*.png)"));
+//            ui->label_14->setPixmap(name);
+//        }
+//    }
+//    if(watched==ui->label_15)
+//    {
+//        if(event->type()==QEvent::MouseButtonPress)
+//        {
+//            QString name=QFileDialog::getOpenFileName(0,"Image",QDir::currentPath()+"/image", tr("Images (*.png)"));
+//            ui->label_15->setPixmap(name);
+//        }
+//    }
+//    if(watched==ui->label_18)
+//    {
+//        if(event->type()==QEvent::MouseButtonPress)
+//        {
+//            QString name=QFileDialog::getOpenFileName(0,"Image",QDir::currentPath()+"/image", tr("Images (*.png)"));
+//            ui->label_18->setPixmap(name);
+//        }
+//    }
+//    if(watched==ui->label_20)
+//    {
+//        if(event->type()==QEvent::MouseButtonPress)
+//        {
+//            QString name=QFileDialog::getOpenFileName(0,"Image",QDir::currentPath()+"/image", tr("Images (*.png)"));
+//            ui->label_20->setPixmap(name);
+//        }
+//    }
+//    if(watched==ui->label_29)
+//    {
+//        if(event->type()==QEvent::MouseButtonPress)
+//        {
+//            QString name=QFileDialog::getOpenFileName(0,"Image",QDir::currentPath()+"/image", tr("Images (*.png)"));
+//            ui->label_29->setPixmap(name);
+//        }
+//    }
+//    if(watched==ui->label_30)
+//    {
+//        if(event->type()==QEvent::MouseButtonPress)
+//        {
+//            QString name=QFileDialog::getOpenFileName(0,"Image",QDir::currentPath()+"/image", tr("Images (*.png)"));
+//            ui->label_30->setPixmap(name);
+//        }
+//    }
+//    if(watched==ui->label_31)
+//    {
+//        if(event->type()==QEvent::MouseButtonPress)
+//        {
+//            QString name=QFileDialog::getOpenFileName(0,"Image",QDir::currentPath()+"/image", tr("Images (*.png)"));
+//            ui->label_31->setPixmap(name);
+//        }
+//    }
+//    if(watched==ui->label_32)
+//    {
+//        if(event->type()==QEvent::MouseButtonPress)
+//        {
+//            QString name=QFileDialog::getOpenFileName(0,"Image",QDir::currentPath()+"/image", tr("Images (*.png)"));
+//            ui->label_32->setPixmap(name);
+//        }
+//    }
+//    if(watched==ui->label_33)
+//    {
+//        if(event->type()==QEvent::MouseButtonPress)
+//        {
+//            QString name=QFileDialog::getOpenFileName(0,"Image",QDir::currentPath()+"/image", tr("Images (*.png)"));
+//            ui->label_33->setPixmap(name);
+//        }
+//    }
     if(watched==ui->LightTime)
     {
         if(event->type()==QEvent::MouseButtonPress)
@@ -535,24 +536,24 @@ void Management::on_AluminizerButton_clicked(bool checked)
         ui->bulkButton->setDisabled(true);
         ui->bulkButton->setStyleSheet("color:#a1a3a6");
 
-        ui->label_14->removeEventFilter(this);
-        ui->label_14->setStyleSheet("background-color:#d9d6c3");
-        ui->label_15->removeEventFilter(this);
-        ui->label_15->setStyleSheet("background-color:#d9d6c3");
-        ui->label_18->removeEventFilter(this);
-        ui->label_18->setStyleSheet("background-color:#d9d6c3");
-        ui->label_20->removeEventFilter(this);
-        ui->label_20->setStyleSheet("background-color:#d9d6c3");
-        ui->label_29->removeEventFilter(this);
-        ui->label_29->setStyleSheet("background-color:#d9d6c3");
-        ui->label_30->removeEventFilter(this);
-        ui->label_30->setStyleSheet("background-color:#d9d6c3");
-        ui->label_31->removeEventFilter(this);
-        ui->label_31->setStyleSheet("background-color:#d9d6c3");
-        ui->label_32->removeEventFilter(this);
-        ui->label_32->setStyleSheet("background-color:#d9d6c3");
-        ui->label_33->removeEventFilter(this);
-        ui->label_33->setStyleSheet("background-color:#d9d6c3");
+//        ui->label_14->removeEventFilter(this);
+//        ui->label_14->setStyleSheet("background-color:#d9d6c3");
+//        ui->label_15->removeEventFilter(this);
+//        ui->label_15->setStyleSheet("background-color:#d9d6c3");
+//        ui->label_18->removeEventFilter(this);
+//        ui->label_18->setStyleSheet("background-color:#d9d6c3");
+//        ui->label_20->removeEventFilter(this);
+//        ui->label_20->setStyleSheet("background-color:#d9d6c3");
+//        ui->label_29->removeEventFilter(this);
+//        ui->label_29->setStyleSheet("background-color:#d9d6c3");
+//        ui->label_30->removeEventFilter(this);
+//        ui->label_30->setStyleSheet("background-color:#d9d6c3");
+//        ui->label_31->removeEventFilter(this);
+//        ui->label_31->setStyleSheet("background-color:#d9d6c3");
+//        ui->label_32->removeEventFilter(this);
+//        ui->label_32->setStyleSheet("background-color:#d9d6c3");
+//        ui->label_33->removeEventFilter(this);
+//        ui->label_33->setStyleSheet("background-color:#d9d6c3");
     }
     else if(checked==false)
     {
@@ -560,24 +561,24 @@ void Management::on_AluminizerButton_clicked(bool checked)
         ui->bulkButton->setDisabled(false);
         ui->bulkButton->setStyleSheet("color: rgb(33, 28, 23);");
 
-        ui->label_14->installEventFilter(this);
-        ui->label_14->setStyleSheet("background-color: rgb(237, 237, 237);");
-        ui->label_15->installEventFilter(this);
-        ui->label_15->setStyleSheet("background-color: rgb(237, 237, 237);");
-        ui->label_18->installEventFilter(this);
-        ui->label_18->setStyleSheet("background-color: rgb(237, 237, 237);");
-        ui->label_20->installEventFilter(this);
-        ui->label_20->setStyleSheet("background-color: rgb(237, 237, 237);");
-        ui->label_29->installEventFilter(this);
-        ui->label_29->setStyleSheet("background-color: rgb(237, 237, 237);");
-        ui->label_30->installEventFilter(this);
-        ui->label_30->setStyleSheet("background-color: rgb(237, 237, 237);");
-        ui->label_31->installEventFilter(this);
-        ui->label_31->setStyleSheet("background-color: rgb(237, 237, 237);");
-        ui->label_32->installEventFilter(this);
-        ui->label_32->setStyleSheet("background-color: rgb(237, 237, 237);");
-        ui->label_33->installEventFilter(this);
-        ui->label_33->setStyleSheet("background-color: rgb(237, 237, 237);");
+//        ui->label_14->installEventFilter(this);
+//        ui->label_14->setStyleSheet("background-color: rgb(237, 237, 237);");
+//        ui->label_15->installEventFilter(this);
+//        ui->label_15->setStyleSheet("background-color: rgb(237, 237, 237);");
+//        ui->label_18->installEventFilter(this);
+//        ui->label_18->setStyleSheet("background-color: rgb(237, 237, 237);");
+//        ui->label_20->installEventFilter(this);
+//        ui->label_20->setStyleSheet("background-color: rgb(237, 237, 237);");
+//        ui->label_29->installEventFilter(this);
+//        ui->label_29->setStyleSheet("background-color: rgb(237, 237, 237);");
+//        ui->label_30->installEventFilter(this);
+//        ui->label_30->setStyleSheet("background-color: rgb(237, 237, 237);");
+//        ui->label_31->installEventFilter(this);
+//        ui->label_31->setStyleSheet("background-color: rgb(237, 237, 237);");
+//        ui->label_32->installEventFilter(this);
+//        ui->label_32->setStyleSheet("background-color: rgb(237, 237, 237);");
+//        ui->label_33->installEventFilter(this);
+//        ui->label_33->setStyleSheet("background-color: rgb(237, 237, 237);");
     }
 }
 //散装逻辑
@@ -622,49 +623,49 @@ void Management::on_packButton_clicked(bool checked)
 //产品学习弹出
 void Management::on_LearningButton_clicked()
 {
-    if(!(ui->NumEdit->text().isEmpty())&&!(ui->NameEdit->text().isEmpty())&&!(ui->SpeedEdit->text().isEmpty())&&!(ui->LightTime->text().isEmpty()))
-    {
-        if(PackFlag==0||PackFlag==1)
-        {
-            if(!(ui->LengthEdit->text().isEmpty()&&!(ui->label_14->text().isEmpty())&&!(ui->label_15->text().isEmpty())&&!(ui->label_18->text().isEmpty())
-                 &&!(ui->label_20->text().isEmpty())&&!(ui->label_29->text().isEmpty())&&!(ui->label_30->text().isEmpty())&&!(ui->label_31->text().isEmpty())
-                 &&!(ui->label_33->text().isEmpty())&&!(ui->label_32->text().isEmpty())))
-            {
-                SaveData();
-                Learn->show();
-                Learn->move(pos().x(),pos().y());
-                this->hide();
-            }
-        }else if(PackFlag==2&&!(ui->LengthEdit->text().isEmpty()))
-        {
-            SaveData();
-            Learn->show();
-            Learn->move(pos().x(),pos().y());
-            this->hide();
-        }
-    }else{
-//        Notice=new notice();
-//        Notice->show();
-//       Notice->move(pos().x(),pos().y());
+//    if(!(ui->NumEdit->text().isEmpty())&&!(ui->NameEdit->text().isEmpty())&&!(ui->SpeedEdit->text().isEmpty())&&!(ui->LightTime->text().isEmpty()))
+//    {
+//        if(PackFlag==0||PackFlag==1)
+//        {
+//            if(!(ui->LengthEdit->text().isEmpty()&&!(ui->label_14->text().isEmpty())&&!(ui->label_15->text().isEmpty())&&!(ui->label_18->text().isEmpty())
+//                 &&!(ui->label_20->text().isEmpty())&&!(ui->label_29->text().isEmpty())&&!(ui->label_30->text().isEmpty())&&!(ui->label_31->text().isEmpty())
+//                 &&!(ui->label_33->text().isEmpty())&&!(ui->label_32->text().isEmpty())))
+//            {
+//                SaveData();
+//                Learn->show();
+//                Learn->move(pos().x(),pos().y());
+//                this->hide();
+//            }
+//        }else if(PackFlag==2&&!(ui->LengthEdit->text().isEmpty()))
+//        {
+//            SaveData();
+//            Learn->show();
+//            Learn->move(pos().x(),pos().y());
+//            this->hide();
+//        }
+//    }else{
+////        Notice=new notice();
+////        Notice->show();
+////       Notice->move(pos().x(),pos().y());
 
-//        QDialog *dlg = new QDialog(this);
+////        QDialog *dlg = new QDialog(this);
 
-//        dlg->resize(400,200);
+////        dlg->resize(400,200);
 
-//        QLabel *ql = new QLabel(dlg);
-//        ql->setGeometry(110,10,250,100);
-//        ql->setText(tr("信息未填写完整！！"));
+////        QLabel *ql = new QLabel(dlg);
+////        ql->setGeometry(110,10,250,100);
+////        ql->setText(tr("信息未填写完整！！"));
 
-//        QPushButton *qb = new QPushButton(dlg);
-//        qb->setGeometry(250,120,60,25);
-//        qb->setText(tr("确定"));
+////        QPushButton *qb = new QPushButton(dlg);
+////        qb->setGeometry(250,120,60,25);
+////        qb->setText(tr("确定"));
 
-//        connect(qb,SIGNAL(clicked()),dlg,SLOT(close()));
-//        dlg->exec();
-        Learn->show();
-        Learn->move(pos().x(),pos().y());
-        this->hide();
-    }
+////        connect(qb,SIGNAL(clicked()),dlg,SLOT(close()));
+////        dlg->exec();
+//        Learn->show();
+//        Learn->move(pos().x(),pos().y());
+//        this->hide();
+//    }
 }
 void Management::SaveData(){
     Product *p = new Product;
@@ -699,17 +700,15 @@ void Management::SaveData(){
     int row = ui->tableWidget->rowCount();
 
     ui->tableWidget->setRowCount(row+1);
-    ui->tableWidget->setColumnCount(3);
+    ui->tableWidget->setColumnCount(2);
 
     ui->tableWidget->setRowHeight(row,30);
     ui->tableWidget->setColumnWidth(0,120);
     ui->tableWidget->setColumnWidth(1,120);
-    ui->tableWidget->setColumnWidth(2,120);
 
 
     ui->tableWidget->setItem(row,0,new QTableWidgetItem(QString("%1").arg(row)));
-    ui->tableWidget->setItem(row,1,new QTableWidgetItem(p->getProductNumber()));
-    ui->tableWidget->setItem(row,2,new QTableWidgetItem(p->getProductName()));
+    ui->tableWidget->setItem(row,1,new QTableWidgetItem(p->getProductName()));
 }
 //剔除完成
 void Management::on_FinishButton_clicked(bool checked)
@@ -772,3 +771,4 @@ void Management::tableWidgtShowInformation(QModelIndex qmi)
     //qDebug()<<qmi.row();
     //qDebug()<<qmi.column();
 }
+

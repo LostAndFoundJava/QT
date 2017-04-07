@@ -49,6 +49,7 @@ private slots:
 
      void on_radioButton_clicked(bool checked);
 
+
 private:
     Ui::Management *ui;
     QButtonGroup *PackingStyleGroup;
@@ -70,6 +71,8 @@ public slots:
 };
 
 #endif // MANAGEMENT_H
+
+
 
 
 

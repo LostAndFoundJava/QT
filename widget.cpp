@@ -40,10 +40,10 @@ Widget::Widget(QWidget *parent,bool status) :
     SUBWIDGET *sub =new SUBWIDGET(this);
 
     sub->initiation(0,1300,-20,0,20,0,40,40,0,-20,-20);
-    //sub->initiation(jxk->getK1Q(),jxk->getK2Q(),jxk->getB1Q(),jxk->getB2Q(),jxk->getB3Q(),jxk->getB4Q(),
-                   // jxk->getLen1Q(),jxk->getLen2Q(),jxk->getDegreeQ(),jxk->getxQ(),jxk->getyQ());
+//    sub->initiation(jxk->getK1Q(),jxk->getK2Q(),jxk->getB1Q(),jxk->getB2Q(),jxk->getB3Q(),jxk->getB4Q(),
+//                    jxk->getLen1Q(),jxk->getLen2Q(),jxk->getDegreeQ(),jxk->getxQ(),jxk->getyQ());
     //定义子widget背景色
-    sub->setGeometryByUser(271,30,450,200);
+    sub->setGeometryByUser(71,30,400,400);
     Pal.setColor(QPalette::Background, "#FFFFF0");
     sub->setAutoFillBackground(true);
     sub->setPalette(Pal);
@@ -58,7 +58,7 @@ Widget::Widget(QWidget *parent,bool status) :
 
     //this->resize(WIDTH_X,HEIGHT_Y);
     //定义进度条样式
-    ui->horizontalSlider->setStyleSheet(" \ QSlider::add-page:Horizontal\{\ background-color: rgb(187, 255, 255);\height:4px;\}\QSlider::sub-page:Horizontal \{\ background-color:rgb(83, 148, 160);\  height:4px;\    }\ QSlider::groove:Horizontal \  {\ background:transparent;\  height:6px;\ }\ QSlider::handle:Horizontal \ {\ height: 12px;\width:12px;\ border-image: url(image/slider.png);\ margin: -2 0px; \}")  ;
+    ui->horizontalSlider->setStyleSheet(" \ QSlider::add-page:Horizontal\{\ background-color: rgb(187, 255, 255);\height:4px;\}\QSlider::sub-page:Horizontal \{\ background-color:rgb(83, 148, 160);\  height:4px;\    }\ QSlider::groove:Horizontal \  {\ background:transparent;\  height:6px;\ }\ QSlider::handle:Horizontal \ {\ height: 12px;\width:12px;\ border-image: url(image/slider.png);\ margin: -2 0px; \}");
     connect(ui->horizontalSlider,SIGNAL(valueChanged(int)),sub,SLOT(getValue(int)));
     connect(sub,SIGNAL(setData(double ,double ,double ,double ,double ,double ,
                                 double ,double ,double ,double ,double ,

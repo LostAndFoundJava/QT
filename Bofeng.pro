@@ -26,7 +26,27 @@ HEADERS += \
     juxingkuang.h \
     product.h \
     notice.h \
-    dataset.h
+    dataset.h \
+    thread_canopen.h \
+    crc16-ccitt.h \
+    CO_trace.h \
+    CO_time.h \
+    CO_SYNC.h \
+    CO_SDOmaster.h \
+    CO_SDO.h \
+    CO_PDO.h \
+    CO_OD_storage.h \
+    CO_OD.h \
+    CO_NMT_Heartbeat.h \
+    CO_master.h \
+    CO_Linux_tasks.h \
+    CO_HBconsumer.h \
+    CO_Emergency.h \
+    CO_driver.h \
+    CO_comm_helpers.h \
+    CO_command.h \
+    CANopen.h \
+    application.h
 FORMS += log.ui mainwindow.ui management.ui systemset.ui \
     keyboard.ui \
     widget.ui \
@@ -53,7 +73,27 @@ SOURCES += \
     juxingkuang.cpp \
     product.cpp \
     notice.cpp \
-    dataset.cpp
+    dataset.cpp \
+    thread_canopen.cpp \
+    crc16-ccitt.c \
+    CO_trace.c \
+    CO_time.c \
+    CO_SYNC.c \
+    CO_SDOmaster.c \
+    CO_SDO.c \
+    CO_PDO.c \
+    CO_OD_storage.c \
+    CO_OD.c \
+    CO_NMT_Heartbeat.c \
+    CO_master.c \
+    CO_Linux_tasks.c \
+    CO_HBconsumer.c \
+    CO_Emergency.c \
+    CO_driver.c \
+    CO_comm_helpers.c \
+    CO_command.c \
+    CANopen.c \
+    application.c
 RESOURCES += Bofeng.qrc
 
 OTHER_FILES +=

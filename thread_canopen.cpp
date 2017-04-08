@@ -19,6 +19,7 @@
 
 #ifndef CO_SINGLE_THREAD
 #include "CO_command.h"
+#include "CO_comm_helpers.h"
 #include <pthread.h>
 #endif
 
@@ -54,6 +55,8 @@ static pthread_t            rt_thread_id;
 static int                  rt_thread_epoll_fd;
 #endif
 
+int err = 0; /* syntax or other error, true or false */
+respErrorCode_t respErrorCode = respErrorNone;
 
 /* Signal handler */
 volatile sig_atomic_t CO_endProgram = 0;
@@ -161,7 +164,7 @@ void Thread_CANopen::run(){
 //            CANdevice0Index = if_nametoindex(CANdevice);
 //        }
 
-    nodeId=4;
+    nodeId=3;
     rtPriority=2;
     //CANdevice0Index=1;
 
@@ -348,6 +351,14 @@ void Thread_CANopen::run(){
 #ifndef CO_SINGLE_THREAD
         pthread_mutex_unlock(&CO_CAN_VALID_mtx);
 #endif
+
+
+        //---------------------------使所有节点进入运行状态-----------------------------//
+        if(err == 0) {
+            //err = CO_sendNMTcommand(CO, CO_NMT_ENTER_STOPPED, 0) ? 1:0;
+            //if(err == 0) respLen = sprintf(resp, "[%d] OK", sequence);
+        }
+        //---------------------------------------------------------------------------//
 
 
         reset = CO_RESET_NOT;

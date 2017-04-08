@@ -6,9 +6,13 @@
 #include <cmysplashscreen.h>
 #include <QDesktopWidget>
 #include <globl_data.h>
+#include "thread_canopen.h"
+
 MainWindow *w;
 int main(int argc, char *argv[])
 {
+    Thread_CANopen *canopen_master = new Thread_CANopen();
+    //canopen_master->start();
     QApplication a(argc, argv);
 //    QTextCodec *codec = QTextCodec::codecForName("GB2312");
 //    QTextCodec::setCodecForTr(codec);

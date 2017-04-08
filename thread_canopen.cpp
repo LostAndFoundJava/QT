@@ -1,26 +1,6 @@
 #include "thread_canopen.h"
 
-#include "application.h"
-#include "CANopen.h"
-#include "CO_OD_storage.h"
-#include "CO_Linux_tasks.h"
-#include "CO_time.h"
-#include <stdio.h>
-#include <stdlib.h>
-#include <unistd.h>
-#include <string.h>
-#include <sched.h>
-#include <signal.h>
-#include <errno.h>
-#include <sys/epoll.h>
-#include <net/if.h>
-#include <linux/reboot.h>
-#include <sys/reboot.h>
 
-#ifndef CO_SINGLE_THREAD
-#include "CO_command.h"
-#include <pthread.h>
-#endif
 
 #define NSEC_PER_SEC            (1000000000)    /* The number of nanoseconds per second. */
 #define NSEC_PER_MSEC           (1000000)       /* The number of nanoseconds per millisecond. */
@@ -54,6 +34,8 @@ static pthread_t            rt_thread_id;
 static int                  rt_thread_epoll_fd;
 #endif
 
+int err = 0; /* syntax or other error, true or false */
+respErrorCode_t respErrorCode = respErrorNone;
 
 /* Signal handler */
 volatile sig_atomic_t CO_endProgram = 0;
@@ -161,7 +143,7 @@ void Thread_CANopen::run(){
 //            CANdevice0Index = if_nametoindex(CANdevice);
 //        }
 
-    nodeId=4;
+    nodeId=3;
     rtPriority=2;
     //CANdevice0Index=1;
 
@@ -348,6 +330,14 @@ void Thread_CANopen::run(){
 #ifndef CO_SINGLE_THREAD
         pthread_mutex_unlock(&CO_CAN_VALID_mtx);
 #endif
+
+
+        //---------------------------使所有节点进入运行状态-----------------------------//
+        if(err == 0) {
+            //err = CO_sendNMTcommand(CO, CO_NMT_ENTER_STOPPED, 0) ? 1:0;
+            //if(err == 0) respLen = sprintf(resp, "[%d] OK", sequence);
+        }
+        //---------------------------------------------------------------------------//
 
 
         reset = CO_RESET_NOT;

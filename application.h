@@ -30,6 +30,85 @@
 
 #include "CANopen.h"
 
+/*
+@code
+               (Program Start)
+                      |
+                      V
+    +------------------------------------+
+    |           app_programStart()       |
+    +------------------------------------+
+                      |
+                      |<-------------------------+
+                      |                          |
+                      V                          |
+             (Initialze CANopen)                 |
+                      |                          |
+                      V                          |
+    +------------------------------------+       |
+    |        app_communicationReset()    |       |
+    +------------------------------------+       |
+                      |                          |
+                      V                          |
+         (Enable CAN and interrupts)             |
+                      |                          |
+                      |<----------------------+  |
+                      |                       |  |
+                      V                       |  |
+    +------------------------------------+    |  |
+    |           app_programAsync()       |    |  |
+    +------------------------------------+    |  |
+                      |                       |  |
+                      V                       |  |
+        (Process CANopen asynchronous)        |  |
+                      |                       |  |
+                      +- infinite loop -------+  |
+                      |                          |
+                      +- reset communication ----+
+                      |
+                      V
+    +------------------------------------+
+    |            app_programEnd()        |
+    +------------------------------------+
+                      |
+                      V
+              (delete CANopen)
+                      |
+                      V
+                (Program end)
+   @endcode
+ *
+ *
+ * ###Timer program flow chart
+ *
+ * @code
+        (Timer interrupt 1 millisecond)
+                      |
+                      V
+              (CANopen read RPDOs)
+                      |
+                      V
+    +------------------------------------+
+    |           app_program1ms()         |
+    +------------------------------------+
+                      |
+                      V
+              (CANopen write TPDOs)
+   @endcode
+ *
+ *
+ * ###Receive and transmit high priority interrupt flow chart
+ *
+ * @code
+           (CAN receive event or)
+      (CAN transmit buffer empty event)
+                      |
+                      V
+       (Process received CAN message or)
+   (copy next message to CAN transmit buffer)
+   @endcode
+*/
+
 #ifdef __cplusplus
 extern "C"{
 #endif

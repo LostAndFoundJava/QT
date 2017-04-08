@@ -1,4 +1,4 @@
-#ifndef WIDGET_H
+﻿#ifndef WIDGET_H
 #define WIDGET_H
 
 #include <QWidget>
@@ -27,8 +27,7 @@ public:
 
 protected:
 
-private slots:
-    void on_horizontalSlider_valueChanged(int value);
+
 
 signals:
     void dotsSignal(QList<double>);
@@ -42,6 +41,7 @@ private slots:
     void getData(double ,double ,double ,double ,double ,double ,
              double ,double ,double ,double ,double ,
              double ,double ,double ,double ,double ,double );
+    void on_verticalSlider_valueChanged(int value);
 };
 
 #endif // WIDGET_H

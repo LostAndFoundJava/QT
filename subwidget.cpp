@@ -616,7 +616,7 @@ void SUBWIDGET::mouseReleaseEvent(QMouseEvent *){
 void SUBWIDGET::getValue(int value)
 {
     QString s = QString("%1").arg(value);
-    degree = value;
+    degree = value+90;
     timer->start(INTERVAL);
 }
 

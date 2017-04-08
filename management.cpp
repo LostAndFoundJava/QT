@@ -41,8 +41,7 @@ Management::Management(QWidget *parent) :
 
     ui->tabWidget->setCurrentIndex(0);
     ui->tabWidget->setStyleSheet("QTabBar::tab{width:167px}");
-    ui->line_1->setFixedHeight(1);
-    ui->line_2->setFixedHeight(1);
+
 
     //镀铝膜隐藏
     ui->AluminizerButton->hide();
@@ -68,9 +67,14 @@ Management::Management(QWidget *parent) :
 //    ui->label_32->installEventFilter(this);
 //    ui->label_33->installEventFilter(this);
     //学习
-        ui->Slider1->setStyleSheet("\ QSlider::groove:Horizontal \  {\ background:qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0,stop:0 rgba(255,255,255),stop:0.3 rgba(255,255,204),stop:0.33 rgba(153,160,51),stop:0.6 rgba(153,153,51),stop:0.63 rgba(150,0,0),stop:1.000 rgba(139,0,0));\  height:6px;\ }\ QSlider::handle:Horizontal \ {\ height: 12px;\width:12px;\ border-image: url(image/slider.png);\ margin: -2 0px; \}");
-        ui->Slider2->setStyleSheet("\ QSlider::groove:Horizontal \  {\ background:qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0,stop:0 rgba(255,255,255),stop:0.3 rgba(255,255,204),stop:0.33 rgba(153,160,51),stop:0.6 rgba(153,153,51),stop:0.63 rgba(150,0,0),stop:1.000 rgba(139,0,0));\  height:6px;\ }\ QSlider::handle:Horizontal \ {\ height: 12px;\width:12px;\ border-image: url(image/slider.png);\ margin: -2 0px; \}");
-        ui->Slider3->setStyleSheet("\ QSlider::groove:Horizontal \  {\ background:qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0,stop:0 rgba(255,255,255),stop:0.3 rgba(255,255,204),stop:0.33 rgba(153,160,51),stop:0.6 rgba(153,153,51),stop:0.63 rgba(150,0,0),stop:1.000 rgba(139,0,0));\  height:6px;\ }\ QSlider::handle:Horizontal \ {\ height: 12px;\width:12px;\ border-image: url(image/slider.png);\ margin: -2 0px; \}");
+    ui->Slider1->setStyleSheet("\ QSlider::groove:Horizontal \  {\ background:qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0,stop:0 rgba(102,205,170),stop:0.3 rgba(102,205,170),stop:0.33 rgba(204,145,158),stop:0.6 rgba(204,145,158),stop:0.63 rgba(150,0,0),stop:1.000 rgba(139,0,0));\  height:8px;\ }\ QSlider::handle:Horizontal \ {\ height: 40px;\width:8px;\ border-image: url(image/slider.png);\ margin: -30 0px; \}");
+    ui->Slider2->setStyleSheet("\ QSlider::groove:Horizontal \  {\ background:qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0,stop:0 rgba(102,205,170),stop:0.3 rgba(102,205,170),stop:0.33 rgba(204,145,158),stop:0.6 rgba(204,145,158),stop:0.63 rgba(150,0,0),stop:1.000 rgba(139,0,0));\  height:8px;\}\ QSlider::handle:Horizontal \ {\ height: 40px;\width:8px;\ border-image: url(image/slider.png);\ margin: -30 0px; \}");
+    ui->Slider3->setStyleSheet("\ QSlider::groove:Horizontal \  {\ background:qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0,stop:0 rgba(102,205,170),stop:0.3 rgba(102,205,170),stop:0.33 rgba(204,145,158),stop:0.6 rgba(204,145,158),stop:0.63 rgba(150,0,0),stop:1.000 rgba(139,0,0));\  height:8px;\ }\ QSlider::handle:Horizontal \ {\ height: 40px;\width:8px;\ border-image: url(image/slider.png);\ margin: -30 0px; \}");
+
+    ui->Slider1->installEventFilter(this);
+    ui->Slider2->installEventFilter(this);
+    ui->Slider3->installEventFilter(this);
+
     ui->LightTime->installEventFilter(this);
     ui->PositiveTest->installEventFilter(this);
     ui->NagtiveTest->installEventFilter(this);
@@ -214,7 +218,13 @@ bool Management::eventFilter(QObject *watched,QEvent *event)
             Window_show.ShowKeyBoard(this,false,ui->SpeedEdit,x,y);
         }
     }
-
+//    if(watched==ui->Slider1)
+//    {
+//        if(event->type()==QEvent::MouseButtonRelease)
+//        {
+//            ui->Slider1-;
+//        }
+//    }
 
 //    if(watched==ui->label_14)
 //    {
@@ -623,49 +633,47 @@ void Management::on_packButton_clicked(bool checked)
 //产品学习弹出
 void Management::on_LearningButton_clicked()
 {
-//    if(!(ui->NumEdit->text().isEmpty())&&!(ui->NameEdit->text().isEmpty())&&!(ui->SpeedEdit->text().isEmpty())&&!(ui->LightTime->text().isEmpty()))
-//    {
-//        if(PackFlag==0||PackFlag==1)
-//        {
-//            if(!(ui->LengthEdit->text().isEmpty()&&!(ui->label_14->text().isEmpty())&&!(ui->label_15->text().isEmpty())&&!(ui->label_18->text().isEmpty())
-//                 &&!(ui->label_20->text().isEmpty())&&!(ui->label_29->text().isEmpty())&&!(ui->label_30->text().isEmpty())&&!(ui->label_31->text().isEmpty())
-//                 &&!(ui->label_33->text().isEmpty())&&!(ui->label_32->text().isEmpty())))
-//            {
-//                SaveData();
-//                Learn->show();
-//                Learn->move(pos().x(),pos().y());
-//                this->hide();
-//            }
-//        }else if(PackFlag==2&&!(ui->LengthEdit->text().isEmpty()))
-//        {
-//            SaveData();
-//            Learn->show();
-//            Learn->move(pos().x(),pos().y());
-//            this->hide();
-//        }
-//    }else{
-////        Notice=new notice();
-////        Notice->show();
-////       Notice->move(pos().x(),pos().y());
+    if(!(ui->NumEdit->text().isEmpty())&&!(ui->NameEdit->text().isEmpty())&&!(ui->SpeedEdit->text().isEmpty())&&!(ui->LightTime->text().isEmpty()))
+    {
+        if(PackFlag==0||PackFlag==2)
+        {
+            if(!(ui->LengthEdit->text().isEmpty()))
+            {
+                SaveData();
+                Learn->show();
+                Learn->move(pos().x(),pos().y());
+                this->hide();
+            }
+        }else if(PackFlag==1)
+        {
+            SaveData();
+            Learn->show();
+            Learn->move(pos().x(),pos().y());
+            this->hide();
+        }
+    }else{
+        Notice=new notice();
+        Notice->show();
+       Notice->move(pos().x(),pos().y());
 
-////        QDialog *dlg = new QDialog(this);
+        QDialog *dlg = new QDialog(this);
 
-////        dlg->resize(400,200);
+        dlg->resize(400,200);
 
-////        QLabel *ql = new QLabel(dlg);
-////        ql->setGeometry(110,10,250,100);
-////        ql->setText(tr("信息未填写完整！！"));
+        QLabel *ql = new QLabel(dlg);
+        ql->setGeometry(110,10,250,100);
+        ql->setText(tr("信息未填写完整！！"));
 
-////        QPushButton *qb = new QPushButton(dlg);
-////        qb->setGeometry(250,120,60,25);
-////        qb->setText(tr("确定"));
+        QPushButton *qb = new QPushButton(dlg);
+        qb->setGeometry(250,120,60,25);
+        qb->setText(tr("确定"));
 
-////        connect(qb,SIGNAL(clicked()),dlg,SLOT(close()));
-////        dlg->exec();
-//        Learn->show();
-//        Learn->move(pos().x(),pos().y());
-//        this->hide();
-//    }
+        connect(qb,SIGNAL(clicked()),dlg,SLOT(close()));
+        dlg->exec();
+        Learn->show();
+        Learn->move(pos().x(),pos().y());
+        this->hide();
+    }
 }
 void Management::SaveData(){
     Product *p = new Product;

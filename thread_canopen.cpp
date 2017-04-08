@@ -1,6 +1,6 @@
 #include "thread_canopen.h"
 
-
+#define STORAGE 0
 
 #define NSEC_PER_SEC            (1000000000)    /* The number of nanoseconds per second. */
 #define NSEC_PER_MSEC           (1000000)       /* The number of nanoseconds per millisecond. */
@@ -23,8 +23,8 @@ static int                  rtPriority = -1;    /* Real time priority, configura
 static int                  mainline_epoll_fd;  /* epoll file descriptor for mainline */
 static CO_OD_storage_t      odStor;             /* Object Dictionary storage object for CO_OD_ROM */
 static CO_OD_storage_t      odStorAuto;         /* Object Dictionary storage object for CO_OD_EEPROM */
-static char                *odStorFile_rom    = "od_storage";       /* Name of the file */
-static char                *odStorFile_eeprom = "od_storage_auto";  /* Name of the file */
+static char                *odStorFile_rom    = "od3_storage";       /* Name of the file */
+static char                *odStorFile_eeprom = "od3_storage_auto";  /* Name of the file */
 static CO_time_t            CO_time;            /* Object for current time */
 
 /* Realtime thread */
@@ -99,10 +99,11 @@ void Thread_CANopen::run(){
     CO_NMT_reset_cmd_t reset = CO_RESET_NOT;
     CO_ReturnError_t odStorStatus_rom, odStorStatus_eeprom;
     int CANdevice0Index = 0;
+    UNSIGNED16 canbitrate=0;
 //    int opt;
     bool_t firstRun = true;
 
-    char* CANdevice = NULL;         /* CAN device, configurable by arguments. */
+    char* CANdevice = "can0";         /* CAN device, configurable by arguments. */
     int nodeId = -1;                /* Set to 1..127 by arguments */
     bool_t rebootEnable = false;    /* Configurable by arguments */
 #ifndef CO_SINGLE_THREAD
@@ -140,10 +141,12 @@ void Thread_CANopen::run(){
 
 //        if(optind < argc) {
 //            CANdevice = argv[optind];
-//            CANdevice0Index = if_nametoindex(CANdevice);
+//
 //        }
 
     nodeId=3;
+    canbitrate=CO_OD_ROM.CANBitRate;
+    CANdevice0Index = if_nametoindex(CANdevice);
     rtPriority=2;
     //CANdevice0Index=1;
 
@@ -186,9 +189,10 @@ void Thread_CANopen::run(){
 
 
     /* initialize Object Dictionary storage */
-    odStorStatus_rom = CO_OD_storage_init(&odStor, (uint8_t*) &CO_OD_ROM, sizeof(CO_OD_ROM), odStorFile_rom);
-    odStorStatus_eeprom = CO_OD_storage_init(&odStorAuto, (uint8_t*) &CO_OD_EEPROM, sizeof(CO_OD_EEPROM), odStorFile_eeprom);
-
+    if(STORAGE){
+        odStorStatus_rom = CO_OD_storage_init(&odStor, (uint8_t*) &CO_OD_ROM, sizeof(CO_OD_ROM), odStorFile_rom);
+        odStorStatus_eeprom = CO_OD_storage_init(&odStorAuto, (uint8_t*) &CO_OD_EEPROM, sizeof(CO_OD_EEPROM), odStorFile_eeprom);
+    }
 
     /* Catch signals SIGINT and SIGTERM */
     if(signal(SIGINT, sigHandler) == SIG_ERR)
@@ -225,7 +229,7 @@ void Thread_CANopen::run(){
 
 
         /* initialize CANopen */
-        err = CO_init(CANdevice0Index, nodeId, 0);
+        err = CO_init(CANdevice0Index, nodeId, canbitrate);
         if(err != CO_ERROR_NO) {
             char s[120];
             snprintf(s, 120, "Communication reset - CANopen initialization failed, err=%d", err);
@@ -234,13 +238,15 @@ void Thread_CANopen::run(){
 
 
         /* initialize OD objects 1010 and 1011 and verify errors. */
-        CO_OD_configure(CO->SDO[0], OD_H1010_STORE_PARAM_FUNC, CO_ODF_1010, (void*)&odStor, 0, 0U);
-        CO_OD_configure(CO->SDO[0], OD_H1011_REST_PARAM_FUNC, CO_ODF_1011, (void*)&odStor, 0, 0U);
-        if(odStorStatus_rom != CO_ERROR_NO) {
-            CO_errorReport(CO->em, CO_EM_NON_VOLATILE_MEMORY, CO_EMC_HARDWARE, (uint32_t)odStorStatus_rom);
-        }
-        if(odStorStatus_eeprom != CO_ERROR_NO) {
-            CO_errorReport(CO->em, CO_EM_NON_VOLATILE_MEMORY, CO_EMC_HARDWARE, (uint32_t)odStorStatus_eeprom + 1000);
+        if(STORAGE){
+            CO_OD_configure(CO->SDO[0], OD_H1010_STORE_PARAM_FUNC, CO_ODF_1010, (void*)&odStor, 0, 0U);
+            CO_OD_configure(CO->SDO[0], OD_H1011_REST_PARAM_FUNC, CO_ODF_1011, (void*)&odStor, 0, 0U);
+            if(odStorStatus_rom != CO_ERROR_NO) {
+                CO_errorReport(CO->em, CO_EM_NON_VOLATILE_MEMORY, CO_EMC_HARDWARE, (uint32_t)odStorStatus_rom);
+            }
+            if(odStorStatus_eeprom != CO_ERROR_NO) {
+                CO_errorReport(CO->em, CO_EM_NON_VOLATILE_MEMORY, CO_EMC_HARDWARE, (uint32_t)odStorStatus_eeprom + 1000);
+            }
         }
 
 
@@ -414,8 +420,10 @@ void Thread_CANopen::run(){
     app_programEnd();
 
     /* Store CO_OD_EEPROM */
-    CO_OD_storage_autoSave(&odStorAuto, 0, 0);
-    CO_OD_storage_autoSaveClose(&odStorAuto);
+    if(STORAGE){
+        CO_OD_storage_autoSave(&odStorAuto, 0, 0);
+        CO_OD_storage_autoSaveClose(&odStorAuto);
+    }
 
     /* delete objects from memory */
     CANrx_taskTmr_close();

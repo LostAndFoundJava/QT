@@ -8,7 +8,7 @@ DEPENDPATH += .
 INCLUDEPATH += .
 
 # Input
-HEADERS += can.h \
+HEADERS += \
            cmysplashscreen.h \
            globl_data.h \
            log.h \
@@ -34,7 +34,7 @@ FORMS += log.ui mainwindow.ui management.ui systemset.ui \
     varify.ui \
     notice.ui \
     dataset.ui
-SOURCES += can.cpp \
+SOURCES += \
            cmysplashscreen.cpp \
            globl_data.cpp \
            log.cpp \

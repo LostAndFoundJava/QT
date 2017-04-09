@@ -206,7 +206,6 @@ void Thread_CANopen::run(){
 
     while(reset != CO_RESET_APP && reset != CO_RESET_QUIT && CO_endProgram == 0) {
 /* CANopen communication reset - initialize CANopen objects *******************/
-        CO_ReturnError_t err;
 
         //printf("%s - communication reset ...\n", argv[0]);
 
@@ -342,7 +341,7 @@ void Thread_CANopen::run(){
 
         //---------------------------使所有节点进入运行状态-----------------------------//
         if(err == 0) {
-            //err = CO_sendNMTcommand(CO, CO_NMT_ENTER_STOPPED, 0) ? 1:0;
+            err = CO_sendNMTcommand(CO, CO_NMT_ENTER_STOPPED, 0) ? 1:0;
             //if(err == 0) respLen = sprintf(resp, "[%d] OK", sequence);
         }
         //---------------------------------------------------------------------------//

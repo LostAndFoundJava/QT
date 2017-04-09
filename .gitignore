@@ -4,3 +4,4 @@ Bofeng.pro.user
 *.o
 ui_*
 moc*
+QT.pro.user

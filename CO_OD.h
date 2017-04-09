@@ -34,6 +34,9 @@
 #ifndef CO_OD_H
 #define CO_OD_H
 
+#include "CO_SDO.h"
+#include "CO_driver.h"
+
 #ifdef __cplusplus
 //extern "C"{
 #endif

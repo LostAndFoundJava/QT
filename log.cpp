@@ -1,7 +1,8 @@
 #include "log.h"
 #include "ui_log.h"
 #include <QGridLayout>
-
+#include <QDebug>
+#include <CO_OD.h>
 Log::Log(QWidget *parent) :
     QWidget(parent),
     ui(new Ui::Log)
@@ -33,6 +34,9 @@ Log::Log(QWidget *parent) :
     ui->Stack->setCurrentIndex(0);
     ui->DisLabel->setText(tr("登陆日志"));
 
+    char str[15];
+    sprintf(str,"%d",CO_OD_RAM.readInput8Bit[0]);
+    qDebug(str);
 
 }
 

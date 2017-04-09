@@ -47,7 +47,7 @@
 #ifndef CO_SDO_H
 #define CO_SDO_H
 
-
+#include "CO_driver.h"
 
 /**
  * @defgroup CO_SDO SDO server

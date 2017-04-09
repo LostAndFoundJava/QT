@@ -44,7 +44,7 @@
  */
 
 
-#include "CO_driver.h"
+
 #include "CO_SDO.h"
 #include "crc16-ccitt.h"
 

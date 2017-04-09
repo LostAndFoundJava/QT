@@ -5,6 +5,8 @@
 #include <sys/time.h>
 #include <time.h>
 #include <globl_data.h>
+#include "CO_driver.h"
+#include "CO_OD.h"
 //#include <stdio.h>
 //#include <stdlib.h>
 //#include <unistd.h>
@@ -60,6 +62,10 @@ MainWindow::MainWindow(QWidget *parent) :
     timer->start(500);
 
     management = new Management;
+
+    char str[15];
+    sprintf(str,"%d",CO_OD_RAM.readInput8Bit[0]);
+    qDebug(str);
 }
 
 MainWindow::~MainWindow()

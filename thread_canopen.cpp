@@ -145,7 +145,10 @@ void Thread_CANopen::run(){
 //        }
 
     nodeId=3;
+<<<<<<< HEAD
     canbitrate=CO_OD_ROM.CANBitRate;
+=======
+>>>>>>> 58dfa3e5c8a3d5b24a9b5250706bd0ba4a2f3380
     CANdevice0Index = if_nametoindex(CANdevice);
     rtPriority=2;
     //CANdevice0Index=1;
@@ -229,7 +232,11 @@ void Thread_CANopen::run(){
 
 
         /* initialize CANopen */
+<<<<<<< HEAD
         err = CO_init(CANdevice0Index, nodeId, canbitrate);
+=======
+        err = CO_init(CANdevice0Index, nodeId, 250);
+>>>>>>> 58dfa3e5c8a3d5b24a9b5250706bd0ba4a2f3380
         if(err != CO_ERROR_NO) {
             char s[120];
             snprintf(s, 120, "Communication reset - CANopen initialization failed, err=%d", err);

@@ -58,6 +58,9 @@ Systemset::Systemset(QWidget *parent) :
     ui->Screenwidget->hide();
     ui->Graphicswidget->hide();
     Button_AMP_1(ui->power);
+    //设定初始状态
+    ui->ChineseButton->setChecked(true);
+    ui->C_Button->setChecked(true);
 }
 
 Systemset::~Systemset()

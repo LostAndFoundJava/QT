@@ -35,7 +35,7 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->Jur_And_User->installEventFilter(this);
     ui->Log->installEventFilter(this);
     ui->Management->installEventFilter(this);
-    ui->Phase->installEventFilter(this);
+    //ui->Phase->installEventFilter(this);
     ui->Sensitivity->installEventFilter(this);
     ui->SetZero->installEventFilter(this);
     ui->System_set->installEventFilter(this);
@@ -146,17 +146,17 @@ bool MainWindow::eventFilter(QObject *watched,QEvent *event)
         }
 
     }
-    if(watched==ui->Phase)
-    {
-        if(event->type()==QEvent::MouseButtonPress)
-        {
-           Button_AMP_1(ui->Phase);
-        }
-        else if(event->type()==QEvent::MouseButtonRelease)
-        {
-            Button_AMP_0(ui->Phase);
-        }
-    }
+//    if(watched==ui->Phase)
+//    {
+//        if(event->type()==QEvent::MouseButtonPress)
+//        {
+//           Button_AMP_1(ui->Phase);
+//        }
+//        else if(event->type()==QEvent::MouseButtonRelease)
+//        {
+//            Button_AMP_0(ui->Phase);
+//        }
+//    }
     if(watched==ui->Sensitivity)
     {
         if(event->type()==QEvent::MouseButtonPress)

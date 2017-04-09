@@ -34,7 +34,7 @@ Widget::Widget(QWidget *parent,bool status) :
    // Pal.setColor(QPalette::Background, "#fffffe");
     this->setAutoFillBackground(true);
     this->setPalette(Pal);
-    this->setGeometry(0,80,791,291);
+    this->setGeometry(0,80,800,270);
 
     //定义子widget
     SUBWIDGET *sub =new SUBWIDGET(this);
@@ -43,7 +43,7 @@ Widget::Widget(QWidget *parent,bool status) :
 //    sub->initiation(jxk->getK1Q(),jxk->getK2Q(),jxk->getB1Q(),jxk->getB2Q(),jxk->getB3Q(),jxk->getB4Q(),
 //                    jxk->getLen1Q(),jxk->getLen2Q(),jxk->getDegreeQ(),jxk->getxQ(),jxk->getyQ());
     //定义子widget背景色
-    sub->setGeometryByUser(71,30,400,400);
+    sub->setGeometryByUser(10,5,650,260);
     Pal.setColor(QPalette::Background, "#FFFFF0");
     sub->setAutoFillBackground(true);
     sub->setPalette(Pal);
@@ -58,8 +58,8 @@ Widget::Widget(QWidget *parent,bool status) :
 
     //this->resize(WIDTH_X,HEIGHT_Y);
     //定义进度条样式
-    ui->horizontalSlider->setStyleSheet(" \ QSlider::add-page:Horizontal\{\ background-color: rgb(187, 255, 255);\height:4px;\}\QSlider::sub-page:Horizontal \{\ background-color:rgb(83, 148, 160);\  height:4px;\    }\ QSlider::groove:Horizontal \  {\ background:transparent;\  height:6px;\ }\ QSlider::handle:Horizontal \ {\ height: 12px;\width:12px;\ border-image: url(image/slider.png);\ margin: -2 0px; \}");
-    connect(ui->horizontalSlider,SIGNAL(valueChanged(int)),sub,SLOT(getValue(int)));
+    ui->verticalSlider->setStyleSheet(" \ QSlider::add-page:vertical\{\ background-color: rgb(187, 255, 255);\width:8px;\}\QSlider::sub-page:vertical \{\ background-color:rgb(83, 148, 160);\  width:8px;\    }\ QSlider::groove:vertical \  {\ background:transparent;\  width:8px;\ border-radius:3px;\}\ QSlider::handle:vertical \ {\ width: 40px;\height:8px;\ border-image: url(image/slider.png);\ margin: 0 -30px; \}");
+    connect(ui->verticalSlider,SIGNAL(valueChanged(int)),sub,SLOT(getValue(int)));
     connect(sub,SIGNAL(setData(double ,double ,double ,double ,double ,double ,
                                 double ,double ,double ,double ,double ,
                                 double ,double ,double ,double ,double ,double )),
@@ -76,12 +76,10 @@ Widget::~Widget()
 {
     delete ui;
 }
-
-
-void Widget::on_horizontalSlider_valueChanged(int value)
+void Widget::on_verticalSlider_valueChanged(int value)
 {
-     QString s = QString("%1").arg(value);
-     ui->label_3->setText(s);
+    QString s = QString("%1").arg(value);
+    ui->label_3->setText(s);
 }
 
 void Widget::getData(double x, double y, double x1, double y1, double x2, double y2,
@@ -90,32 +88,32 @@ void Widget::getData(double x, double y, double x1, double y1, double x2, double
 {
     QString s;
 
-     s = QString("%1").arg(x);
-    ui->label_7->setText(s);
+//     s = QString("%1").arg(x);
+//    ui->label_7->setText(s);
 
-     s = QString("%1").arg(x1);
-    ui->label_9->setText(s);
+//     s = QString("%1").arg(x1);
+//    ui->label_9->setText(s);
 
-     s = QString("%1").arg(x2);
-    ui->label_11->setText(s);
+//     s = QString("%1").arg(x2);
+//    ui->label_11->setText(s);
 
-     s = QString("%1").arg(x3);
-    ui->label_13->setText(s);
+//     s = QString("%1").arg(x3);
+//    ui->label_13->setText(s);
 
-     s = QString("%1").arg(phase);
-    ui->label_15->setText(s);
+//     s = QString("%1").arg(phase);
+//    ui->label_15->setText(s);
 
-     s = QString("%1").arg(y);
-    ui->label_16->setText(s);
+//     s = QString("%1").arg(y);
+//    ui->label_16->setText(s);
 
-     s = QString("%1").arg(y1);
-    ui->label_17->setText(s);
+//     s = QString("%1").arg(y1);
+//    ui->label_17->setText(s);
 
-    s = QString("%1").arg(y2);
-    ui->label_18->setText(s);
+//    s = QString("%1").arg(y2);
+//    ui->label_18->setText(s);
 
-    s = QString("%1").arg(y3);
-    ui->label_19->setText(s);
+//    s = QString("%1").arg(y3);
+//    ui->label_19->setText(s);
 }
 
 void Widget::generateDots()
@@ -133,20 +131,21 @@ void Widget::generateDots()
 
 void Widget::showCorridateAndPhase()
 {
-    ui->label_6->hide();
-    ui->label_7->hide();
-    ui->label_8->hide();
-    ui->label_9->hide();
-    ui->label_10->hide();
-    ui->label_11->hide();
-    ui->label_12->hide();
-    ui->label_13->hide();
-    ui->label_14->hide();
-    ui->label_15->hide();
-    ui->label_16->hide();
-    ui->label_17->hide();
-    ui->label_18->hide();
-    ui->label_19->hide();
-    ui->label_20->hide();
-    ui->label_21->hide();
+//    ui->label_6->hide();
+//    ui->label_7->hide();
+//    ui->label_8->hide();
+//    ui->label_9->hide();
+//    ui->label_10->hide();
+//    ui->label_11->hide();
+//    ui->label_12->hide();
+//    ui->label_13->hide();
+//    ui->label_14->hide();
+//    ui->label_15->hide();
+//    ui->label_16->hide();
+//    ui->label_17->hide();
+//    ui->label_18->hide();
+//    ui->label_19->hide();
+//    ui->label_20->hide();
+//    ui->label_21->hide();
 }
+

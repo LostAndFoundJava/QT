@@ -34,7 +34,7 @@
    <property name="font">
     <font>
      <family>微软雅黑</family>
-     <pointsize>14</pointsize>
+     <pointsize>16</pointsize>
     </font>
    </property>
    <property name="styleSheet">
@@ -49,14 +49,14 @@
     <rect>
      <x>130</x>
      <y>10</y>
-     <width>141</width>
+     <width>151</width>
      <height>21</height>
     </rect>
    </property>
    <property name="font">
     <font>
      <family>微软雅黑</family>
-     <pointsize>14</pointsize>
+     <pointsize>16</pointsize>
     </font>
    </property>
    <property name="styleSheet">
@@ -69,16 +69,16 @@
   <widget class="QLabel" name="DateTime">
    <property name="geometry">
     <rect>
-     <x>574</x>
+     <x>567</x>
      <y>10</y>
-     <width>176</width>
+     <width>181</width>
      <height>31</height>
     </rect>
    </property>
    <property name="font">
     <font>
      <family>微软雅黑</family>
-     <pointsize>14</pointsize>
+     <pointsize>16</pointsize>
     </font>
    </property>
    <property name="styleSheet">
@@ -93,7 +93,7 @@
     <rect>
      <x>370</x>
      <y>10</y>
-     <width>111</width>
+     <width>134</width>
      <height>31</height>
     </rect>
    </property>
@@ -115,16 +115,16 @@ border-radius:5px;</string>
   <widget class="QLabel" name="ProNum">
    <property name="geometry">
     <rect>
-     <x>30</x>
-     <y>50</y>
-     <width>61</width>
-     <height>16</height>
+     <x>20</x>
+     <y>46</y>
+     <width>81</width>
+     <height>20</height>
     </rect>
    </property>
    <property name="font">
     <font>
      <family>幼圆</family>
-     <pointsize>11</pointsize>
+     <pointsize>14</pointsize>
     </font>
    </property>
    <property name="text">
@@ -134,16 +134,16 @@ border-radius:5px;</string>
   <widget class="QLabel" name="ProName">
    <property name="geometry">
     <rect>
-     <x>150</x>
-     <y>50</y>
-     <width>71</width>
-     <height>16</height>
+     <x>140</x>
+     <y>45</y>
+     <width>91</width>
+     <height>21</height>
     </rect>
    </property>
    <property name="font">
     <font>
      <family>幼圆</family>
-     <pointsize>11</pointsize>
+     <pointsize>14</pointsize>
     </font>
    </property>
    <property name="text">
@@ -172,16 +172,16 @@ border-radius:5px;</string>
   <widget class="QLabel" name="LearnProgress">
    <property name="geometry">
     <rect>
-     <x>300</x>
-     <y>50</y>
-     <width>61</width>
-     <height>16</height>
+     <x>280</x>
+     <y>46</y>
+     <width>81</width>
+     <height>20</height>
     </rect>
    </property>
    <property name="font">
     <font>
      <family>幼圆</family>
-     <pointsize>11</pointsize>
+     <pointsize>14</pointsize>
     </font>
    </property>
    <property name="text">
@@ -202,15 +202,15 @@ border-radius:5px;</string>
    <property name="geometry">
     <rect>
      <x>40</x>
-     <y>390</y>
-     <width>81</width>
-     <height>31</height>
+     <y>387</y>
+     <width>90</width>
+     <height>34</height>
     </rect>
    </property>
    <property name="font">
     <font>
      <family>幼圆</family>
-     <pointsize>12</pointsize>
+     <pointsize>14</pointsize>
     </font>
    </property>
    <property name="styleSheet">
@@ -226,15 +226,15 @@ border-radius:5px;</string>
    <property name="geometry">
     <rect>
      <x>160</x>
-     <y>390</y>
-     <width>81</width>
-     <height>31</height>
+     <y>387</y>
+     <width>90</width>
+     <height>34</height>
     </rect>
    </property>
    <property name="font">
     <font>
      <family>幼圆</family>
-     <pointsize>12</pointsize>
+     <pointsize>14</pointsize>
     </font>
    </property>
    <property name="styleSheet">
@@ -250,15 +250,15 @@ border-radius:5px;</string>
    <property name="geometry">
     <rect>
      <x>340</x>
-     <y>390</y>
-     <width>81</width>
-     <height>31</height>
+     <y>387</y>
+     <width>90</width>
+     <height>34</height>
     </rect>
    </property>
    <property name="font">
     <font>
      <family>幼圆</family>
-     <pointsize>12</pointsize>
+     <pointsize>14</pointsize>
     </font>
    </property>
    <property name="styleSheet">
@@ -267,22 +267,22 @@ color: rgb(255, 250, 240);
 border-radius:5px;</string>
    </property>
    <property name="text">
-    <string>灵敏度</string>
+    <string>增益</string>
    </property>
   </widget>
   <widget class="QPushButton" name="Phase">
    <property name="geometry">
     <rect>
      <x>460</x>
-     <y>390</y>
-     <width>81</width>
-     <height>31</height>
+     <y>387</y>
+     <width>90</width>
+     <height>34</height>
     </rect>
    </property>
    <property name="font">
     <font>
      <family>幼圆</family>
-     <pointsize>12</pointsize>
+     <pointsize>14</pointsize>
     </font>
    </property>
    <property name="styleSheet">
@@ -298,15 +298,15 @@ border-radius:5px;</string>
    <property name="geometry">
     <rect>
      <x>640</x>
-     <y>390</y>
-     <width>81</width>
-     <height>31</height>
+     <y>387</y>
+     <width>90</width>
+     <height>34</height>
     </rect>
    </property>
    <property name="font">
     <font>
      <family>幼圆</family>
-     <pointsize>12</pointsize>
+     <pointsize>14</pointsize>
     </font>
    </property>
    <property name="styleSheet">
@@ -316,6 +316,22 @@ border-radius:5px;</string>
    </property>
    <property name="text">
     <string>模式</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label">
+   <property name="geometry">
+    <rect>
+     <x>120</x>
+     <y>45</y>
+     <width>1</width>
+     <height>26</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">border:1px solid #000;</string>
+   </property>
+   <property name="text">
+    <string/>
    </property>
   </widget>
  </widget>

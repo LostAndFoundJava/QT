@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>751</width>
-    <height>426</height>
+    <width>800</width>
+    <height>400</height>
    </rect>
   </property>
   <property name="palette">
@@ -92,7 +92,7 @@
    <property name="font">
     <font>
      <family>微软雅黑</family>
-     <pointsize>14</pointsize>
+     <pointsize>16</pointsize>
     </font>
    </property>
    <property name="styleSheet">
@@ -110,14 +110,14 @@
     <rect>
      <x>330</x>
      <y>10</y>
-     <width>101</width>
+     <width>127</width>
      <height>31</height>
     </rect>
    </property>
    <property name="font">
     <font>
      <family>幼圆</family>
-     <pointsize>12</pointsize>
+     <pointsize>14</pointsize>
     </font>
    </property>
    <property name="styleSheet">
@@ -132,7 +132,7 @@ border-radius:5px;</string>
   <widget class="QLabel" name="DateTime">
    <property name="geometry">
     <rect>
-     <x>574</x>
+     <x>622</x>
      <y>10</y>
      <width>176</width>
      <height>31</height>
@@ -141,7 +141,7 @@ border-radius:5px;</string>
    <property name="font">
     <font>
      <family>微软雅黑</family>
-     <pointsize>14</pointsize>
+     <pointsize>16</pointsize>
     </font>
    </property>
    <property name="styleSheet">
@@ -160,13 +160,13 @@ border-radius:5px;</string>
      <x>40</x>
      <y>50</y>
      <width>90</width>
-     <height>30</height>
+     <height>34</height>
     </rect>
    </property>
    <property name="font">
     <font>
      <family>幼圆</family>
-     <pointsize>12</pointsize>
+     <pointsize>14</pointsize>
     </font>
    </property>
    <property name="styleSheet">
@@ -181,16 +181,16 @@ border-radius:5px;</string>
   <widget class="QPushButton" name="language">
    <property name="geometry">
     <rect>
-     <x>150</x>
+     <x>161</x>
      <y>50</y>
      <width>90</width>
-     <height>30</height>
+     <height>34</height>
     </rect>
    </property>
    <property name="font">
     <font>
      <family>幼圆</family>
-     <pointsize>12</pointsize>
+     <pointsize>14</pointsize>
     </font>
    </property>
    <property name="styleSheet">
@@ -205,16 +205,16 @@ border-radius:5px;</string>
   <widget class="QPushButton" name="check">
    <property name="geometry">
     <rect>
-     <x>260</x>
+     <x>285</x>
      <y>50</y>
      <width>90</width>
-     <height>30</height>
+     <height>34</height>
     </rect>
    </property>
    <property name="font">
     <font>
      <family>幼圆</family>
-     <pointsize>12</pointsize>
+     <pointsize>14</pointsize>
     </font>
    </property>
    <property name="styleSheet">
@@ -229,16 +229,16 @@ border-radius:5px;</string>
   <widget class="QPushButton" name="screen_display">
    <property name="geometry">
     <rect>
-     <x>380</x>
+     <x>415</x>
      <y>50</y>
-     <width>97</width>
-     <height>30</height>
+     <width>119</width>
+     <height>34</height>
     </rect>
    </property>
    <property name="font">
     <font>
      <family>幼圆</family>
-     <pointsize>12</pointsize>
+     <pointsize>14</pointsize>
     </font>
    </property>
    <property name="styleSheet">
@@ -253,16 +253,16 @@ border-radius:5px;</string>
   <widget class="QPushButton" name="graphics_clear">
    <property name="geometry">
     <rect>
-     <x>500</x>
+     <x>550</x>
      <y>50</y>
-     <width>90</width>
-     <height>30</height>
+     <width>100</width>
+     <height>34</height>
     </rect>
    </property>
    <property name="font">
     <font>
      <family>幼圆</family>
-     <pointsize>12</pointsize>
+     <pointsize>14</pointsize>
     </font>
    </property>
    <property name="styleSheet">
@@ -277,16 +277,16 @@ border-radius:5px;</string>
   <widget class="QPushButton" name="network">
    <property name="geometry">
     <rect>
-     <x>610</x>
+     <x>670</x>
      <y>50</y>
      <width>90</width>
-     <height>30</height>
+     <height>34</height>
     </rect>
    </property>
    <property name="font">
     <font>
      <family>幼圆</family>
-     <pointsize>12</pointsize>
+     <pointsize>14</pointsize>
     </font>
    </property>
    <property name="styleSheet">
@@ -301,16 +301,16 @@ border-radius:5px;</string>
   <widget class="QPushButton" name="update">
    <property name="geometry">
     <rect>
-     <x>260</x>
+     <x>286</x>
      <y>100</y>
      <width>90</width>
-     <height>30</height>
+     <height>34</height>
     </rect>
    </property>
    <property name="font">
     <font>
      <family>幼圆</family>
-     <pointsize>12</pointsize>
+     <pointsize>14</pointsize>
     </font>
    </property>
    <property name="styleSheet">
@@ -325,16 +325,16 @@ border-radius:5px;</string>
   <widget class="QPushButton" name="setting">
    <property name="geometry">
     <rect>
-     <x>380</x>
+     <x>410</x>
      <y>100</y>
-     <width>117</width>
-     <height>30</height>
+     <width>139</width>
+     <height>34</height>
     </rect>
    </property>
    <property name="font">
     <font>
      <family>幼圆</family>
-     <pointsize>12</pointsize>
+     <pointsize>14</pointsize>
     </font>
    </property>
    <property name="styleSheet">
@@ -349,16 +349,16 @@ border-radius:5px;</string>
   <widget class="QPushButton" name="parameter">
    <property name="geometry">
     <rect>
-     <x>150</x>
+     <x>161</x>
      <y>100</y>
-     <width>90</width>
-     <height>30</height>
+     <width>100</width>
+     <height>34</height>
     </rect>
    </property>
    <property name="font">
     <font>
      <family>幼圆</family>
-     <pointsize>12</pointsize>
+     <pointsize>14</pointsize>
     </font>
    </property>
    <property name="styleSheet">
@@ -375,14 +375,14 @@ border-radius:5px;</string>
     <rect>
      <x>40</x>
      <y>100</y>
-     <width>90</width>
-     <height>30</height>
+     <width>97</width>
+     <height>34</height>
     </rect>
    </property>
    <property name="font">
     <font>
      <family>幼圆</family>
-     <pointsize>12</pointsize>
+     <pointsize>14</pointsize>
     </font>
    </property>
    <property name="styleSheet">
@@ -397,16 +397,16 @@ border-radius:5px;</string>
   <widget class="QWidget" name="widget" native="true">
    <property name="geometry">
     <rect>
-     <x>40</x>
-     <y>150</y>
-     <width>701</width>
+     <x>20</x>
+     <y>140</y>
+     <width>761</width>
      <height>251</height>
     </rect>
    </property>
    <widget class="QWidget" name="Graphicswidget" native="true">
     <property name="geometry">
      <rect>
-      <x>0</x>
+      <x>10</x>
       <y>150</y>
       <width>311</width>
       <height>81</height>
@@ -447,7 +447,7 @@ border-radius:3px;</string>
      <property name="font">
       <font>
        <family>幼圆</family>
-       <pointsize>12</pointsize>
+       <pointsize>14</pointsize>
       </font>
      </property>
      <property name="styleSheet">
@@ -457,14 +457,11 @@ border-radius:3px;</string>
       <string>图形累计数:</string>
      </property>
     </widget>
-    <zorder>spinBox</zorder>
-    <zorder>label</zorder>
-    <zorder>Screenwidget</zorder>
    </widget>
    <widget class="QWidget" name="Screenwidget" native="true">
     <property name="geometry">
      <rect>
-      <x>320</x>
+      <x>330</x>
       <y>20</y>
       <width>171</width>
       <height>221</height>
@@ -478,9 +475,15 @@ border-radius:3px;</string>
       <rect>
        <x>50</x>
        <y>30</y>
-       <width>75</width>
-       <height>23</height>
+       <width>90</width>
+       <height>30</height>
       </rect>
+     </property>
+     <property name="font">
+      <font>
+       <family>幼圆</family>
+       <pointsize>12</pointsize>
+      </font>
      </property>
      <property name="styleSheet">
       <string notr="true">background-color: rgb(83, 148, 160);
@@ -496,9 +499,15 @@ border-radius:5px;</string>
       <rect>
        <x>50</x>
        <y>70</y>
-       <width>75</width>
-       <height>23</height>
+       <width>90</width>
+       <height>30</height>
       </rect>
+     </property>
+     <property name="font">
+      <font>
+       <family>幼圆</family>
+       <pointsize>12</pointsize>
+      </font>
      </property>
      <property name="styleSheet">
       <string notr="true">background-color: rgb(83, 148, 160);
@@ -514,9 +523,15 @@ border-radius:5px;</string>
       <rect>
        <x>50</x>
        <y>120</y>
-       <width>75</width>
-       <height>23</height>
+       <width>90</width>
+       <height>30</height>
       </rect>
+     </property>
+     <property name="font">
+      <font>
+       <family>幼圆</family>
+       <pointsize>12</pointsize>
+      </font>
      </property>
      <property name="styleSheet">
       <string notr="true">background-color: rgb(83, 148, 160);
@@ -532,9 +547,15 @@ border-radius:5px;</string>
       <rect>
        <x>50</x>
        <y>170</y>
-       <width>75</width>
-       <height>23</height>
+       <width>90</width>
+       <height>30</height>
       </rect>
+     </property>
+     <property name="font">
+      <font>
+       <family>幼圆</family>
+       <pointsize>12</pointsize>
+      </font>
      </property>
      <property name="styleSheet">
       <string notr="true">background-color: rgb(83, 148, 160);
@@ -545,11 +566,6 @@ border-radius:5px;</string>
       <string>屏保</string>
      </property>
     </widget>
-    <zorder>adjustment</zorder>
-    <zorder>dataset</zorder>
-    <zorder>ligntopen</zorder>
-    <zorder>screenprotect</zorder>
-    <zorder>widget</zorder>
    </widget>
    <widget class="QWidget" name="Languagewidget" native="true">
     <property name="geometry">
@@ -563,7 +579,7 @@ border-radius:5px;</string>
     <property name="styleSheet">
      <string notr="true">border:1px solid #000;</string>
     </property>
-    <widget class="QRadioButton" name="radioButton_4">
+    <widget class="QRadioButton" name="ChineseButton">
      <property name="geometry">
       <rect>
        <x>40</x>
@@ -575,7 +591,7 @@ border-radius:5px;</string>
      <property name="font">
       <font>
        <family>幼圆</family>
-       <pointsize>12</pointsize>
+       <pointsize>14</pointsize>
       </font>
      </property>
      <property name="styleSheet">
@@ -585,7 +601,7 @@ border-radius:5px;</string>
       <string>中文</string>
      </property>
     </widget>
-    <widget class="QRadioButton" name="radioButton_5">
+    <widget class="QRadioButton" name="EngliseButton">
      <property name="geometry">
       <rect>
        <x>40</x>
@@ -597,7 +613,7 @@ border-radius:5px;</string>
      <property name="font">
       <font>
        <family>幼圆</family>
-       <pointsize>12</pointsize>
+       <pointsize>14</pointsize>
       </font>
      </property>
      <property name="styleSheet">
@@ -611,7 +627,7 @@ border-radius:5px;</string>
    <widget class="QWidget" name="Powerwidget" native="true">
     <property name="geometry">
      <rect>
-      <x>510</x>
+      <x>540</x>
       <y>40</y>
       <width>171</width>
       <height>161</height>
@@ -620,19 +636,19 @@ border-radius:5px;</string>
     <property name="styleSheet">
      <string notr="true">border:1px solid #000;</string>
     </property>
-    <widget class="QRadioButton" name="radioButton">
+    <widget class="QRadioButton" name="C_Button">
      <property name="geometry">
       <rect>
        <x>60</x>
        <y>30</y>
-       <width>89</width>
-       <height>17</height>
+       <width>91</width>
+       <height>21</height>
       </rect>
      </property>
      <property name="font">
       <font>
        <family>幼圆</family>
-       <pointsize>12</pointsize>
+       <pointsize>14</pointsize>
       </font>
      </property>
      <property name="styleSheet">
@@ -642,19 +658,19 @@ border-radius:5px;</string>
       <string>操作员</string>
      </property>
     </widget>
-    <widget class="QRadioButton" name="radioButton_2">
+    <widget class="QRadioButton" name="G_Button">
      <property name="geometry">
       <rect>
        <x>60</x>
        <y>70</y>
-       <width>89</width>
-       <height>17</height>
+       <width>91</width>
+       <height>21</height>
       </rect>
      </property>
      <property name="font">
       <font>
        <family>幼圆</family>
-       <pointsize>12</pointsize>
+       <pointsize>14</pointsize>
       </font>
      </property>
      <property name="styleSheet">
@@ -664,19 +680,19 @@ border-radius:5px;</string>
       <string>管理员</string>
      </property>
     </widget>
-    <widget class="QRadioButton" name="radioButton_3">
+    <widget class="QRadioButton" name="Z_Button">
      <property name="geometry">
       <rect>
        <x>60</x>
        <y>110</y>
-       <width>89</width>
-       <height>17</height>
+       <width>91</width>
+       <height>21</height>
       </rect>
      </property>
      <property name="font">
       <font>
        <family>幼圆</family>
-       <pointsize>12</pointsize>
+       <pointsize>14</pointsize>
       </font>
      </property>
      <property name="styleSheet">
@@ -686,11 +702,6 @@ border-radius:5px;</string>
       <string>制造商</string>
      </property>
     </widget>
-    <zorder>radioButton</zorder>
-    <zorder>radioButton_2</zorder>
-    <zorder>radioButton_3</zorder>
-    <zorder>Languagewidget</zorder>
-    <zorder>widget</zorder>
    </widget>
   </widget>
  </widget>

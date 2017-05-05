@@ -5,7 +5,10 @@
 #include <QListWidget>
 #include <QStackedWidget>
 #include <QLabel>
-
+#include "globl_data.h"
+#include <input.h>
+#include <record.h>
+#include <sqlite.h>
 namespace Ui {
 class Log;
 }
@@ -26,8 +29,24 @@ private slots:
 
     void on_LoadLog_2_clicked();
 
+    void on_tableWidget_2_cellClicked(int row, int column);
+
+    void on_USBOuput_clicked();
+
+    void on_Save_clicked();
+
 private:
     Ui::Log *ui;
+    input *Input;
+    void valueInt(void);
+    int row1;
+    int column1;
+public slots:
+    void ShowTime(void);
+    void ContentInput();
+    char UsbRead ();
+    void getData(QString,int,int);
+    void saveData(void);
 };
 
 #endif // LOG_H

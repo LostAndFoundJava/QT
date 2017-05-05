@@ -11,7 +11,7 @@
 #include <QtGui>
 //#include "Qmessagebox.h"
 #include <QMessageBox>
-#include "keyboard.h"
+#include "kboard.h"
 //#include <sys/ioctl.h>
 #include <fcntl.h>
 //#include <linux/fs.h>
@@ -41,7 +41,7 @@ public:
     ~Option();
 
 private:
-    Keyboard    *k_board;
+    kboard    *k_board;
 
 
 public:

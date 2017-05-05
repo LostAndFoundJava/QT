@@ -17,9 +17,16 @@ notice::notice(QWidget *parent) :
     Pal.setColor(QPalette::Background, "#D4E6CA");
     this->setAutoFillBackground(true);
     this->setPalette(Pal);
+
+    this->setWindowFlags(Qt::FramelessWindowHint);
 }
 
 notice::~notice()
 {
     delete ui;
+}
+
+void notice::on_pushButton_clicked()
+{
+    this->hide();
 }

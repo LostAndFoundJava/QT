@@ -225,3 +225,76 @@ QList<Product*> *SQLITE::queryProduct()
     }
     return ql;
 }
+void SQLITE::insertLog(QString logTime1,QString logOperator1,QString ngProductorNumber1,QString ngProductorName1,
+                       QString ngTime1,QString ngSignal1,QString ngOperator1){
+    QString insert_sql = "insert into log (logTime,logOperator,ngProductorNumber,ngProductorName,ngTime,ngSignal,ngOperator) values (?,?,?,?,?,?,?)";
+
+    sql_query->prepare(insert_sql);
+
+//    QVariantList id;
+//    id.append();
+
+    QVariantList logTime;
+    logTime.append(logTime1);
+
+    QVariantList logOperator;
+   logOperator.append(logOperator1);
+
+    QVariantList ngProductorNumber;
+    ngProductorNumber.append(ngProductorNumber1);
+
+    QVariantList ngProductorName;
+    ngProductorName.append(ngProductorName1);
+
+    QVariantList ngTime;
+    ngTime.append(ngTime1);
+
+    QVariantList ngSignal;
+    ngSignal.append(ngSignal1);
+
+    QVariantList ngOperator;
+    ngOperator.append(ngOperator1);
+
+
+
+    //sql_query->addBindValue(id);
+    sql_query->addBindValue(logTime);
+    sql_query->addBindValue(logOperator);
+    sql_query->addBindValue(ngProductorNumber);
+    sql_query->addBindValue(ngProductorName);
+    sql_query->addBindValue(ngTime);
+    sql_query->addBindValue(ngSignal);
+    sql_query->addBindValue(ngOperator);
+
+
+    if(!sql_query->execBatch())
+    {
+        qDebug()<<sql_query->lastError();
+    }
+    else
+    {
+        qDebug()<<"success";
+    }
+}
+QList<Record*> *SQLITE::queryRecord()
+{
+    QList<Record*> *ql = new QList<Record*>;
+    QString select_all_sql = "select * from record";
+    sql_query->prepare(select_all_sql);
+
+    if(!sql_query->exec())
+    {
+        qDebug()<<sql_query->lastError();
+    }
+    else
+    {
+        while(sql_query->next())
+        {
+            Record *p = new Record;
+            p->setLogOperator(sql_query->value(2).toString());
+            qDebug()<<sql_query->value(2).toString();
+            ql->append(p);
+        }
+    }
+    return ql;
+}

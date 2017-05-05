@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>751</width>
-    <height>420</height>
+    <width>800</width>
+    <height>400</height>
    </rect>
   </property>
   <property name="palette">
@@ -84,10 +84,21 @@
    <property name="geometry">
     <rect>
      <x>330</x>
-     <y>10</y>
-     <width>91</width>
-     <height>21</height>
+     <y>7</y>
+     <width>130</width>
+     <height>33</height>
     </rect>
+   </property>
+   <property name="font">
+    <font>
+     <family>AR PL UKai CN</family>
+     <pointsize>14</pointsize>
+    </font>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">background-color: rgb(83, 148, 160);
+color: rgb(255, 250, 240);
+border-radius:5px;</string>
    </property>
    <property name="text">
     <string>权限/用户名</string>
@@ -96,17 +107,26 @@
   <widget class="QLabel" name="DateTime">
    <property name="geometry">
     <rect>
-     <x>570</x>
+     <x>617</x>
      <y>10</y>
-     <width>161</width>
-     <height>20</height>
+     <width>181</width>
+     <height>21</height>
     </rect>
+   </property>
+   <property name="font">
+    <font>
+     <family>AR PL UKai CN</family>
+     <pointsize>16</pointsize>
+    </font>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">border:none;</string>
    </property>
    <property name="frameShape">
     <enum>QFrame::Box</enum>
    </property>
    <property name="text">
-    <string>2017年02月01日星期日 13:28</string>
+    <string>2017/02/01 13:28</string>
    </property>
   </widget>
   <widget class="QLabel" name="DisLabel">
@@ -114,9 +134,18 @@
     <rect>
      <x>20</x>
      <y>10</y>
-     <width>71</width>
-     <height>16</height>
+     <width>91</width>
+     <height>21</height>
     </rect>
+   </property>
+   <property name="font">
+    <font>
+     <family>AR PL UKai CN</family>
+     <pointsize>16</pointsize>
+    </font>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">border:none;</string>
    </property>
    <property name="frameShape">
     <enum>QFrame::Box</enum>
@@ -129,10 +158,21 @@
    <property name="geometry">
     <rect>
      <x>20</x>
-     <y>380</y>
-     <width>75</width>
-     <height>23</height>
+     <y>360</y>
+     <width>90</width>
+     <height>32</height>
     </rect>
+   </property>
+   <property name="font">
+    <font>
+     <family>AR PL UKai CN</family>
+     <pointsize>14</pointsize>
+    </font>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">background-color: rgb(83, 148, 160);
+color: rgb(255, 250, 240);
+border-radius:5px;</string>
    </property>
    <property name="text">
     <string>登陆日志</string>
@@ -141,11 +181,22 @@
   <widget class="QPushButton" name="NGButton">
    <property name="geometry">
     <rect>
-     <x>100</x>
-     <y>380</y>
-     <width>75</width>
-     <height>23</height>
+     <x>150</x>
+     <y>360</y>
+     <width>90</width>
+     <height>32</height>
     </rect>
+   </property>
+   <property name="font">
+    <font>
+     <family>AR PL UKai CN</family>
+     <pointsize>14</pointsize>
+    </font>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">background-color: rgb(83, 148, 160);
+color: rgb(255, 250, 240);
+border-radius:5px;</string>
    </property>
    <property name="text">
     <string>NG日志</string>
@@ -154,11 +205,22 @@
   <widget class="QPushButton" name="USBOuput">
    <property name="geometry">
     <rect>
-     <x>530</x>
-     <y>380</y>
-     <width>75</width>
-     <height>23</height>
+     <x>440</x>
+     <y>360</y>
+     <width>90</width>
+     <height>32</height>
     </rect>
+   </property>
+   <property name="font">
+    <font>
+     <family>AR PL UKai CN</family>
+     <pointsize>14</pointsize>
+    </font>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">background-color: rgb(83, 148, 160);
+color: rgb(255, 250, 240);
+border-radius:5px;</string>
    </property>
    <property name="text">
     <string>USB输出</string>
@@ -167,11 +229,22 @@
   <widget class="QPushButton" name="Return">
    <property name="geometry">
     <rect>
-     <x>620</x>
-     <y>380</y>
-     <width>75</width>
-     <height>23</height>
+     <x>660</x>
+     <y>360</y>
+     <width>90</width>
+     <height>32</height>
     </rect>
+   </property>
+   <property name="font">
+    <font>
+     <family>AR PL UKai CN</family>
+     <pointsize>14</pointsize>
+    </font>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">background-color: rgb(83, 148, 160);
+color: rgb(255, 250, 240);
+border-radius:5px;</string>
    </property>
    <property name="text">
     <string>返回</string>
@@ -180,10 +253,10 @@
   <widget class="QStackedWidget" name="Stack">
    <property name="geometry">
     <rect>
-     <x>8</x>
-     <y>30</y>
-     <width>731</width>
-     <height>341</height>
+     <x>18</x>
+     <y>40</y>
+     <width>791</width>
+     <height>311</height>
     </rect>
    </property>
    <property name="autoFillBackground">
@@ -193,201 +266,72 @@
     <number>1</number>
    </property>
    <widget class="QWidget" name="LoadLog">
-    <widget class="QWidget" name="gridLayoutWidget">
+    <widget class="QTableWidget" name="tableWidget">
      <property name="geometry">
       <rect>
-       <x>0</x>
-       <y>0</y>
-       <width>731</width>
-       <height>341</height>
+       <x>-53</x>
+       <y>1</y>
+       <width>817</width>
+       <height>321</height>
       </rect>
      </property>
-     <layout class="QGridLayout" name="gridLayout">
-      <item row="0" column="0">
-       <widget class="QTableWidget" name="tableWidget">
-        <property name="minimumSize">
-         <size>
-          <width>729</width>
-          <height>339</height>
-         </size>
-        </property>
-        <property name="dragEnabled">
-         <bool>false</bool>
-        </property>
-        <property name="verticalScrollMode">
-         <enum>QAbstractItemView::ScrollPerItem</enum>
-        </property>
-        <attribute name="horizontalHeaderVisible">
-         <bool>false</bool>
-        </attribute>
-        <attribute name="horizontalHeaderCascadingSectionResizes">
-         <bool>false</bool>
-        </attribute>
-        <attribute name="horizontalHeaderHighlightSections">
-         <bool>true</bool>
-        </attribute>
-        <attribute name="horizontalHeaderMinimumSectionSize">
-         <number>21</number>
-        </attribute>
-        <attribute name="verticalHeaderVisible">
-         <bool>false</bool>
-        </attribute>
-        <attribute name="verticalHeaderMinimumSectionSize">
-         <number>21</number>
-        </attribute>
-        <row>
-         <property name="text">
-          <string>1</string>
-         </property>
-        </row>
-        <row>
-         <property name="text">
-          <string>2</string>
-         </property>
-        </row>
-        <row>
-         <property name="text">
-          <string>3</string>
-         </property>
-        </row>
-        <row>
-         <property name="text">
-          <string>4</string>
-         </property>
-        </row>
-        <row>
-         <property name="text">
-          <string>5</string>
-         </property>
-        </row>
-        <column>
-         <property name="text">
-          <string>年/月/日/时/分</string>
-         </property>
-        </column>
-        <column>
-         <property name="text">
-          <string>操作人</string>
-         </property>
-        </column>
-       </widget>
-      </item>
-     </layout>
+     <row>
+      <property name="text">
+       <string>新建行</string>
+      </property>
+     </row>
+     <row>
+      <property name="text">
+       <string>新建行</string>
+      </property>
+     </row>
+     <row>
+      <property name="text">
+       <string>新建行</string>
+      </property>
+     </row>
+     <row>
+      <property name="text">
+       <string>新建行</string>
+      </property>
+     </row>
+     <row>
+      <property name="text">
+       <string>新建行</string>
+      </property>
+     </row>
+     <row>
+      <property name="text">
+       <string>新建行</string>
+      </property>
+     </row>
+     <column>
+      <property name="text">
+       <string>年/月/日/时/分</string>
+      </property>
+     </column>
+     <column>
+      <property name="text">
+       <string>操作人</string>
+      </property>
+     </column>
     </widget>
    </widget>
    <widget class="QWidget" name="NGLog">
-    <widget class="QWidget" name="gridLayoutWidget_2">
-     <property name="geometry">
-      <rect>
-       <x>9</x>
-       <y>9</y>
-       <width>351</width>
-       <height>331</height>
-      </rect>
-     </property>
-     <layout class="QGridLayout" name="gridLayout_2">
-      <item row="5" column="0">
-       <widget class="QLabel" name="label_11">
-        <property name="text">
-         <string/>
-        </property>
-       </widget>
-      </item>
-      <item row="0" column="1">
-       <widget class="QLineEdit" name="lineEdit"/>
-      </item>
-      <item row="3" column="0">
-       <widget class="QLabel" name="TestNum">
-        <property name="text">
-         <string>检测数:</string>
-        </property>
-       </widget>
-      </item>
-      <item row="0" column="0">
-       <widget class="QLabel" name="Number">
-        <property name="text">
-         <string>产品编号:</string>
-        </property>
-       </widget>
-      </item>
-      <item row="2" column="0">
-       <widget class="QLabel" name="EndTime">
-        <property name="text">
-         <string>日志结束时间:</string>
-        </property>
-       </widget>
-      </item>
-      <item row="0" column="2">
-       <widget class="QLabel" name="Name">
-        <property name="text">
-         <string>产品名称:</string>
-        </property>
-       </widget>
-      </item>
-      <item row="3" column="2">
-       <widget class="QLabel" name="label_15">
-        <property name="text">
-         <string>NG数:</string>
-        </property>
-       </widget>
-      </item>
-      <item row="1" column="0">
-       <widget class="QLabel" name="StartTime">
-        <property name="text">
-         <string>日志开始时间:</string>
-        </property>
-       </widget>
-      </item>
-      <item row="3" column="3">
-       <widget class="QLineEdit" name="lineEdit_4"/>
-      </item>
-      <item row="0" column="3">
-       <widget class="QLineEdit" name="lineEdit_2"/>
-      </item>
-      <item row="2" column="1">
-       <widget class="QLabel" name="label_8">
-        <property name="text">
-         <string>2017.1.19</string>
-        </property>
-       </widget>
-      </item>
-      <item row="1" column="1">
-       <widget class="QLabel" name="label_7">
-        <property name="text">
-         <string>2017.1.19</string>
-        </property>
-       </widget>
-      </item>
-      <item row="4" column="1">
-       <widget class="QLineEdit" name="lineEdit_5"/>
-      </item>
-      <item row="4" column="0">
-       <widget class="QLabel" name="Proportion">
-        <property name="text">
-         <string>NG数占比检测数比例:</string>
-        </property>
-       </widget>
-      </item>
-      <item row="3" column="1">
-       <widget class="QLineEdit" name="lineEdit_3"/>
-      </item>
-      <item row="5" column="1">
-       <widget class="QLabel" name="label_12">
-        <property name="text">
-         <string/>
-        </property>
-       </widget>
-      </item>
-     </layout>
-    </widget>
     <widget class="QTableWidget" name="tableWidget_2">
      <property name="geometry">
       <rect>
-       <x>370</x>
+       <x>330</x>
        <y>10</y>
-       <width>361</width>
-       <height>331</height>
+       <width>438</width>
+       <height>311</height>
       </rect>
+     </property>
+     <property name="font">
+      <font>
+       <family>AR PL UKai CN</family>
+       <pointsize>14</pointsize>
+      </font>
      </property>
      <attribute name="horizontalHeaderMinimumSectionSize">
       <number>10</number>
@@ -459,7 +403,356 @@
       </property>
      </column>
     </widget>
+    <widget class="QWidget" name="widget" native="true">
+     <property name="geometry">
+      <rect>
+       <x>0</x>
+       <y>10</y>
+       <width>321</width>
+       <height>301</height>
+      </rect>
+     </property>
+     <widget class="QLineEdit" name="lineEdit_5">
+      <property name="geometry">
+       <rect>
+        <x>190</x>
+        <y>270</y>
+        <width>130</width>
+        <height>25</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <family>AR PL UKai CN</family>
+        <pointsize>14</pointsize>
+       </font>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">border:none;
+border-bottom:1px solid #000;
+background-color: rgb(212, 230, 202);</string>
+      </property>
+      <property name="alignment">
+       <set>Qt::AlignCenter</set>
+      </property>
+     </widget>
+     <widget class="QLabel" name="Proportion">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>270</y>
+        <width>178</width>
+        <height>25</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <family>AR PL UKai CN</family>
+        <pointsize>14</pointsize>
+       </font>
+      </property>
+      <property name="text">
+       <string>NG数占比检测数比例:</string>
+      </property>
+      <property name="alignment">
+       <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+      </property>
+     </widget>
+     <widget class="QLineEdit" name="lineEdit_3">
+      <property name="geometry">
+       <rect>
+        <x>190</x>
+        <y>180</y>
+        <width>130</width>
+        <height>25</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <family>AR PL UKai CN</family>
+        <pointsize>14</pointsize>
+       </font>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">border:none;
+border-bottom:1px solid #000;
+background-color: rgb(212, 230, 202);</string>
+      </property>
+      <property name="alignment">
+       <set>Qt::AlignCenter</set>
+      </property>
+     </widget>
+     <widget class="QLineEdit" name="lineEdit">
+      <property name="geometry">
+       <rect>
+        <x>190</x>
+        <y>10</y>
+        <width>130</width>
+        <height>25</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <family>AR PL UKai CN</family>
+        <pointsize>14</pointsize>
+       </font>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">border:none;
+border-bottom:1px solid #000;
+background-color: rgb(212, 230, 202);</string>
+      </property>
+      <property name="alignment">
+       <set>Qt::AlignCenter</set>
+      </property>
+     </widget>
+     <widget class="QLabel" name="EndTime">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>130</y>
+        <width>178</width>
+        <height>37</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <family>AR PL UKai CN</family>
+        <pointsize>14</pointsize>
+       </font>
+      </property>
+      <property name="text">
+       <string>日志结束时间:</string>
+      </property>
+      <property name="alignment">
+       <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+      </property>
+     </widget>
+     <widget class="QLabel" name="label_15">
+      <property name="geometry">
+       <rect>
+        <x>0</x>
+        <y>225</y>
+        <width>178</width>
+        <height>25</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>NG数:</string>
+      </property>
+      <property name="alignment">
+       <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+      </property>
+     </widget>
+     <widget class="QLabel" name="Name">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>10</y>
+        <width>178</width>
+        <height>25</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <family>AR PL UKai CN</family>
+        <pointsize>14</pointsize>
+       </font>
+      </property>
+      <property name="text">
+       <string>产品名称:</string>
+      </property>
+      <property name="alignment">
+       <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+      </property>
+     </widget>
+     <widget class="QLabel" name="Number">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>60</y>
+        <width>178</width>
+        <height>25</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <family>AR PL UKai CN</family>
+        <pointsize>14</pointsize>
+       </font>
+      </property>
+      <property name="styleSheet">
+       <string notr="true"/>
+      </property>
+      <property name="text">
+       <string>产品编号:</string>
+      </property>
+      <property name="alignment">
+       <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+      </property>
+     </widget>
+     <widget class="QLineEdit" name="lineEdit_4">
+      <property name="geometry">
+       <rect>
+        <x>190</x>
+        <y>225</y>
+        <width>130</width>
+        <height>25</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <family>AR PL UKai CN</family>
+        <pointsize>14</pointsize>
+       </font>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">border:none;
+border-bottom:1px solid #000;
+background-color: rgb(212, 230, 202);</string>
+      </property>
+      <property name="alignment">
+       <set>Qt::AlignCenter</set>
+      </property>
+     </widget>
+     <widget class="QLabel" name="label_7">
+      <property name="geometry">
+       <rect>
+        <x>190</x>
+        <y>90</y>
+        <width>130</width>
+        <height>38</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <family>AR PL UKai CN</family>
+        <pointsize>14</pointsize>
+       </font>
+      </property>
+      <property name="text">
+       <string>2017.1.19</string>
+      </property>
+      <property name="alignment">
+       <set>Qt::AlignCenter</set>
+      </property>
+     </widget>
+     <widget class="QLabel" name="StartTime">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>90</y>
+        <width>178</width>
+        <height>38</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <family>AR PL UKai CN</family>
+        <pointsize>14</pointsize>
+       </font>
+      </property>
+      <property name="text">
+       <string>日志开始时间:</string>
+      </property>
+      <property name="alignment">
+       <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+      </property>
+     </widget>
+     <widget class="QLabel" name="TestNum">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>180</y>
+        <width>178</width>
+        <height>25</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <family>AR PL UKai CN</family>
+        <pointsize>14</pointsize>
+       </font>
+      </property>
+      <property name="text">
+       <string>检测数:</string>
+      </property>
+      <property name="alignment">
+       <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+      </property>
+     </widget>
+     <widget class="QLineEdit" name="lineEdit_2">
+      <property name="geometry">
+       <rect>
+        <x>190</x>
+        <y>60</y>
+        <width>130</width>
+        <height>25</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <family>AR PL UKai CN</family>
+        <pointsize>14</pointsize>
+       </font>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">border:none;
+border-bottom:1px solid #000;
+background-color: rgb(212, 230, 202);</string>
+      </property>
+      <property name="alignment">
+       <set>Qt::AlignCenter</set>
+      </property>
+     </widget>
+     <widget class="QLabel" name="label_8">
+      <property name="geometry">
+       <rect>
+        <x>190</x>
+        <y>130</y>
+        <width>130</width>
+        <height>37</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <family>AR PL UKai CN</family>
+        <pointsize>14</pointsize>
+       </font>
+      </property>
+      <property name="text">
+       <string>2017.1.19</string>
+      </property>
+      <property name="alignment">
+       <set>Qt::AlignCenter</set>
+      </property>
+     </widget>
+    </widget>
    </widget>
+  </widget>
+  <widget class="QPushButton" name="Save">
+   <property name="geometry">
+    <rect>
+     <x>550</x>
+     <y>360</y>
+     <width>90</width>
+     <height>32</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <family>AR PL UKai CN</family>
+     <pointsize>14</pointsize>
+    </font>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">background-color: rgb(83, 148, 160);
+color: rgb(255, 250, 240);
+border-radius:5px;</string>
+   </property>
+   <property name="text">
+    <string>保存</string>
+   </property>
   </widget>
  </widget>
  <resources/>

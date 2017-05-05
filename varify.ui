@@ -298,9 +298,9 @@ border-radius:5px;</string>
   <widget class="QLabel" name="DateTime">
    <property name="geometry">
     <rect>
-     <x>607</x>
+     <x>590</x>
      <y>10</y>
-     <width>191</width>
+     <width>211</width>
      <height>31</height>
     </rect>
    </property>

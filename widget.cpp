@@ -1,4 +1,4 @@
-﻿#include "widget.h"
+﻿                                       #include "widget.h"
 #include "ui_widget.h"
 #include "subwidget.h"
 #include <QPainter>
@@ -9,6 +9,7 @@
 #include <QTime>
 #include <QSlider>
 #include <qmath.h>
+#include<QMap>
 #define HEIGHT_Y  400
 #define WIDTH_X  800
 class SUBWIDGET;
@@ -29,12 +30,13 @@ Widget::Widget(QWidget *parent,bool status) :
     //假设为这么多，以后从文件中读取
     ui->setupUi(this);
 
+    QPixmap pixmap(":/new/prefix1/image/circle_green.png");
     QPalette Pal(palette());
     // set black background
    // Pal.setColor(QPalette::Background, "#fffffe");
     this->setAutoFillBackground(true);
     this->setPalette(Pal);
-    this->setGeometry(0,80,800,270);
+    this->setGeometry(280,0,580,350);
 
     //定义子widget
     SUBWIDGET *sub =new SUBWIDGET(this);
@@ -43,8 +45,9 @@ Widget::Widget(QWidget *parent,bool status) :
 //    sub->initiation(jxk->getK1Q(),jxk->getK2Q(),jxk->getB1Q(),jxk->getB2Q(),jxk->getB3Q(),jxk->getB4Q(),
 //                    jxk->getLen1Q(),jxk->getLen2Q(),jxk->getDegreeQ(),jxk->getxQ(),jxk->getyQ());
     //定义子widget背景色
-    sub->setGeometryByUser(10,5,650,260);
-    Pal.setColor(QPalette::Background, "#FFFFF0");
+    sub->setGeometryByUser(99,0,478,348);
+    //Pal.(QPalette::Background, "url(image/slider.png)");
+    Pal.setBrush(backgroundRole(),QBrush(pixmap));
     sub->setAutoFillBackground(true);
     sub->setPalette(Pal);
 
@@ -61,7 +64,7 @@ Widget::Widget(QWidget *parent,bool status) :
     ui->verticalSlider->setStyleSheet(" \ QSlider::add-page:vertical\{\ background-color: rgb(187, 255, 255);\width:8px;\}\QSlider::sub-page:vertical \{\ background-color:rgb(83, 148, 160);\  width:8px;\    }\ QSlider::groove:vertical \  {\ background:transparent;\  width:8px;\ border-radius:3px;\}\ QSlider::handle:vertical \ {\ width: 40px;\height:8px;\ border-image: url(image/slider.png);\ margin: 0 -30px; \}");
     connect(ui->verticalSlider,SIGNAL(valueChanged(int)),sub,SLOT(getValue(int)));
     connect(sub,SIGNAL(setData(double ,double ,double ,double ,double ,double ,
-                                double ,double ,double ,double ,double ,
+                                 double ,double ,double ,double ,double ,
                                 double ,double ,double ,double ,double ,double )),
             this,SLOT(getData(double ,double ,double ,double ,double ,double ,
                                 double ,double ,double ,double ,double ,

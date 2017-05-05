@@ -21,20 +21,22 @@ void Option::ShowKeyBoard(QWidget *parent, bool num,QWidget *edit,int x,int y) /
 
     if (k_board == NULL)
     {
-        k_board = new Keyboard(parent,num);
+        k_board = new kboard(parent,num);
         last = edit;
     }
+    k_board->move(x-200,y-200);
+    k_board->show();
     k_board->setEditUi(edit);
 
-    if (k_board->isVisible() && last == edit)
-        k_board->hide();
-    else
-    {
-        last = edit;
-        k_board->move(406+x,278+y);
-        //调整对话框显示位置
-        k_board->show();
-    }
+//    if (k_board->isVisible() && last == edit)
+//        k_board->hide();
+//    else
+//    {
+//        last = edit;
+//        //k_board->move(406+x,278+y);
+//        //调整对话框显示位置
+//        k_board->show();
+//    }
 }
 
 void Option::CloseKeyBoard()

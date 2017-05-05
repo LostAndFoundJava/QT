@@ -21,12 +21,15 @@ MainWindow::MainWindow(QWidget *parent) :
     valueInt();
     //设置背景色
     QPalette Pal(palette());
-    Pal.setColor(QPalette::Background, "#D4E6CA");
+    Pal.setColor(QPalette::Background, "#ffffff");
     this->setAutoFillBackground(true);
     this->setPalette(Pal);
     //struct timespec slptm;
     //slptm.tv_sec=1.5;
     //slptm.tv_nsec=0;
+
+    this->setWindowFlags(Qt::FramelessWindowHint);
+
     QTime t;
     t.start();
     while(t.elapsed()<System_InitTime)
@@ -39,19 +42,6 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->Sensitivity->installEventFilter(this);
     ui->SetZero->installEventFilter(this);
     ui->System_set->installEventFilter(this);
-
-    //设置TAB的顺序
-//    QWidget::setTabOrder(ui->Detect,ui->Jur_And_User);
-//    QWidget::setTabOrder(ui->Jur_And_User,ui->DateTime);
-//    QWidget::setTabOrder(ui->DateTime,ui->ProNum);
-//    QWidget::setTabOrder(ui->ProNum,ui->ProName);
-//    QWidget::setTabOrder(ui->ProName,ui->SetZero);
-//    QWidget::setTabOrder(ui->SetZero,ui->Management);
-//    QWidget::setTabOrder(ui->Management,ui->Sensitivity);
-//    QWidget::setTabOrder(ui->Sensitivity,ui->Phase);
-//    QWidget::setTabOrder(ui->Phase,ui->Log);
-//    QWidget::setTabOrder(ui->Log,ui->System_set);
-//    QWidget::setTabOrder(ui->System_set,ui->Detect);
 
     Widget *w1 = new Widget(this,false);
     w1->show();
@@ -252,3 +242,8 @@ void MainWindow::on_SetZero_clicked()
     ui->NoPassNum->setText(tr("未通过数0"));
 }
 
+
+void MainWindow::on_Quit_clicked()
+{
+    this->close();
+}

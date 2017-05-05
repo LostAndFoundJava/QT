@@ -12,6 +12,8 @@
 #include <notice.h>
 #include <QDialog>
 #include <QMessageBox>
+#include<input.h>
+#include<QLineEdit>
 class verify;
 namespace Ui {
 class Management;
@@ -50,27 +52,57 @@ private slots:
      void on_radioButton_clicked(bool checked);
 
 
+     void on_low_clicked(bool checked);
+
+     void on_high_clicked(bool checked);
+
+     void on_one_p_clicked(bool checked);
+
+     void on_two_p_clicked(bool checked);
+
+     void on_three_p_clicked(bool checked);
+
+
 private:
     Ui::Management *ui;
     QButtonGroup *PackingStyleGroup;
     class learn *Learn;
     notice *Notice;
+    input *Input;
     void valueInt(void);
+
 
     //正反检测标志位
     int PNTestFlag;
     //包装标志位
     int PackFlag;
     int AutoFlag;
+    int LearnFlag;
+    QString edit_text;
 protected:
     bool eventFilter(QObject *, QEvent *);
 public slots:
     void ShowTime(void);
     void SaveData(void);
     void tableWidgtShowInformation(QModelIndex);
+    void getData(QString,QLineEdit *);
+    void ContentInput(QLineEdit *);
+
+
+
+
 };
 
 #endif // MANAGEMENT_H
+
+
+
+
+
+
+
+
+
 
 
 

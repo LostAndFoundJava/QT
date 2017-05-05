@@ -51,6 +51,7 @@ private slots:
     void on_System_set_clicked();
     void on_SetZero_clicked();
 
+    void on_Quit_clicked();
 };
 
 extern MainWindow *w;

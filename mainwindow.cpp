@@ -51,11 +51,14 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(timer, SIGNAL(timeout()), this, SLOT(ShowTime()));
     timer->start(500);
 
-    management = new Management;
+    //
 
     char str[15];
     sprintf(str,"%d",CO_OD_RAM.readInput8Bit[0]);
     qDebug(str);
+
+    management = new Management;
+    log = new Log;
 }
 
 MainWindow::~MainWindow()
@@ -214,16 +217,15 @@ void MainWindow::keyPressEvent(QKeyEvent *event)
 
 void MainWindow::on_Log_clicked()
 {
-    log = new Log;
+
     log->show();
-    p=this->pos();
     log->move(pos().x(),pos().y());
 }
 
 void MainWindow::on_Management_clicked()
 {
+
     management->show();
-    p=this->pos();
     management->move(pos().x(),pos().y());
 }
 
@@ -231,7 +233,6 @@ void MainWindow::on_System_set_clicked()
 {
     systemset = new Systemset;
     systemset->show();
-    p=this->pos();
     systemset->move(pos().x(),pos().y());
 }
 

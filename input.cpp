@@ -103,15 +103,18 @@ input::input(QWidget *parent,bool num) :
     m_srf = srf.split("\r\n");
     //用QString的split函数将字库文件划分成一段一段，每个拼音对应一段字库
 
-
+   // this->ref=ui1->lineEdit;
 
 }
 void input::setReference(QLineEdit* edit1){
     this->ref = edit1;
+    dataflag=1;
 }
-void input::setReferenceA(int row1,int column1){
-    row2 = row1;
-    column2 = column1;
+void input::setLogReference(QLineEdit* edit2,int row1,int column1){
+    this->logref =edit2;
+    this->row = row1;
+    this->column = column1;
+    dataflag=0;
 }
 
 void input::paintEvent(QPaintEvent *)
@@ -263,30 +266,16 @@ void input::get_key_letter(QString letter)
 
 void input::on_pushButton_esc_clicked()
 {
-//    ui1-> pushButton_en_ch->setText("中文");
-//    Flag_InputMode=HANZI;
-
-//    m_CurPY="";
-//    ui1-> pinyin ->setText(m_CurPY);//要用ui1指向前面所定义的指针
-//    hanzi_zk_set();
-
-//    //修改一些button
-//    ui1->pushButton_sign_tan->setText("！");
-//    ui1->pushButton_sign_wen->setText("？");
-//    ui1->pushButton_sign_dou->setText("，");
-//    ui1->pushButton_sign_ju->setText("。");
-//    ui1->pushButton_sign_fen->setText("；");
-//    for(int i=0;i<26;i++)
-//    {
-//        m_letter_a_z[i]->setEnabled(true);
-//    }
     QString letter =  ui1->lineEdit->text();
-    if(this->ref)
+    if(dataflag==1)
     {
-    emit setData(letter,this->ref);
-    }else{
-    emit setData1(letter,row2,column2);
-   }
+
+     emit setData(letter,this->ref,row,column);
+
+    }else if(dataflag==0)
+    {
+        emit setData(letter,this->logref,row,column);
+    }
     this->hide();
 }
 

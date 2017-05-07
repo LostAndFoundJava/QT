@@ -372,36 +372,6 @@ border-radius:5px;</string>
        <string>新建行</string>
       </property>
      </row>
-     <column>
-      <property name="text">
-       <string>序号</string>
-      </property>
-     </column>
-     <column>
-      <property name="text">
-       <string>产品编号</string>
-      </property>
-     </column>
-     <column>
-      <property name="text">
-       <string>产品名称</string>
-      </property>
-     </column>
-     <column>
-      <property name="text">
-       <string>NG时间</string>
-      </property>
-     </column>
-     <column>
-      <property name="text">
-       <string>信号值</string>
-      </property>
-     </column>
-     <column>
-      <property name="text">
-       <string>操作人</string>
-      </property>
-     </column>
     </widget>
     <widget class="QWidget" name="widget" native="true">
      <property name="geometry">

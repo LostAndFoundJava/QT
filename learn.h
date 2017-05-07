@@ -8,7 +8,6 @@
 #include <config.h>
 #include <QFileDialog>
 #include "globl_data.h"
-#include <varify.h>
 namespace Ui {
     class learn;
 }

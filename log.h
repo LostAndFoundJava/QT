@@ -1,6 +1,7 @@
 #ifndef LOG_H
 #define LOG_H
 
+
 #include <QWidget>
 #include <QListWidget>
 #include <QStackedWidget>
@@ -8,7 +9,6 @@
 #include "globl_data.h"
 #include <input.h>
 #include <record.h>
-#include <sqlite.h>
 namespace Ui {
 class Log;
 }
@@ -35,18 +35,22 @@ private slots:
 
     void on_Save_clicked();
 
+   // void on_tableWidget_cellClicked(int row, int column);
+
 private:
     Ui::Log *ui;
     input *Input;
     void valueInt(void);
-    int row1;
-    int column1;
+    //QLineEdit *n;
+    QTableWidget *tableWidget;
+    QTableWidget *tableWidget_2;
 public slots:
     void ShowTime(void);
     void ContentInput();
     char UsbRead ();
-    void getData(QString,int,int);
+    void getData(QString,QLineEdit *,int row,int colum);
     void saveData(void);
+    void LogInput(QLineEdit *,int row,int colum);
 };
 
 #endif // LOG_H

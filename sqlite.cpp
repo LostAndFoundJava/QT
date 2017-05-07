@@ -225,9 +225,9 @@ QList<Product*> *SQLITE::queryProduct()
     }
     return ql;
 }
-void SQLITE::insertLog(QString logTime1,QString logOperator1,QString ngProductorNumber1,QString ngProductorName1,
+void SQLITE::insertRecord(QString logTime1,QString logOperator1,QString ngProductorNumber1,QString ngProductorName1,
                        QString ngTime1,QString ngSignal1,QString ngOperator1){
-    QString insert_sql = "insert into log (logTime,logOperator,ngProductorNumber,ngProductorName,ngTime,ngSignal,ngOperator) values (?,?,?,?,?,?,?)";
+    QString insert_sql = "insert into record (logTime,logOperator,ngProductorNumber,ngProductorName,ngTime,ngSignal,ngOperator) values (?,?,?,?,?,?,?)";
 
     sql_query->prepare(insert_sql);
 
@@ -278,23 +278,31 @@ void SQLITE::insertLog(QString logTime1,QString logOperator1,QString ngProductor
 }
 QList<Record*> *SQLITE::queryRecord()
 {
-    QList<Record*> *ql = new QList<Record*>;
-    QString select_all_sql = "select * from record";
-    sql_query->prepare(select_all_sql);
+    QList<Record*> *ql1 = new QList<Record*>;
+    QString select_all_sql1 = "select * from record";
 
-    if(!sql_query->exec())
-    {
-        qDebug()<<sql_query->lastError();
-    }
-    else
+    sql_query->prepare(select_all_sql1);
+    qDebug()<<sql_query;
+    if(sql_query->exec())
     {
         while(sql_query->next())
         {
-            Record *p = new Record;
-            p->setLogOperator(sql_query->value(2).toString());
+            Record *r = new Record;
+            r->setLogTime(sql_query->value(1).toString());
+            r->setLogOperator(sql_query->value(2).toString());
+            r->setNgProductNumber(sql_query->value(3).toString());
+            r->setNgProductName(sql_query->value(4).toString());
+            r->setNgTime(sql_query->value(5).toString());
+            r->setNgSignal(sql_query->value(6).toString());
+            r->setNgOperator(sql_query->value(7).toString());
             qDebug()<<sql_query->value(2).toString();
-            ql->append(p);
+            ql1->append(r);
         }
+
     }
-    return ql;
+    else
+    {
+        qDebug()<<sql_query->lastError();
+    }
+    return ql1;
 }

@@ -29,7 +29,7 @@ public:
     explicit input(QWidget *parent = 0,bool num=false);
     void setEditUi(QWidget *edit);
     void setReference(QLineEdit* edit);
-    void setReferenceA(int row2,int column2);
+    void setLogReference(QLineEdit* edit_log,int row,int column);
     ~input();
 private:
     QStringList m_srf;
@@ -139,12 +139,14 @@ private:
     QPushButton *m_letter_a_z[26];
     QWidget *edit;
     QLineEdit *ref;
-    int row2;
-    int column2;
+    QLineEdit *logref;
+    int row;
+    int column;
+    int dataflag;
 
 signals:
-    void setData(QString,QLineEdit *);
-     void setData1(QString,int,int);
+    void setData(QString,QLineEdit *,int row,int column);
+
 };
 
 #endif // INPUT_H

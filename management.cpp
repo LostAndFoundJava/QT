@@ -402,7 +402,7 @@ void Management::ContentInput(QLineEdit *input_edit){
     Input->setReference(input_edit);
     Input->move(pos().x(),pos().y());
     Input->show();
-    connect(Input,SIGNAL(setData(QString,QLineEdit *)),this,SLOT(getData(QString,QLineEdit *)));
+    connect(Input,SIGNAL(setData(QString,QLineEdit *,int,int)),this,SLOT(getData(QString,QLineEdit *)));
 }
 void Management::getData(QString text,QLineEdit *input_edit)
 {
@@ -651,7 +651,7 @@ void Management::tableWidgtShowInformation(QModelIndex qmi)
 }
 
 
-
+//频率
 void Management::on_low_clicked(bool checked)
 {
     if(checked==true)

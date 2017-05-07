@@ -30,7 +30,19 @@
 #include <stdlib.h> /* for malloc, free */
 #include <errno.h>
 #include <sys/socket.h>
+#include <stdio.h>
 
+static void print_frame(struct can_frame *fr)
+{
+    int i;
+    printf("can_id = %08xh ", fr->can_id & CAN_SFF_MASK);
+    //printf("%08x", fr->can_id);
+    printf("dlc = %d ", fr->can_dlc);
+    printf("data = ");
+    for (i = 0; i < fr->can_dlc; i++)
+        printf("%02xh ", fr->data[i]);
+    printf("\n");
+}
 
 /******************************************************************************/
 #ifndef CO_SINGLE_THREAD
@@ -167,6 +179,7 @@ CO_ReturnError_t CO_CANmodule_init(
 
         /* Create and bind socket */
         CANmodule->fd = socket(AF_CAN, SOCK_RAW, CAN_RAW);
+        printf("CANmodule->fd=%d\n",CANmodule->fd);
         if(CANmodule->fd < 0){
             ret = CO_ERROR_ILLEGAL_ARGUMENT;
         }else{
@@ -304,15 +317,29 @@ CO_ReturnError_t CO_CANsend(CO_CANmodule_t *CANmodule, CO_CANtx_t *buffer){
     ssize_t n;
     size_t count = sizeof(struct can_frame);
 
+//---------------------printf can frame---------------------------//
+    int i;
+    struct can_frame can_sending_frame;
+    can_sending_frame.can_id=buffer->ident;
+    can_sending_frame.can_dlc=buffer->DLC;
+    for (i = 0; i < buffer->DLC; i++)
+        can_sending_frame.data[i]=buffer->data[i];
+    print_frame(buffer);
+//----------------------------------------------------------------//
+
     n = write(CANmodule->fd, buffer, count);
 #ifdef CO_LOG_CAN_MESSAGES
     void CO_logMessage(const CanMsg *msg);
     CO_logMessage((const CanMsg*) buffer);
 #endif
 
+    //printf("CO_CANsend count=%d,n=%d\n",count,n);
+
     if(n != count){
         CO_errorReport((CO_EM_t*)CANmodule->em, CO_EM_CAN_TX_OVERFLOW, CO_EMC_CAN_OVERRUN, n);
+        printf("EM(CO_CANsend-CO_EM_CAN_TX_OVERFLOW-CO_EMC_CAN_OVERRUN)\n");
         err = CO_ERROR_TX_OVERFLOW;
+        printf("CO_CANsend err=%d\n",err);
     }
 
     return err;
@@ -402,10 +429,15 @@ void CO_CANrxWait(CO_CANmodule_t *CANmodule){
     size = sizeof(struct can_frame);
     n = read(CANmodule->fd, &msg, size);
 
+//-------------printf can frame-------------------//
+    print_frame(&msg);
+//------------------------------------------------//
+
     if(CANmodule->CANnormal){
         if(n != size){
             /* This happens only once after error occurred (network down or something). */
             CO_errorReport((CO_EM_t*)CANmodule->em, CO_EM_CAN_RXB_OVERFLOW, CO_EMC_COMMUNICATION, n);
+            printf("EM(CO_CANrxWait-CO_EM_CAN_RXB_OVERFLOW-CO_EMC_COMMUNICATION)\n");
         }
         else{
             CO_CANrxMsg_t *rcvMsg;      /* pointer to received message in CAN module */
@@ -430,6 +462,7 @@ void CO_CANrxWait(CO_CANmodule_t *CANmodule){
             /* Call specific function, which will process the message */
             if(msgMatched && (buffer->pFunct != NULL)){
                 buffer->pFunct(buffer->object, rcvMsg);
+                printf("Receive can buffer: rcvMsg->data=%Xh",&rcvMsg->data);
             }
 
 #ifdef CO_LOG_CAN_MESSAGES

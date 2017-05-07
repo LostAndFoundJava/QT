@@ -1,4 +1,4 @@
-/**
+    /**
  * CANopen Emergency protocol.
  *
  * @file        CO_Emergency.h
@@ -47,7 +47,7 @@
 #ifndef CO_EMERGENCY_H
 #define CO_EMERGENCY_H
 
-
+#include "CO_SDO.h"
 
 /**
  * @defgroup CO_Emergency Emergency

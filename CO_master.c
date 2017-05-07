@@ -27,7 +27,6 @@
 
 #include "CO_master.h"
 
-
 /******************************************************************************/
 int sdoClientUpload(
         CO_SDOclient_t *SDOclient,

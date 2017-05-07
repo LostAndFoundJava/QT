@@ -362,6 +362,8 @@ CO_ReturnError_t CO_OD_storage_autoSave(
             fflush(odStor->fp);
 
             odStor->lastSavedMs = 0;
+
+            printf("Save the data into the od_storage/od_storage_auto\n");
         }
 
         free(buf);

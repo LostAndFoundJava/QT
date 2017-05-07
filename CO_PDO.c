@@ -51,7 +51,7 @@
 #include "CO_SYNC.h"
 #include "CO_PDO.h"
 #include <string.h>
-
+#include <stdio.h>
 /*
  * Read received message from CAN module.
  *
@@ -227,7 +227,6 @@ static uint32_t CO_PDOfindMap(
 
     /* data length must be byte aligned */
     if(dataLen&0x07) return CO_SDO_AB_NO_MAP;   /* Object cannot be mapped to the PDO. */
-
     dataLen >>= 3;    /* new data length is in bytes */
     *pLength += dataLen;
 
@@ -321,7 +320,7 @@ static uint32_t CO_RPDOconfigMap(CO_RPDO_t* RPDO, uint8_t noOfMappedObjects){
         uint8_t prevLength = length;
         uint8_t MBvar;
         uint32_t map = *(pMap++);
-
+        printf("RPDOconfigMap=%Xh\n",map);
         /* function do much checking of errors in map */
         ret = CO_PDOfindMap(
                 RPDO->SDO,
@@ -334,6 +333,7 @@ static uint32_t CO_RPDOconfigMap(CO_RPDO_t* RPDO, uint8_t noOfMappedObjects){
         if(ret){
             length = 0;
             CO_errorReport(RPDO->em, CO_EM_PDO_WRONG_MAPPING, CO_EMC_PROTOCOL_ERROR, map);
+            printf("EM(CO_RPDOconfigMap-CO_EM_PDO_WRONG_MAPPING-CO_EMC_PROTOCOL_ERROR,ret=%Xh)\n",ret);
             break;
         }
 
@@ -388,7 +388,7 @@ static uint32_t CO_TPDOconfigMap(CO_TPDO_t* TPDO, uint8_t noOfMappedObjects){
         uint8_t prevLength = length;
         uint8_t MBvar;
         uint32_t map = *(pMap++);
-
+        printf("TPDOconfigMap=%Xh\n",map);
         /* function do much checking of errors in map */
         ret = CO_PDOfindMap(
                 TPDO->SDO,
@@ -401,6 +401,7 @@ static uint32_t CO_TPDOconfigMap(CO_TPDO_t* TPDO, uint8_t noOfMappedObjects){
         if(ret){
             length = 0;
             CO_errorReport(TPDO->em, CO_EM_PDO_WRONG_MAPPING, CO_EMC_PROTOCOL_ERROR, map);
+            printf("EM(CO_TPDOconfigMap-CO_EM_PDO_WRONG_MAPPING-CO_EMC_PROTOCOL_ERROR,ret=%Xh)\n",ret);
             break;
         }
 
@@ -897,7 +898,7 @@ int16_t CO_TPDOsend(CO_TPDO_t *TPDO){
     }
 
     TPDO->sendRequest = 0;
-
+    printf("TPDO sending\n");
     return CO_CANsend(TPDO->CANdevTx, TPDO->CANtxBuff);
 }
 
@@ -991,11 +992,16 @@ void CO_TPDO_process(
             /* send synchronous acyclic PDO */
             if(TPDO->TPDOCommPar->transmissionType == 0){
                 if(TPDO->sendRequest) CO_TPDOsend(TPDO);
+                //printf("send synchronous acyclic PDO\n");
             }
             /* send synchronous cyclic PDO */
             else{
+
+                //printf("TPDO->syncCounter = %d\n",TPDO->syncCounter);
+
                 /* is the start of synchronous TPDO transmission */
                 if(TPDO->syncCounter == 255){
+                    //printf("SYNC->counterOverflowValue=%d,TPDO->TPDOCommPar->SYNCStartValue=%d\n",SYNC->counterOverflowValue,TPDO->TPDOCommPar->SYNCStartValue);
                     if(SYNC->counterOverflowValue && TPDO->TPDOCommPar->SYNCStartValue)
                         TPDO->syncCounter = 254;   /* SYNCStartValue is in use */
                     else
@@ -1003,6 +1009,7 @@ void CO_TPDO_process(
                 }
                 /* if the SYNCStartValue is in use, start first TPDO after SYNC with matched SYNCStartValue. */
                 if(TPDO->syncCounter == 254){
+                    //printf("if the SYNCStartValue is in use, start first TPDO after SYNC with matched SYNCStartValue\n");
                     if(SYNC->counter == TPDO->TPDOCommPar->SYNCStartValue){
                         TPDO->syncCounter = TPDO->TPDOCommPar->transmissionType;
                         CO_TPDOsend(TPDO);
@@ -1010,6 +1017,7 @@ void CO_TPDO_process(
                 }
                 /* Send PDO after every N-th Sync */
                 else if(--TPDO->syncCounter == 0){
+                    //printf("Send PDO after every N-th Sync\n");
                     TPDO->syncCounter = TPDO->TPDOCommPar->transmissionType;
                     CO_TPDOsend(TPDO);
                 }

@@ -1,6 +1,6 @@
 #include "thread_canopen.h"
 
-#define STORAGE 0
+#define STORAGE 1
 
 #define NSEC_PER_SEC            (1000000000)    /* The number of nanoseconds per second. */
 #define NSEC_PER_MSEC           (1000000)       /* The number of nanoseconds per millisecond. */
@@ -34,8 +34,7 @@ static pthread_t            rt_thread_id;
 static int                  rt_thread_epoll_fd;
 #endif
 
-int err = 0; /* syntax or other error, true or false */
-respErrorCode_t respErrorCode = respErrorNone;
+
 
 /* Signal handler */
 volatile sig_atomic_t CO_endProgram = 0;
@@ -46,14 +45,16 @@ static void sigHandler(int sig) {
 
 /* Helper functions ***********************************************************/
 void CO_errExit(char* msg) {
-    perror(msg);
+    //perror(msg);
+    qDebug(msg);
     exit(EXIT_FAILURE);
 }
 
 /* send CANopen generic emergency message */
 void CO_error(const uint32_t info) {
     CO_errorReport(CO->em, CO_EM_GENERIC_SOFTWARE_ERROR, CO_EMC_SOFTWARE_INTERNAL, info);
-    fprintf(stderr, "canopend generic error: 0x%X\n", info);
+    //fprintf(stderr, "canopend generic error: 0x%X\n", info);
+    qDebug("canopend generic error: 0x%X",info);
 }
 
 
@@ -87,6 +88,13 @@ fprintf(stderr,
 "\n");
 }
 
+/* Maximum size of Object Dictionary variable transmitted via SDO. */
+#ifndef CO_COMMAND_SDO_BUFFER_SIZE
+#define CO_COMMAND_SDO_BUFFER_SIZE     100000
+#endif
+
+#define STRING_BUFFER_SIZE  (CO_COMMAND_SDO_BUFFER_SIZE * 4 + 100)
+#define LISTEN_BACKLOG      50
 
 
 Thread_CANopen::Thread_CANopen(QObject *parent) :
@@ -97,6 +105,12 @@ Thread_CANopen::Thread_CANopen(QObject *parent) :
 void Thread_CANopen::run(){
 //-------------------------------------CANopen协议-----------------------------------//
     CO_NMT_reset_cmd_t reset = CO_RESET_NOT;
+    int err1 = 0; /* syntax or other error, true or false */
+//    respErrorCode_t respErrorCode = respErrorNone;
+    char resp[STRING_BUFFER_SIZE];
+    int respLen = 0;
+
+
     CO_ReturnError_t odStorStatus_rom, odStorStatus_eeprom;
     int CANdevice0Index = 0;
     UNSIGNED16 canbitrate=0;
@@ -144,46 +158,56 @@ void Thread_CANopen::run(){
 //
 //        }
 
-    nodeId=3;
-    canbitrate=CO_OD_ROM.CANBitRate;
+    //nodeId=3;
+    nodeId=OD_CANNodeID;
+    canbitrate=OD_CANBitRate;
     CANdevice0Index = if_nametoindex(CANdevice);
-    rtPriority=2;
-    //CANdevice0Index=1;
+    rtPriority=99;
+
+    qDebug("Starting CAN device:%s",CANdevice);
 
     if(nodeId < 1 || nodeId > 127) {
-        fprintf(stderr, "Wrong node ID (%d)\n", nodeId);
+        //fprintf(stderr, "Wrong node ID (%d)\n", nodeId);
         //printUsage(argv[0]);
+        qDebug("program init ERROR in nodeID");
         exit(EXIT_FAILURE);
     }
+
+
+
 
     if(rtPriority != -1 && (rtPriority < sched_get_priority_min(SCHED_FIFO)
                          || rtPriority > sched_get_priority_max(SCHED_FIFO))) {
-        fprintf(stderr, "Wrong RT priority (%d)\n", rtPriority);
+        //fprintf(stderr, "Wrong RT priority (%d)\n", rtPriority);
         //printUsage(argv[0]);
+        qDebug("program init ERROR in rtPriority");
         exit(EXIT_FAILURE);
     }
 
-//    if(CANdevice0Index == 0) {
-//        char s[120];
-//        snprintf(s, 120, "Can't find CAN device \"%s\"", CANdevice);
-//        CO_errExit(s);
-//    }
+    if(CANdevice0Index == 0) {
+        char s[120];
+        snprintf(s, 120, "Can't find CAN device \"%s\"", CANdevice);
+        CO_errExit(s);
+    }
 
 
 //      printf("%s - starting CANopen device with Node ID %d(0x%02X)", argv[0], nodeId, nodeId);
-
+    qDebug("Starting CANopen device %s with Node ID %d",CANdevice,nodeId);
 
     /* Verify, if OD structures have proper alignment of initial values */
     if(CO_OD_RAM.FirstWord != CO_OD_RAM.LastWord) {
-        //fprintf(stderr, "Program init - %s - Error in CO_OD_RAM.\n", argv[0]);
+        //fprintf(stderr, "Program init -  - Error in CO_OD_RAM.\n");
+        qDebug("Program init ERROR in CO_CO_RAM");
         exit(EXIT_FAILURE);
     }
     if(CO_OD_EEPROM.FirstWord != CO_OD_EEPROM.LastWord) {
         //fprintf(stderr, "Program init - %s - Error in CO_OD_EEPROM.\n", argv[0]);
+        qDebug("Program init ERROR in CO_CO_EEPROM");
         exit(EXIT_FAILURE);
     }
     if(CO_OD_ROM.FirstWord != CO_OD_ROM.LastWord) {
         //fprintf(stderr, "Program init - %s - Error in CO_OD_ROM.\n", argv[0]);
+        qDebug("Program init ERROR in CO_CO_ROM");
         exit(EXIT_FAILURE);
     }
 
@@ -192,6 +216,7 @@ void Thread_CANopen::run(){
     if(STORAGE){
         odStorStatus_rom = CO_OD_storage_init(&odStor, (uint8_t*) &CO_OD_ROM, sizeof(CO_OD_ROM), odStorFile_rom);
         odStorStatus_eeprom = CO_OD_storage_init(&odStorAuto, (uint8_t*) &CO_OD_EEPROM, sizeof(CO_OD_EEPROM), odStorFile_eeprom);
+        qDebug("OdStor_rom init return error:%d, OdStor_eeprom init return error:%d",odStorStatus_rom,odStorStatus_eeprom);
     }
 
     /* Catch signals SIGINT and SIGTERM */
@@ -201,13 +226,14 @@ void Thread_CANopen::run(){
         CO_errExit("Program init - SIGTERM handler creation failed");
 
     /* increase variable each startup. Variable is automatically stored in non-volatile memory. */
-    printf(", count=%u ...\n", ++OD_powerOnCounter);
+    printf("count=%u ...\n", ++OD_powerOnCounter);
 
 
     while(reset != CO_RESET_APP && reset != CO_RESET_QUIT && CO_endProgram == 0) {
 /* CANopen communication reset - initialize CANopen objects *******************/
-
+        CO_ReturnError_t err;
         //printf("%s - communication reset ...\n", argv[0]);
+        qDebug("Communication reset ...");
 
 
 #ifndef CO_SINGLE_THREAD
@@ -229,7 +255,6 @@ void Thread_CANopen::run(){
 
         /* initialize CANopen */
         err = CO_init(CANdevice0Index, nodeId, canbitrate);
-        err = CO_init(CANdevice0Index, nodeId, 250);
 
         if(err != CO_ERROR_NO) {
             char s[120];
@@ -244,9 +269,11 @@ void Thread_CANopen::run(){
             CO_OD_configure(CO->SDO[0], OD_H1011_REST_PARAM_FUNC, CO_ODF_1011, (void*)&odStor, 0, 0U);
             if(odStorStatus_rom != CO_ERROR_NO) {
                 CO_errorReport(CO->em, CO_EM_NON_VOLATILE_MEMORY, CO_EMC_HARDWARE, (uint32_t)odStorStatus_rom);
+                printf("EM(odStorStatus_rom-CO_EM_NON_VOLATILE_MEMORY-CO_EMC_HARDWARE)\n");
             }
             if(odStorStatus_eeprom != CO_ERROR_NO) {
                 CO_errorReport(CO->em, CO_EM_NON_VOLATILE_MEMORY, CO_EMC_HARDWARE, (uint32_t)odStorStatus_eeprom + 1000);
+                printf("EM(odStorStatus_eeprom-CO_EM_NON_VOLATILE_MEMORY-CO_EMC_HARDWARE)\n");
             }
         }
 
@@ -269,6 +296,8 @@ void Thread_CANopen::run(){
             mainline_epoll_fd = epoll_create(4);
             if(mainline_epoll_fd == -1)
                 CO_errExit("Program init - epoll_create mainline failed");
+
+            printf("mainline_epoll_fd=%d\n",mainline_epoll_fd);
 
             /* Init mainline */
             taskMain_init(mainline_epoll_fd, &OD_performance[ODA_performance_mainCycleMaxTime]);
@@ -293,6 +322,8 @@ void Thread_CANopen::run(){
             rt_thread_epoll_fd = epoll_create(2);
             if(rt_thread_epoll_fd == -1)
                 CO_errExit("Program init - epoll_create rt_thread failed");
+
+            printf("rt_thread_epoll_fd=%d\n",rt_thread_epoll_fd);
 
             /* Init taskRT */
             CANrx_taskTmr_init(rt_thread_epoll_fd, TMR_TASK_INTERVAL_NS, &OD_performance[ODA_performance_timerCycleMaxTime]);
@@ -334,22 +365,17 @@ void Thread_CANopen::run(){
 
         /* start CAN */
         CO_CANsetNormalMode(CO->CANmodule[0]);
+
+        //CO->NMT->operatingState=CO_NMT_OPERATIONAL;
+        //qDebug("CANopen node operating state is: %d\n",CO->NMT->operatingState);
+
 #ifndef CO_SINGLE_THREAD
         pthread_mutex_unlock(&CO_CAN_VALID_mtx);
 #endif
 
-
-        //---------------------------使所有节点进入运行状态-----------------------------//
-        if(err == 0) {
-            err = CO_sendNMTcommand(CO, CO_NMT_ENTER_STOPPED, 0) ? 1:0;
-            //if(err == 0) respLen = sprintf(resp, "[%d] OK", sequence);
-        }
-        //---------------------------------------------------------------------------//
-
-
         reset = CO_RESET_NOT;
 
-        //printf("%s - running ...\n", argv[0]);
+        qDebug("running ...\n");
 
 
         while(reset == CO_RESET_NOT && CO_endProgram == 0) {
@@ -431,7 +457,7 @@ void Thread_CANopen::run(){
     taskMain_close();
     CO_delete(CANdevice0Index);
 
-    //printf("%s on %s (nodeId=0x%02X) - finished.\n\n", argv[0], CANdevice, nodeId);
+    qDebug("%s (nodeId=%d) - finished.\n\n",CANdevice, nodeId);
 
     /* Flush all buffers (and reboot) */
     if(rebootEnable && reset == CO_RESET_APP) {
@@ -482,6 +508,7 @@ static void* rt_thread(void* arg) {
             /* Detect timer large overflow */
             if(OD_performance[ODA_performance_timerCycleMaxTime] > TMR_TASK_OVERFLOW_US && rtPriority > 0 && CO->CANmodule[0]->CANnormal) {
                 CO_errorReport(CO->em, CO_EM_ISR_TIMER_OVERFLOW, CO_EMC_SOFTWARE_INTERNAL, 0x22400000L | OD_performance[ODA_performance_timerCycleMaxTime]);
+                //printf("EM(OD_performance-CO_EM_ISR_TIMER_OVERFLOW-CO_EMC_SOFTWARE_INTERNAL)\n");
             }
         }
 

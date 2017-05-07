@@ -5,8 +5,7 @@
 #include <sys/time.h>
 #include <time.h>
 #include <globl_data.h>
-#include "CO_driver.h"
-#include "CO_OD.h"
+#include "CANopen.h"
 //#include <stdio.h>
 //#include <stdlib.h>
 //#include <unistd.h>
@@ -63,9 +62,9 @@ MainWindow::MainWindow(QWidget *parent) :
 
     management = new Management;
 
-    char str[15];
-    sprintf(str,"%d",CO_OD_RAM.readInput8Bit[0]);
-    qDebug(str);
+//    qDebug("0x600001:%d 0x600002:%d 0x620001:%d 0x620002:%d\n",CO_OD_RAM.readInput8Bit[0],
+//           CO_OD_RAM.readInput8Bit[1],CO_OD_RAM.writeOutput8Bit[0],CO_OD_RAM.writeOutput8Bit[1]);
+//    qDebug("CANopen node operating state is: %d\n",CO->NMT->operatingState);
 }
 
 MainWindow::~MainWindow()

@@ -1,8 +1,8 @@
-#include "log.h"
+    #include "log.h"
 #include "ui_log.h"
 #include <QGridLayout>
 #include <QDebug>
-#include <CO_OD.h>
+#include "CANopen.h"
 Log::Log(QWidget *parent) :
     QWidget(parent),
     ui(new Ui::Log)
@@ -34,9 +34,54 @@ Log::Log(QWidget *parent) :
     ui->Stack->setCurrentIndex(0);
     ui->DisLabel->setText(tr("登陆日志"));
 
-    char str[15];
-    sprintf(str,"%d",CO_OD_RAM.readInput8Bit[0]);
-    qDebug(str);
+    int err1=0;
+    uint8_t dataTx[100]; /* SDO transmit buffer */
+    uint32_t dataTxLen = 1;  /* Length of data to transmit. */
+    uint32_t SDOabortCode = 1;
+    //------------------------------发送SDO-------------------------------------//
+//    dataTx[0]=0x50;
+//    if(err1 == 0) {
+//        err1 = sdoClientDownload(
+//                CO->SDOclient,
+//                3,
+//                0x6000,
+//                0x01,
+//                dataTx,
+//                dataTxLen,
+//                &SDOabortCode,
+//                500,
+//                0);
+//        if(err1==0)
+//            qDebug("send SDO to node 3 success");
+//        else
+//            qDebug("send SDO to node 3 failed in error:%d",err1);
+//    }
+    //--------------------------------------------------------------------------//
+
+    //-------------------------------发送SDO-------------------------------------//
+    dataTx[0]=0x60;
+    if(err1 == 0) {
+        err1 = sdoClientDownload(
+                CO->SDOclient,
+                2,
+                0x6000,
+                0x01,
+                dataTx,
+                dataTxLen,
+                &SDOabortCode,
+                500,
+                0);
+        if(err1==0)
+            qDebug("send SDO to node 2 success");
+        else
+            qDebug("send SDO to node 2 failed in error:%d",err1);
+    }
+    //--------------------------------------------------------------------------//
+
+    qDebug("0x600001:%Xh 0x600002:%Xh 0x620001:%Xh 0x620002:%Xh",CO_OD_RAM.readInput8Bit[0],
+           CO_OD_RAM.readInput8Bit[1],CO_OD_RAM.writeOutput8Bit[0],CO_OD_RAM.writeOutput8Bit[1]);
+    qDebug("0x640101:%Xh 0x640102:%Xh ",CO_OD_RAM.readAnalogueInput32Bit[0],
+           CO_OD_RAM.readAnalogueInput32Bit[1]);
 
 }
 

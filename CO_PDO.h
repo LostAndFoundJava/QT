@@ -47,7 +47,8 @@
 #ifndef CO_PDO_H
 #define CO_PDO_H
 
-
+#include "CO_Emergency.h"
+#include "CO_SYNC.h"
 
 /**
  * @defgroup CO_PDO PDO

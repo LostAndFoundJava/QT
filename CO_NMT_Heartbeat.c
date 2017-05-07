@@ -48,7 +48,7 @@
 #include "CO_SDO.h"
 #include "CO_Emergency.h"
 #include "CO_NMT_Heartbeat.h"
-
+#include <stdio.h>
 /*
  * Read received message from CAN module.
  *
@@ -216,6 +216,7 @@ CO_NMT_reset_cmd_t CO_NMT_process(
             if((NMTstartup & 0x04) == 0) NMT->operatingState = CO_NMT_OPERATIONAL;
             else                         NMT->operatingState = CO_NMT_PRE_OPERATIONAL;
         }
+        printf("HB sending, CANopen node operating state is: %d\n",NMT->operatingState);
     }
 
 

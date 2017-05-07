@@ -5,6 +5,8 @@
 #include <sys/time.h>
 #include <time.h>
 #include <globl_data.h>
+#include "CANopen.h"
+//extern CO_t *CO;
 Systemset::Systemset(QWidget *parent) :
     QWidget(parent),
     ui(new Ui::Systemset)
@@ -61,6 +63,28 @@ Systemset::Systemset(QWidget *parent) :
     //设定初始状态
     ui->ChineseButton->setChecked(true);
     ui->C_Button->setChecked(true);
+
+
+    int err1=0;
+    //---------------------------使所有节点进入运行状态-----------------------------//
+    if(err1 == 0) {
+        err1 = CO_sendNMTcommand(CO, CO_NMT_ENTER_OPERATIONAL, 0);
+        //if(err1 == 0) respLen = sprintf(resp, "[%d] OK", 1);
+        if(err1==0)
+            qDebug("NMT command success");
+        else
+            qDebug("NMT command failed in error:%d",err1);
+    }
+    //---------------------------------------------------------------------------//
+
+    qDebug("0x600001:%Xh 0x600002:%Xh 0x620001:%Xh 0x620002:%Xh",CO_OD_RAM.readInput8Bit[0],
+           CO_OD_RAM.readInput8Bit[1],CO_OD_RAM.writeOutput8Bit[0],CO_OD_RAM.writeOutput8Bit[1]);
+    qDebug("0x640101:%Xh 0x640102:%Xh ",CO_OD_RAM.readAnalogueInput32Bit[0],
+           CO_OD_RAM.readAnalogueInput32Bit[1]);
+
+
+    qDebug("TPDO.COBID=%Xh,TPDO.defaultCOBID=%Xh",CO->TPDO[0]->TPDOCommPar->COB_IDUsedByTPDO,CO->TPDO[0]->defaultCOB_ID);
+    qDebug("RPDO.COBID=%Xh,RPDO.defaultCOBID=%Xh",CO->RPDO[0]->RPDOCommPar->COB_IDUsedByRPDO,CO->RPDO[0]->defaultCOB_ID);
 }
 
 Systemset::~Systemset()

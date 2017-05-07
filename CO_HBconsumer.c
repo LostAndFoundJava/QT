@@ -49,6 +49,7 @@
 #include "CO_Emergency.h"
 #include "CO_NMT_Heartbeat.h"
 #include "CO_HBconsumer.h"
+#include <stdio.h>
 
 /*
  * Read received message from CAN module.
@@ -233,11 +234,13 @@ void CO_HBconsumer_process(
                 if(monitoredNode->monStarted){
                     if(monitoredNode->timeoutTimer >= monitoredNode->time){
                         CO_errorReport(HBcons->em, CO_EM_HEARTBEAT_CONSUMER, CO_EMC_HEARTBEAT, i);
+                        printf("EM(CO_HBconsumer_process-CO_EM_HEARTBEAT_CONSUMER-CO_EMC_HEARTBEAT)\n");
                         monitoredNode->NMTstate = 0;
                     }
                     else if(monitoredNode->NMTstate == 0){
                         /* there was a bootup message */
                         CO_errorReport(HBcons->em, CO_EM_HB_CONSUMER_REMOTE_RESET, CO_EMC_HEARTBEAT, i);
+                        printf("EM(CO_HBconsumer_process-CO_EM_HB_CONSUMER_REMOTE_RESET-CO_EMC_HEARTBEAT)\n");
                     }
                 }
                 if(monitoredNode->NMTstate != CO_NMT_OPERATIONAL)

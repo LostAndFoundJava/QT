@@ -47,7 +47,7 @@
 
 #include "CO_SDO.h"
 #include "crc16-ccitt.h"
-
+#include <stdio.h>
 
 /* Client command specifier, see DS301 */
 #define CCS_DOWNLOAD_INITIATE          1U
@@ -746,6 +746,7 @@ static void CO_SDO_abort(CO_SDO_t *SDO, uint32_t code){
     CO_memcpySwap4(&SDO->CANtxBuff->data[4], &code);
     SDO->state = CO_SDO_ST_IDLE;
     SDO->CANrxNew = false;
+    printf("SDO process abort sending\n");
     CO_CANsend(SDO->CANdevTx, SDO->CANtxBuff);
 }
 
@@ -1416,6 +1417,7 @@ int8_t CO_SDO_process(
             }
 
             /* send response */
+            printf("SDO process sending\n");
             CO_CANsend(SDO->CANdevTx, SDO->CANtxBuff);
 
             /* Set timerNext_ms to 0 to inform OS to call this function again without delay. */
@@ -1447,6 +1449,7 @@ int8_t CO_SDO_process(
     /* free buffer and send message */
     SDO->CANrxNew = false;
     if(sendResponse) {
+        printf("SDO process response sending\n");
         CO_CANsend(SDO->CANdevTx, SDO->CANtxBuff);
     }
 

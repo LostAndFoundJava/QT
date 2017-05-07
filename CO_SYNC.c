@@ -49,7 +49,7 @@
 #include "CO_Emergency.h"
 #include "CO_NMT_Heartbeat.h"
 #include "CO_SYNC.h"
-
+#include <stdio.h>
 /*
  * Read received message from CAN module.
  *
@@ -256,7 +256,7 @@ CO_ReturnError_t CO_SYNC_init(
     }
 
     /* Configure object variables */
-    SYNC->isProducer = (COB_ID_SYNCMessage&0x40000000L) ? true : false;
+    SYNC->isProducer = (COB_ID_SYNCMessage&0x40000000L) ? true : false;   //判断是不是同步报文生产者
     SYNC->COB_ID = COB_ID_SYNCMessage&0x7FF;
 
     SYNC->periodTime = communicationCyclePeriod;
@@ -340,6 +340,7 @@ uint8_t CO_SYNC_process(
                 ret = 1;
                 SYNC->CANrxToggle = SYNC->CANrxToggle ? false : true;
                 SYNC->CANtxBuff->data[0] = SYNC->counter;
+                printf("SYNC sending\n");
                 CO_CANsend(SYNC->CANdevTx, SYNC->CANtxBuff);
             }
         }
@@ -361,8 +362,10 @@ uint8_t CO_SYNC_process(
         }
 
         /* Verify timeout of SYNC */
-        if(SYNC->periodTime && SYNC->timer > SYNC->periodTimeoutTime && *SYNC->operatingState == CO_NMT_OPERATIONAL)
+        if(SYNC->periodTime && SYNC->timer > SYNC->periodTimeoutTime && *SYNC->operatingState == CO_NMT_OPERATIONAL){
             CO_errorReport(SYNC->em, CO_EM_SYNC_TIME_OUT, CO_EMC_COMMUNICATION, SYNC->timer);
+            printf("EM(CO_SYNC_process-CO_EM_SYNC_TIME_OUT-CO_EMC_COMMUNICATION)\n");
+        }
     }
     else {
         SYNC->CANrxNew = false;
@@ -371,6 +374,7 @@ uint8_t CO_SYNC_process(
     /* verify error from receive function */
     if(SYNC->receiveError != 0U){
         CO_errorReport(SYNC->em, CO_EM_SYNC_LENGTH, CO_EMC_SYNC_DATA_LENGTH, (uint32_t)SYNC->receiveError);
+        printf("EM(CO_SYNC_process-CO_EM_SYNC_LENGTH-CO_EMC_SYNC_DATA_LENGTH)\n");
         SYNC->receiveError = 0U;
     }
 

@@ -228,7 +228,7 @@ struct sCO_OD_RAM{
 /*2401[32]  */ OD_trace_t     trace[32];
 /*6000      */ UNSIGNED8      readInput8Bit[8];
 /*6200      */ UNSIGNED8      writeOutput8Bit[8];
-/*6401      */ INTEGER16      readAnalogueInput16Bit[12];
+/*6401      */ REAL32         readAnalogueInput32Bit[8];
 /*6411      */ INTEGER16      writeAnalogueOutput16Bit[8];
 
                UNSIGNED32     LastWord;
@@ -457,8 +457,8 @@ extern struct sCO_OD_ROM CO_OD_ROM;
       #define ODL_writeOutput8Bit_arrayLength            8
 
 /*6401, Data Type: INTEGER16, Array[12] */
-      #define OD_readAnalogueInput16Bit                  CO_OD_RAM.readAnalogueInput16Bit
-      #define ODL_readAnalogueInput16Bit_arrayLength     12
+      #define OD_readAnalogueInput32Bit                  CO_OD_RAM.readAnalogueInput32Bit
+      #define ODL_readAnalogueInput16Bit_arrayLength     8
 
 /*6411, Data Type: INTEGER16, Array[8] */
       #define OD_writeAnalogueOutput16Bit                CO_OD_RAM.writeAnalogueOutput16Bit

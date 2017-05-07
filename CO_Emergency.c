@@ -45,9 +45,8 @@
 
 
 #include "CO_driver.h"
-#include "CO_SDO.h"
 #include "CO_Emergency.h"
-
+#include <stdio.h>
 
 /*
  * Function for accessing _Pre-Defined Error Field_ (index 0x1003) from SDO server.
@@ -207,6 +206,7 @@ void CO_EM_process(
     CO_CANverifyErrors(emPr->CANdev);
     if(em->wrongErrorReport != 0U){
         CO_errorReport(em, CO_EM_WRONG_ERROR_REPORT, CO_EMC_SOFTWARE_INTERNAL, (uint32_t)em->wrongErrorReport);
+        printf("EM(CO_EM_process-CO_EM_WRONG_ERROR_REPORT-CO_EMC_SOFTWARE_INTERNAL)\n");
         em->wrongErrorReport = 0U;
     }
 
@@ -254,6 +254,7 @@ void CO_EM_process(
         if(em->bufFull == 2U){
             em->bufFull = 0U;    /* will be updated below */
             CO_errorReport(em, CO_EM_EMERGENCY_BUFFER_FULL, CO_EMC_GENERIC, 0U);
+            printf("EM(CO_EM_process-CO_EM_EMERGENCY_BUFFER_FULL-CO_EMC_GENERIC)\n");
         }
         else{
             em->bufFull = 0;
@@ -271,6 +272,8 @@ void CO_EM_process(
         }
 
         /* send CAN message */
+
+        printf("EM sending error=%Xh\n",preDEF);
         CO_CANsend(emPr->CANdev, emPr->CANtxBuff);
     }
 

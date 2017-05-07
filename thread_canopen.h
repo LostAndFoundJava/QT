@@ -7,6 +7,7 @@
 #include "CO_OD_storage.h"
 #include "CO_Linux_tasks.h"
 #include "CO_time.h"
+#include "CO_master.h"
 #include <stdio.h>
 #include <stdlib.h>
 #include <unistd.h>

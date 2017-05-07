@@ -46,7 +46,7 @@
 
 
 #include "CANopen.h"
-
+#include <stdio.h>
 
 /* If defined, global variables will be used, otherwise CANopen objects will
    be generated with calloc(). */
@@ -150,7 +150,7 @@
 #if CO_NO_NMT_MASTER == 1
     CO_CANtx_t *NMTM_txBuff = 0;
 
-    uint8_t CO_sendNMTcommand(CO_t *CO, uint8_t command, uint8_t nodeID){
+    int8_t CO_sendNMTcommand(CO_t *CO, uint8_t command, uint8_t nodeID){
         if(NMTM_txBuff == 0){
             /* error, CO_CANtxBufferInit() was not called for this buffer. */
             return CO_ERROR_TX_UNCONFIGURED; /* -11 */
@@ -179,10 +179,14 @@
                     CO->NMT->resetCommand = CO_RESET_COMM;
                     break;
             }
+            printf("NMT command operating state:%d\n",CO->NMT->operatingState);
         }
-
+        printf("NMT sending\n");
         return CO_CANsend(CO->CANmodule[0], NMTM_txBuff); /* 0 = success */
     }
+
+
+
 #endif
 
 

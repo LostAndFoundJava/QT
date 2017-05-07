@@ -32,11 +32,9 @@ private:
     void Button_AMP_1(QPushButton *button);
     void Button_AMP_0(QPushButton *button);
 
-    Log *log;
+   class Log *log;
     class Management *management;
     Systemset *systemset;
-
-    QPoint p;
 public slots:
     bool eventFilter(QObject *watched,QEvent *event);
     void ShowTime(void);
@@ -51,6 +49,7 @@ private slots:
     void on_System_set_clicked();
     void on_SetZero_clicked();
 
+    void on_Quit_clicked();
 };
 
 extern MainWindow *w;

@@ -15,6 +15,9 @@ learn::learn(QWidget *parent) :
     Pal.setColor(QPalette::Background, "#D4E6CA");
     this->setAutoFillBackground(true);
     this->setPalette(Pal);
+
+    this->setWindowFlags(Qt::FramelessWindowHint);
+
     //时间显示
     valueInt();
     QTimer *timer = new QTimer(this);

@@ -13,19 +13,19 @@
 #endif
 #include <QMainWindow>
 #include <QPushButton>
-#include <ui_keyboard.h>
+#include "ui_kboard.h"
 namespace Ui {
-class Keyboard;
+class kboard;
 }
 
-class Keyboard : public QMainWindow
+class kboard : public QWidget
 {
     Q_OBJECT
-
+    
 public:
-    explicit Keyboard(QWidget *parent,bool num);
+    explicit kboard(QWidget *parent = 0,bool num = false);
     void setEditUi(QWidget *edit);
-    ~Keyboard();
+    ~kboard();
 private:
     QStringList m_srf;
     QString     m_CurPY;    //在使用汉字输入时 用于存放当前输入框中的值
@@ -126,9 +126,9 @@ private slots:
     void on_pushButton_en_ch_clicked();
     void on_pushButton_esc_clicked();
 private:
-    Ui::Keyboard *ui1;
+    Ui::kboard *ui1;
     QPushButton *m_Display[10];
     QPushButton *m_letter_a_z[26];
 };
 
-#endif // KEYBOARD_H
+#endif // KBOARD_H

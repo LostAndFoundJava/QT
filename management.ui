@@ -110,9 +110,9 @@
   <widget class="QLabel" name="DateTime">
    <property name="geometry">
     <rect>
-     <x>618</x>
+     <x>596</x>
      <y>10</y>
-     <width>181</width>
+     <width>201</width>
      <height>31</height>
     </rect>
    </property>
@@ -184,10 +184,10 @@
       <widget class="QTabWidget" name="tabWidget">
        <property name="geometry">
         <rect>
-         <x>250</x>
-         <y>-1</y>
-         <width>551</width>
-         <height>351</height>
+         <x>245</x>
+         <y>0</y>
+         <width>548</width>
+         <height>350</height>
         </rect>
        </property>
        <property name="font">
@@ -201,7 +201,7 @@
 background-color: rgb(212, 230, 202);</string>
        </property>
        <property name="currentIndex">
-        <number>1</number>
+        <number>0</number>
        </property>
        <widget class="QWidget" name="tab1">
         <attribute name="title">
@@ -512,11 +512,73 @@ background-color: rgb(212, 230, 202);</string>
         <attribute name="title">
          <string>学习</string>
         </attribute>
+        <widget class="QPushButton" name="LearningButton">
+         <property name="geometry">
+          <rect>
+           <x>300</x>
+           <y>273</y>
+           <width>90</width>
+           <height>30</height>
+          </rect>
+         </property>
+         <property name="font">
+          <font>
+           <family>楷体</family>
+           <pointsize>14</pointsize>
+          </font>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">background-color: rgb(83, 148, 160);
+color: rgb(255, 250, 240);
+border-radius:5px;</string>
+         </property>
+         <property name="text">
+          <string>产品学习</string>
+         </property>
+        </widget>
+        <widget class="QRadioButton" name="low">
+         <property name="geometry">
+          <rect>
+           <x>38</x>
+           <y>201</y>
+           <width>71</width>
+           <height>22</height>
+          </rect>
+         </property>
+         <property name="font">
+          <font>
+           <family>AR PL UKai CN</family>
+           <pointsize>14</pointsize>
+          </font>
+         </property>
+         <property name="text">
+          <string>低频</string>
+         </property>
+        </widget>
+        <widget class="QRadioButton" name="high">
+         <property name="geometry">
+          <rect>
+           <x>153</x>
+           <y>201</y>
+           <width>71</width>
+           <height>22</height>
+          </rect>
+         </property>
+         <property name="font">
+          <font>
+           <family>AR PL UKai CN</family>
+           <pointsize>14</pointsize>
+          </font>
+         </property>
+         <property name="text">
+          <string>高频</string>
+         </property>
+        </widget>
         <widget class="QLabel" name="label_11">
          <property name="geometry">
           <rect>
-           <x>90</x>
-           <y>199</y>
+           <x>40</x>
+           <y>90</y>
            <width>101</width>
            <height>20</height>
           </rect>
@@ -531,30 +593,11 @@ background-color: rgb(212, 230, 202);</string>
           <string>学习选择：</string>
          </property>
         </widget>
-        <widget class="QLabel" name="label_12">
-         <property name="geometry">
-          <rect>
-           <x>100</x>
-           <y>230</y>
-           <width>201</width>
-           <height>20</height>
-          </rect>
-         </property>
-         <property name="font">
-          <font>
-           <family>楷体</family>
-           <pointsize>14</pointsize>
-          </font>
-         </property>
-         <property name="text">
-          <string>产品过光电出探头时间：</string>
-         </property>
-        </widget>
         <widget class="QRadioButton" name="radioButton">
          <property name="geometry">
           <rect>
-           <x>110</x>
-           <y>260</y>
+           <x>96</x>
+           <y>170</y>
            <width>161</width>
            <height>16</height>
           </rect>
@@ -569,11 +612,73 @@ background-color: rgb(212, 230, 202);</string>
           <string>输送带自动往复</string>
          </property>
         </widget>
+        <widget class="QLabel" name="label_10">
+         <property name="geometry">
+          <rect>
+           <x>40</x>
+           <y>28</y>
+           <width>101</width>
+           <height>20</height>
+          </rect>
+         </property>
+         <property name="font">
+          <font>
+           <family>AR PL UKai CN</family>
+           <pointsize>14</pointsize>
+           <weight>50</weight>
+           <italic>false</italic>
+           <bold>false</bold>
+          </font>
+         </property>
+         <property name="text">
+          <string>全手动模式</string>
+         </property>
+        </widget>
+        <widget class="QLineEdit" name="LightTime">
+         <property name="geometry">
+          <rect>
+           <x>286</x>
+           <y>131</y>
+           <width>101</width>
+           <height>20</height>
+          </rect>
+         </property>
+         <property name="font">
+          <font>
+           <family>楷体</family>
+           <pointsize>14</pointsize>
+          </font>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">border:none;
+border-bottom:1px solid #000;
+background-color: rgb(212, 230, 202);</string>
+         </property>
+        </widget>
+        <widget class="QLabel" name="label_12">
+         <property name="geometry">
+          <rect>
+           <x>86</x>
+           <y>131</y>
+           <width>201</width>
+           <height>20</height>
+          </rect>
+         </property>
+         <property name="font">
+          <font>
+           <family>楷体</family>
+           <pointsize>14</pointsize>
+          </font>
+         </property>
+         <property name="text">
+          <string>产品过光电出探头时间：</string>
+         </property>
+        </widget>
         <widget class="QPushButton" name="PositiveTest">
          <property name="geometry">
           <rect>
-           <x>190</x>
-           <y>160</y>
+           <x>176</x>
+           <y>51</y>
            <width>90</width>
            <height>30</height>
           </rect>
@@ -596,8 +701,8 @@ border-radius:5px;</string>
         <widget class="QPushButton" name="NagtiveTest">
          <property name="geometry">
           <rect>
-           <x>330</x>
-           <y>160</y>
+           <x>356</x>
+           <y>51</y>
            <width>90</width>
            <height>30</height>
           </rect>
@@ -617,32 +722,11 @@ border-radius:5px;</string>
           <string>反检测</string>
          </property>
         </widget>
-        <widget class="QLineEdit" name="LightTime">
-         <property name="geometry">
-          <rect>
-           <x>300</x>
-           <y>230</y>
-           <width>101</width>
-           <height>20</height>
-          </rect>
-         </property>
-         <property name="font">
-          <font>
-           <family>楷体</family>
-           <pointsize>14</pointsize>
-          </font>
-         </property>
-         <property name="styleSheet">
-          <string notr="true">border:none;
-border-bottom:1px solid #000;
-background-color: rgb(212, 230, 202);</string>
-         </property>
-        </widget>
         <widget class="QLabel" name="label_13">
          <property name="geometry">
           <rect>
-           <x>410</x>
-           <y>230</y>
+           <x>396</x>
+           <y>131</y>
            <width>31</width>
            <height>16</height>
           </rect>
@@ -657,184 +741,72 @@ background-color: rgb(212, 230, 202);</string>
           <string>秒</string>
          </property>
         </widget>
-        <widget class="QLabel" name="label_6">
+        <widget class="QWidget" name="widget_2" native="true">
          <property name="geometry">
           <rect>
-           <x>90</x>
-           <y>10</y>
-           <width>131</width>
-           <height>16</height>
+           <x>153</x>
+           <y>230</y>
+           <width>341</width>
+           <height>31</height>
           </rect>
          </property>
-         <property name="font">
-          <font>
-           <family>楷体</family>
-           <pointsize>14</pointsize>
-          </font>
-         </property>
-         <property name="text">
-          <string>产品特征选择：</string>
-         </property>
-        </widget>
-        <widget class="QLabel" name="label_7">
-         <property name="geometry">
-          <rect>
-           <x>100</x>
-           <y>40</y>
-           <width>101</width>
-           <height>20</height>
-          </rect>
-         </property>
-         <property name="font">
-          <font>
-           <family>楷体</family>
-           <pointsize>14</pointsize>
-          </font>
-         </property>
-         <property name="text">
-          <string>产品含水量</string>
-         </property>
-        </widget>
-        <widget class="QLabel" name="label_8">
-         <property name="geometry">
-          <rect>
-           <x>100</x>
-           <y>73</y>
-           <width>101</width>
-           <height>20</height>
-          </rect>
-         </property>
-         <property name="font">
-          <font>
-           <family>楷体</family>
-           <pointsize>14</pointsize>
-          </font>
-         </property>
-         <property name="text">
-          <string>产品含盐量</string>
-         </property>
-        </widget>
-        <widget class="QLabel" name="label_9">
-         <property name="geometry">
-          <rect>
-           <x>114</x>
-           <y>108</y>
-           <width>81</width>
-           <height>20</height>
-          </rect>
-         </property>
-         <property name="font">
-          <font>
-           <family>楷体</family>
-           <pointsize>14</pointsize>
-          </font>
-         </property>
-         <property name="text">
-          <string>产品体积</string>
-         </property>
-        </widget>
-        <widget class="QLabel" name="label_10">
-         <property name="geometry">
-          <rect>
-           <x>90</x>
-           <y>137</y>
-           <width>101</width>
-           <height>20</height>
-          </rect>
-         </property>
-         <property name="font">
-          <font>
-           <family>楷体</family>
-           <pointsize>14</pointsize>
-          </font>
-         </property>
-         <property name="text">
-          <string>全手动模式</string>
-         </property>
-        </widget>
-        <widget class="QPushButton" name="LearningButton">
-         <property name="geometry">
-          <rect>
-           <x>300</x>
-           <y>280</y>
-           <width>90</width>
-           <height>30</height>
-          </rect>
-         </property>
-         <property name="font">
-          <font>
-           <family>楷体</family>
-           <pointsize>14</pointsize>
-          </font>
-         </property>
-         <property name="styleSheet">
-          <string notr="true">background-color: rgb(83, 148, 160);
-color: rgb(255, 250, 240);
-border-radius:5px;</string>
-         </property>
-         <property name="text">
-          <string>产品学习</string>
-         </property>
-        </widget>
-        <widget class="QSlider" name="Slider1">
-         <property name="geometry">
-          <rect>
-           <x>210</x>
-           <y>43</y>
-           <width>160</width>
-           <height>16</height>
-          </rect>
-         </property>
-         <property name="singleStep">
-          <number>3</number>
-         </property>
-         <property name="pageStep">
-          <number>30</number>
-         </property>
-         <property name="sliderPosition">
-          <number>15</number>
-         </property>
-         <property name="orientation">
-          <enum>Qt::Horizontal</enum>
-         </property>
-        </widget>
-        <widget class="QSlider" name="Slider2">
-         <property name="geometry">
-          <rect>
-           <x>210</x>
-           <y>76</y>
-           <width>160</width>
-           <height>16</height>
-          </rect>
-         </property>
-         <property name="pageStep">
-          <number>30</number>
-         </property>
-         <property name="sliderPosition">
-          <number>15</number>
-         </property>
-         <property name="orientation">
-          <enum>Qt::Horizontal</enum>
-         </property>
-        </widget>
-        <widget class="QSlider" name="Slider3">
-         <property name="geometry">
-          <rect>
-           <x>210</x>
-           <y>113</y>
-           <width>160</width>
-           <height>16</height>
-          </rect>
-         </property>
-         <property name="pageStep">
-          <number>30</number>
-         </property>
-         <property name="sliderPosition">
-          <number>15</number>
-         </property>
-         <property name="orientation">
-          <enum>Qt::Horizontal</enum>
-         </property>
+         <widget class="QRadioButton" name="one_p">
+          <property name="geometry">
+           <rect>
+            <x>0</x>
+            <y>0</y>
+            <width>81</width>
+            <height>22</height>
+           </rect>
+          </property>
+          <property name="font">
+           <font>
+            <family>AR PL UKai CN</family>
+            <pointsize>14</pointsize>
+           </font>
+          </property>
+          <property name="text">
+           <string>频率1</string>
+          </property>
+         </widget>
+         <widget class="QRadioButton" name="two_p">
+          <property name="geometry">
+           <rect>
+            <x>120</x>
+            <y>0</y>
+            <width>81</width>
+            <height>22</height>
+           </rect>
+          </property>
+          <property name="font">
+           <font>
+            <family>AR PL UKai CN</family>
+            <pointsize>14</pointsize>
+           </font>
+          </property>
+          <property name="text">
+           <string>频率2</string>
+          </property>
+         </widget>
+         <widget class="QRadioButton" name="three_p">
+          <property name="geometry">
+           <rect>
+            <x>250</x>
+            <y>0</y>
+            <width>81</width>
+            <height>22</height>
+           </rect>
+          </property>
+          <property name="font">
+           <font>
+            <family>AR PL UKai CN</family>
+            <pointsize>14</pointsize>
+           </font>
+          </property>
+          <property name="text">
+           <string>频率3</string>
+          </property>
+         </widget>
         </widget>
        </widget>
        <widget class="QWidget" name="tab3">
@@ -845,9 +817,9 @@ border-radius:5px;</string>
          <property name="geometry">
           <rect>
            <x>280</x>
-           <y>50</y>
+           <y>46</y>
            <width>91</width>
-           <height>16</height>
+           <height>20</height>
           </rect>
          </property>
          <property name="font">
@@ -864,9 +836,9 @@ border-radius:5px;</string>
          <property name="geometry">
           <rect>
            <x>65</x>
-           <y>146</y>
+           <y>142</y>
            <width>91</width>
-           <height>16</height>
+           <height>20</height>
           </rect>
          </property>
          <property name="font">
@@ -908,7 +880,7 @@ background-color: rgb(212, 230, 202);</string>
           <rect>
            <x>230</x>
            <y>50</y>
-           <width>31</width>
+           <width>41</width>
            <height>16</height>
           </rect>
          </property>
@@ -951,7 +923,7 @@ background-color: rgb(212, 230, 202);</string>
           <rect>
            <x>430</x>
            <y>50</y>
-           <width>31</width>
+           <width>41</width>
            <height>16</height>
           </rect>
          </property>
@@ -1032,7 +1004,7 @@ background-color: rgb(212, 230, 202);</string>
           <rect>
            <x>230</x>
            <y>146</y>
-           <width>31</width>
+           <width>41</width>
            <height>16</height>
           </rect>
          </property>
@@ -1051,7 +1023,7 @@ background-color: rgb(212, 230, 202);</string>
           <rect>
            <x>463</x>
            <y>146</y>
-           <width>31</width>
+           <width>41</width>
            <height>16</height>
           </rect>
          </property>
@@ -1070,7 +1042,7 @@ background-color: rgb(212, 230, 202);</string>
           <rect>
            <x>238</x>
            <y>216</y>
-           <width>31</width>
+           <width>41</width>
            <height>16</height>
           </rect>
          </property>
@@ -1088,9 +1060,9 @@ background-color: rgb(212, 230, 202);</string>
          <property name="geometry">
           <rect>
            <x>65</x>
-           <y>50</y>
+           <y>46</y>
            <width>91</width>
-           <height>16</height>
+           <height>20</height>
           </rect>
          </property>
          <property name="font">
@@ -1110,9 +1082,9 @@ background-color: rgb(212, 230, 202);</string>
          <property name="geometry">
           <rect>
            <x>90</x>
-           <y>80</y>
+           <y>76</y>
            <width>101</width>
-           <height>16</height>
+           <height>20</height>
           </rect>
          </property>
          <property name="font">
@@ -1132,9 +1104,9 @@ background-color: rgb(212, 230, 202);</string>
          <property name="geometry">
           <rect>
            <x>306</x>
-           <y>146</y>
+           <y>142</y>
            <width>81</width>
-           <height>16</height>
+           <height>20</height>
           </rect>
          </property>
          <property name="font">
@@ -1150,10 +1122,10 @@ background-color: rgb(212, 230, 202);</string>
         <widget class="QLabel" name="label_19">
          <property name="geometry">
           <rect>
-           <x>65</x>
-           <y>216</y>
-           <width>98</width>
-           <height>16</height>
+           <x>62</x>
+           <y>212</y>
+           <width>101</width>
+           <height>20</height>
           </rect>
          </property>
          <property name="font">
@@ -1170,7 +1142,7 @@ background-color: rgb(212, 230, 202);</string>
          <property name="geometry">
           <rect>
            <x>120</x>
-           <y>280</y>
+           <y>275</y>
            <width>90</width>
            <height>30</height>
           </rect>
@@ -1194,7 +1166,7 @@ border-radius:5px;</string>
          <property name="geometry">
           <rect>
            <x>340</x>
-           <y>280</y>
+           <y>275</y>
            <width>90</width>
            <height>30</height>
           </rect>
@@ -1290,9 +1262,9 @@ border-radius:5px;</string>
          <property name="geometry">
           <rect>
            <x>420</x>
-           <y>220</y>
+           <y>216</y>
            <width>101</width>
-           <height>17</height>
+           <height>21</height>
           </rect>
          </property>
          <property name="font">
@@ -1342,9 +1314,9 @@ border-radius:5px;</string>
       <widget class="QTableWidget" name="tableWidget">
        <property name="geometry">
         <rect>
-         <x>0</x>
+         <x>5</x>
          <y>0</y>
-         <width>251</width>
+         <width>244</width>
          <height>350</height>
         </rect>
        </property>
@@ -1438,7 +1410,7 @@ background-color: rgb(212, 230, 202);</string>
     <rect>
      <x>348</x>
      <y>10</y>
-     <width>111</width>
+     <width>121</width>
      <height>31</height>
     </rect>
    </property>

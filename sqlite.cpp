@@ -225,3 +225,82 @@ QList<Product*> *SQLITE::queryProduct()
     }
     return ql;
 }
+void SQLITE::insertRecord(QString logTime1,QString logOperator1,QString ngProductNumber1,QString ngProductName1,
+                       QString ngTime1,QString ngSignal1,QString ngOperator1){
+    QString insert_sql = "insert into record (logTime,logOperator,ngProductNumber,ngProductName,ngTime,ngSignal,ngOperator) values (?,?,?,?,?,?,?)";
+
+    sql_query->prepare(insert_sql);
+
+//    QVariantList id;
+//    id.append();
+
+    QVariantList logTime;
+    logTime.append(logTime1);
+
+    QVariantList logOperator;
+   logOperator.append(logOperator1);
+
+    QVariantList ngProductNumber;
+    ngProductNumber.append(ngProductNumber1);
+
+    QVariantList ngProductName;
+    ngProductName.append(ngProductName1);
+
+    QVariantList ngTime;
+    ngTime.append(ngTime1);
+
+    QVariantList ngSignal;
+    ngSignal.append(ngSignal1);
+
+    QVariantList ngOperator;
+    ngOperator.append(ngOperator1);
+
+
+
+
+    sql_query->addBindValue(logTime);
+    sql_query->addBindValue(logOperator);
+    sql_query->addBindValue(ngProductNumber);
+    sql_query->addBindValue(ngProductName);
+    sql_query->addBindValue(ngTime);
+    sql_query->addBindValue(ngSignal);
+    sql_query->addBindValue(ngOperator);
+
+
+    if(!sql_query->execBatch())
+    {
+        qDebug()<<sql_query->lastError();
+    }
+    else
+    {
+        qDebug()<<"success";
+    }
+}
+QList<Record*> *SQLITE::queryRecord()
+{
+    QList<Record*> *ql1 = new QList<Record*>;
+    QString select_all_sql1 = "select * from record";
+    sql_query->prepare(select_all_sql1);
+
+    if(!sql_query->exec())
+    {
+        qDebug()<<sql_query->lastError();
+    }else{
+        while(sql_query->next())
+        {
+            Record *r = new Record;
+            r->setLogTime(sql_query->value(1).toString());
+            r->setLogOperator(sql_query->value(2).toString());
+            r->setNgProductNumber(sql_query->value(3).toString());
+            r->setNgProductName(sql_query->value(4).toString());
+            r->setNgTime(sql_query->value(5).toString());
+            r->setNgSignal(sql_query->value(6).toString());
+            r->setNgOperator(sql_query->value(7).toString());
+            qDebug()<<sql_query->value(2).toString();
+            ql1->append(r);
+        }
+
+    }
+
+    return ql1;
+}

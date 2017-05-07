@@ -20,12 +20,15 @@ MainWindow::MainWindow(QWidget *parent) :
     valueInt();
     //设置背景色
     QPalette Pal(palette());
-    Pal.setColor(QPalette::Background, "#D4E6CA");
+    Pal.setColor(QPalette::Background, "#ffffff");
     this->setAutoFillBackground(true);
     this->setPalette(Pal);
     //struct timespec slptm;
     //slptm.tv_sec=1.5;
     //slptm.tv_nsec=0;
+
+    this->setWindowFlags(Qt::FramelessWindowHint);
+
     QTime t;
     t.start();
     while(t.elapsed()<System_InitTime)
@@ -39,19 +42,6 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->SetZero->installEventFilter(this);
     ui->System_set->installEventFilter(this);
 
-    //设置TAB的顺序
-//    QWidget::setTabOrder(ui->Detect,ui->Jur_And_User);
-//    QWidget::setTabOrder(ui->Jur_And_User,ui->DateTime);
-//    QWidget::setTabOrder(ui->DateTime,ui->ProNum);
-//    QWidget::setTabOrder(ui->ProNum,ui->ProName);
-//    QWidget::setTabOrder(ui->ProName,ui->SetZero);
-//    QWidget::setTabOrder(ui->SetZero,ui->Management);
-//    QWidget::setTabOrder(ui->Management,ui->Sensitivity);
-//    QWidget::setTabOrder(ui->Sensitivity,ui->Phase);
-//    QWidget::setTabOrder(ui->Phase,ui->Log);
-//    QWidget::setTabOrder(ui->Log,ui->System_set);
-//    QWidget::setTabOrder(ui->System_set,ui->Detect);
-
     Widget *w1 = new Widget(this,false);
     w1->show();
 
@@ -60,11 +50,14 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(timer, SIGNAL(timeout()), this, SLOT(ShowTime()));
     timer->start(500);
 
-    management = new Management;
+    //
 
-//    qDebug("0x600001:%d 0x600002:%d 0x620001:%d 0x620002:%d\n",CO_OD_RAM.readInput8Bit[0],
-//           CO_OD_RAM.readInput8Bit[1],CO_OD_RAM.writeOutput8Bit[0],CO_OD_RAM.writeOutput8Bit[1]);
-//    qDebug("CANopen node operating state is: %d\n",CO->NMT->operatingState);
+
+    char str[15];
+    sprintf(str,"%d",CO_OD_RAM.readInput8Bit[0]);
+    qDebug(str);
+
+    log = new Log;
 }
 
 MainWindow::~MainWindow()
@@ -223,16 +216,15 @@ void MainWindow::keyPressEvent(QKeyEvent *event)
 
 void MainWindow::on_Log_clicked()
 {
-    log = new Log;
+
     log->show();
-    p=this->pos();
     log->move(pos().x(),pos().y());
 }
 
 void MainWindow::on_Management_clicked()
 {
+    management = new Management;
     management->show();
-    p=this->pos();
     management->move(pos().x(),pos().y());
 }
 
@@ -240,7 +232,6 @@ void MainWindow::on_System_set_clicked()
 {
     systemset = new Systemset;
     systemset->show();
-    p=this->pos();
     systemset->move(pos().x(),pos().y());
 }
 
@@ -251,3 +242,8 @@ void MainWindow::on_SetZero_clicked()
     ui->NoPassNum->setText(tr("未通过数0"));
 }
 
+
+void MainWindow::on_Quit_clicked()
+{
+    this->close();
+}

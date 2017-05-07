@@ -22,6 +22,8 @@ varify::varify(QWidget *parent) :
     connect(timer, SIGNAL(timeout()), this, SLOT(ShowTime()));
     timer->start(500);
 
+    this->setWindowFlags(Qt::FramelessWindowHint);
+
     valueInt();
     //设置背景色
     QPalette Pal1(palette());

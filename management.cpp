@@ -8,6 +8,8 @@
 #include <QDialog>
 #include <QColor>
 #include "CANopen.h"
+#include<input.h>
+#include<QLineEdit>
 Management::Management(QWidget *parent) :
     QWidget(parent),
     ui(new Ui::Management)
@@ -24,9 +26,12 @@ Management::Management(QWidget *parent) :
     Pal.setColor(QPalette::Background, "#D4E6CA");
     this->setAutoFillBackground(true);
     this->setPalette(Pal);
+
+    this->setWindowFlags(Qt::FramelessWindowHint);
+
     //标签页
-    ui->tableWidget->setColumnWidth(0,200);
-    ui->tableWidget->setColumnWidth(1,200);
+    ui->tableWidget->setColumnWidth(0,120);
+    ui->tableWidget->setColumnWidth(1,120);
     ui->tableWidget->setWindowFlags(Qt::FramelessWindowHint);
 
 
@@ -41,12 +46,8 @@ Management::Management(QWidget *parent) :
     PackingStyleGroup->addButton(ui->packButton);
     PackingStyleGroup->addButton(ui->bulkButton);
 
-//    ui->buttonBox_1->setStandardButtons(QDialogButtonBox::Ok|QDialogButtonBox::Cancel);
-//    ui->buttonBox_1->button(QDialogButtonBox::Ok)->setText(tr("确定"));
-//    ui->buttonBox_1->button(QDialogButtonBox::Cancel)->setText(tr("取消"));
-
     ui->tabWidget->setCurrentIndex(0);
-    ui->tabWidget->setStyleSheet("QTabBar::tab{width:167px}");
+    ui->tabWidget->setStyleSheet("QTabBar::tab{width:181px}");
 
 
     //镀铝膜隐藏
@@ -61,25 +62,10 @@ Management::Management(QWidget *parent) :
     ui->LengthEdit->installEventFilter(this);
     ui->SpeedEdit->installEventFilter(this);
 
-
-    //弹出图片选择
-//    ui->label_14->installEventFilter(this);
-//    ui->label_15->installEventFilter(this);
-//    ui->label_18->installEventFilter(this);
-//    ui->label_20->installEventFilter(this);
-//    ui->label_29->installEventFilter(this);
-//    ui->label_30->installEventFilter(this);
-//    ui->label_31->installEventFilter(this);
-//    ui->label_32->installEventFilter(this);
-//    ui->label_33->installEventFilter(this);
-    //学习
-    ui->Slider1->setStyleSheet("\ QSlider::groove:Horizontal \  {\ background:qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0,stop:0 rgba(102,205,170),stop:0.3 rgba(102,205,170),stop:0.33 rgba(204,145,158),stop:0.6 rgba(204,145,158),stop:0.63 rgba(150,0,0),stop:1.000 rgba(139,0,0));\  height:8px;\ }\ QSlider::handle:Horizontal \ {\ height: 40px;\width:8px;\ border-image: url(image/slider.png);\ margin: -30 0px; \}");
-    ui->Slider2->setStyleSheet("\ QSlider::groove:Horizontal \  {\ background:qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0,stop:0 rgba(102,205,170),stop:0.3 rgba(102,205,170),stop:0.33 rgba(204,145,158),stop:0.6 rgba(204,145,158),stop:0.63 rgba(150,0,0),stop:1.000 rgba(139,0,0));\  height:8px;\}\ QSlider::handle:Horizontal \ {\ height: 40px;\width:8px;\ border-image: url(image/slider.png);\ margin: -30 0px; \}");
-    ui->Slider3->setStyleSheet("\ QSlider::groove:Horizontal \  {\ background:qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0,stop:0 rgba(102,205,170),stop:0.3 rgba(102,205,170),stop:0.33 rgba(204,145,158),stop:0.6 rgba(204,145,158),stop:0.63 rgba(150,0,0),stop:1.000 rgba(139,0,0));\  height:8px;\ }\ QSlider::handle:Horizontal \ {\ height: 40px;\width:8px;\ border-image: url(image/slider.png);\ margin: -30 0px; \}");
-
-    ui->Slider1->installEventFilter(this);
-    ui->Slider2->installEventFilter(this);
-    ui->Slider3->installEventFilter(this);
+    ui->low->setChecked(true);
+    ui->high->setStyleSheet("color:#a1a3a6");
+    ui->widget_2->hide();
+    ui->one_p->setChecked(true);
 
     ui->LightTime->installEventFilter(this);
     ui->PositiveTest->installEventFilter(this);
@@ -107,9 +93,10 @@ Management::Management(QWidget *parent) :
     //新建学习界面
     Learn = new learn();
 
+
     //tablewidget设置数据
     //从数据库读出已存入的基本信息
-    ui->tableWidget->setEditTriggers(QAbstractItemView::NoEditTriggers);
+    ui->tableWidget->setEditTriggers(QAbstractItemView::NoEditTriggers);//禁止表格修改
 
     SQLITE sqlite;
     sqlite.openDatabase();
@@ -128,11 +115,8 @@ Management::Management(QWidget *parent) :
         ui->tableWidget->setColumnWidth(0,120);
         ui->tableWidget->setColumnWidth(1,120);
 
-
-
         ui->tableWidget->setItem(i,0,new QTableWidgetItem(QString("%1").arg(i)));
         ui->tableWidget->setItem(i,1,new QTableWidgetItem(p->getProductName()));
-
     }
 
     sqlite.closeDatabase();
@@ -150,6 +134,8 @@ Management::Management(QWidget *parent) :
     ui->packButton->setChecked(true);
     ui->AluminizerButton->show();
     PackFlag=0;
+    //
+    LearnFlag=0;
     //输送带自动往复
     AutoFlag=1;
     //剔除
@@ -189,127 +175,45 @@ Management::Management(QWidget *parent) :
     ui->label_25->setStyleSheet("color:#a1a3a6");
 
     ui->Light->setDisabled(true);
+    //
 
 
 }
-
 bool Management::eventFilter(QObject *watched,QEvent *event)
 {
-    int x =pos().x();
-    int y = pos().y();
     if(watched==ui->NumEdit)
     {
         if(event->type()==QEvent::MouseButtonPress)
         {
-            Window_show.ShowKeyBoard(this,false,ui->NumEdit,x,y);
+            ContentInput(ui->NumEdit);
         }
     }
     if(watched==ui->NameEdit)
     {
         if(event->type()==QEvent::MouseButtonPress)
         {
-            Window_show.ShowKeyBoard(this,false,ui->NameEdit,x,y);
+           ContentInput(ui->NameEdit);
         }
     }
     if(watched==ui->LengthEdit)
     {
         if(event->type()==QEvent::MouseButtonPress)
         {
-            Window_show.ShowKeyBoard(this,false,ui->LengthEdit,x,y);
+           ContentInput(ui->LengthEdit);
         }
     }
     if(watched==ui->SpeedEdit)
     {
         if(event->type()==QEvent::MouseButtonPress)
         {
-            Window_show.ShowKeyBoard(this,false,ui->SpeedEdit,x,y);
+           ContentInput(ui->SpeedEdit);
         }
     }
-//    if(watched==ui->Slider1)
-//    {
-//        if(event->type()==QEvent::MouseButtonRelease)
-//        {
-//            ui->Slider1-;
-//        }
-//    }
-
-//    if(watched==ui->label_14)
-//    {
-//        if(event->type()==QEvent::MouseButtonPress)
-//        {
-//            QString name=QFileDialog::getOpenFileName(0,"Image",QDir::currentPath()+"/image", tr("Images (*.png)"));
-//            ui->label_14->setPixmap(name);
-//        }
-//    }
-//    if(watched==ui->label_15)
-//    {
-//        if(event->type()==QEvent::MouseButtonPress)
-//        {
-//            QString name=QFileDialog::getOpenFileName(0,"Image",QDir::currentPath()+"/image", tr("Images (*.png)"));
-//            ui->label_15->setPixmap(name);
-//        }
-//    }
-//    if(watched==ui->label_18)
-//    {
-//        if(event->type()==QEvent::MouseButtonPress)
-//        {
-//            QString name=QFileDialog::getOpenFileName(0,"Image",QDir::currentPath()+"/image", tr("Images (*.png)"));
-//            ui->label_18->setPixmap(name);
-//        }
-//    }
-//    if(watched==ui->label_20)
-//    {
-//        if(event->type()==QEvent::MouseButtonPress)
-//        {
-//            QString name=QFileDialog::getOpenFileName(0,"Image",QDir::currentPath()+"/image", tr("Images (*.png)"));
-//            ui->label_20->setPixmap(name);
-//        }
-//    }
-//    if(watched==ui->label_29)
-//    {
-//        if(event->type()==QEvent::MouseButtonPress)
-//        {
-//            QString name=QFileDialog::getOpenFileName(0,"Image",QDir::currentPath()+"/image", tr("Images (*.png)"));
-//            ui->label_29->setPixmap(name);
-//        }
-//    }
-//    if(watched==ui->label_30)
-//    {
-//        if(event->type()==QEvent::MouseButtonPress)
-//        {
-//            QString name=QFileDialog::getOpenFileName(0,"Image",QDir::currentPath()+"/image", tr("Images (*.png)"));
-//            ui->label_30->setPixmap(name);
-//        }
-//    }
-//    if(watched==ui->label_31)
-//    {
-//        if(event->type()==QEvent::MouseButtonPress)
-//        {
-//            QString name=QFileDialog::getOpenFileName(0,"Image",QDir::currentPath()+"/image", tr("Images (*.png)"));
-//            ui->label_31->setPixmap(name);
-//        }
-//    }
-//    if(watched==ui->label_32)
-//    {
-//        if(event->type()==QEvent::MouseButtonPress)
-//        {
-//            QString name=QFileDialog::getOpenFileName(0,"Image",QDir::currentPath()+"/image", tr("Images (*.png)"));
-//            ui->label_32->setPixmap(name);
-//        }
-//    }
-//    if(watched==ui->label_33)
-//    {
-//        if(event->type()==QEvent::MouseButtonPress)
-//        {
-//            QString name=QFileDialog::getOpenFileName(0,"Image",QDir::currentPath()+"/image", tr("Images (*.png)"));
-//            ui->label_33->setPixmap(name);
-//        }
-//    }
     if(watched==ui->LightTime)
     {
         if(event->type()==QEvent::MouseButtonPress)
         {
-             Window_show.ShowKeyBoard(this,false,ui->LightTime,x,y);
+           ContentInput(ui->LightTime);
         }
     }
     if(watched==ui->PositiveTest)
@@ -335,35 +239,35 @@ bool Management::eventFilter(QObject *watched,QEvent *event)
     {
         if(event->type()==QEvent::MouseButtonPress)
         {
-             Window_show.ShowKeyBoard(this,false,ui->RmoveTime,x,y);
+           ContentInput(ui->RmoveTime);
         }
     }
     if(watched==ui->RmoveKeep)
     {
         if(event->type()==QEvent::MouseButtonPress)
         {
-             Window_show.ShowKeyBoard(this,false,ui->RmoveKeep,x,y);
+             ContentInput(ui->RmoveKeep);
         }
     }
     if(watched==ui->StopTime)
     {
         if(event->type()==QEvent::MouseButtonPress)
         {
-             Window_show.ShowKeyBoard(this,false,ui->StopTime,x,y);
+            ContentInput(ui->StopTime);
         }
     }
     if(watched==ui->StartTime)
     {
         if(event->type()==QEvent::MouseButtonPress)
         {
-             Window_show.ShowKeyBoard(this,false,ui->StartTime,x,y);
+            ContentInput(ui->StartTime);
         }
     }
     if(watched==ui->BackTime)
     {
         if(event->type()==QEvent::MouseButtonPress)
         {
-             Window_show.ShowKeyBoard(this,false,ui->BackTime,x,y);
+             ContentInput(ui->BackTime);
         }
     }
 //剔除设置
@@ -500,7 +404,18 @@ if(watched==ui->BackButton)
 }
    return QWidget::eventFilter(watched,event);
 }
+void Management::ContentInput(QLineEdit *input_edit){
+    Input=new input();
+    Input->setReference(input_edit);
+    Input->move(pos().x(),pos().y());
+    Input->show();
+    connect(Input,SIGNAL(setData(QString,QLineEdit *,int,int)),this,SLOT(getData(QString,QLineEdit *)));
+}
+void Management::getData(QString text,QLineEdit *input_edit)
+{
+  input_edit->insert(text);
 
+}
 Management::~Management()
 {
     delete ui;
@@ -528,20 +443,6 @@ void Management::ShowTime()
      ui->DateTime->setText((text+time.toString(" hh:mm")));
 
 }
-//void Management::on_buttonBox_1_clicked(QAbstractButton *button)
-//{
-//    if(ui->buttonBox_1->button(QDialogButtonBox::Ok)==button)
-//    {
-//        ui->tabWidget->setCurrentIndex(1);
-
-//    }
-//    else if(ui->buttonBox_1->button(QDialogButtonBox::Cancel))
-//    {
-//        this->close();
-
-//    }
-//    Window_show.CloseKeyBoard();
-//}
 //镀铝膜
 void Management::on_AluminizerButton_clicked(bool checked)
 {
@@ -553,24 +454,10 @@ void Management::on_AluminizerButton_clicked(bool checked)
         ui->bulkButton->setDisabled(true);
         ui->bulkButton->setStyleSheet("color:#a1a3a6");
 
-//        ui->label_14->removeEventFilter(this);
-//        ui->label_14->setStyleSheet("background-color:#d9d6c3");
-//        ui->label_15->removeEventFilter(this);
-//        ui->label_15->setStyleSheet("background-color:#d9d6c3");
-//        ui->label_18->removeEventFilter(this);
-//        ui->label_18->setStyleSheet("background-color:#d9d6c3");
-//        ui->label_20->removeEventFilter(this);
-//        ui->label_20->setStyleSheet("background-color:#d9d6c3");
-//        ui->label_29->removeEventFilter(this);
-//        ui->label_29->setStyleSheet("background-color:#d9d6c3");
-//        ui->label_30->removeEventFilter(this);
-//        ui->label_30->setStyleSheet("background-color:#d9d6c3");
-//        ui->label_31->removeEventFilter(this);
-//        ui->label_31->setStyleSheet("background-color:#d9d6c3");
-//        ui->label_32->removeEventFilter(this);
-//        ui->label_32->setStyleSheet("background-color:#d9d6c3");
-//        ui->label_33->removeEventFilter(this);
-//        ui->label_33->setStyleSheet("background-color:#d9d6c3");
+        ui->low->setStyleSheet("color:#a1a3a6");
+        ui->low->setCheckable(false);
+        ui->high->setStyleSheet("color:#a1a3a6");
+        ui->high->setCheckable(false);
     }
     else if(checked==false)
     {
@@ -578,24 +465,11 @@ void Management::on_AluminizerButton_clicked(bool checked)
         ui->bulkButton->setDisabled(false);
         ui->bulkButton->setStyleSheet("color: rgb(33, 28, 23);");
 
-//        ui->label_14->installEventFilter(this);
-//        ui->label_14->setStyleSheet("background-color: rgb(237, 237, 237);");
-//        ui->label_15->installEventFilter(this);
-//        ui->label_15->setStyleSheet("background-color: rgb(237, 237, 237);");
-//        ui->label_18->installEventFilter(this);
-//        ui->label_18->setStyleSheet("background-color: rgb(237, 237, 237);");
-//        ui->label_20->installEventFilter(this);
-//        ui->label_20->setStyleSheet("background-color: rgb(237, 237, 237);");
-//        ui->label_29->installEventFilter(this);
-//        ui->label_29->setStyleSheet("background-color: rgb(237, 237, 237);");
-//        ui->label_30->installEventFilter(this);
-//        ui->label_30->setStyleSheet("background-color: rgb(237, 237, 237);");
-//        ui->label_31->installEventFilter(this);
-//        ui->label_31->setStyleSheet("background-color: rgb(237, 237, 237);");
-//        ui->label_32->installEventFilter(this);
-//        ui->label_32->setStyleSheet("background-color: rgb(237, 237, 237);");
-//        ui->label_33->installEventFilter(this);
-//        ui->label_33->setStyleSheet("background-color: rgb(237, 237, 237);");
+        ui->low->setStyleSheet("color:rgb(33, 28, 23);");
+        ui->low->setCheckable(true);
+        ui->high->setStyleSheet("color:rgb(33, 28, 23);");
+        ui->high->setCheckable(true);
+
     }
 }
 //散装逻辑
@@ -615,6 +489,7 @@ void Management::on_bulkButton_clicked(bool checked)
         ui->NagtiveTest->removeEventFilter(this);
         ui->NagtiveTest->setStyleSheet("background-color:#a1a3a6;border-radius:5px");
         ui->PositiveTest->removeEventFilter(this);
+        ui->PositiveTest->setStyleSheet("background-color:#b8dedf;color:#000;border-radius:5px;");
     }
 }
 
@@ -663,23 +538,23 @@ void Management::on_LearningButton_clicked()
         Notice->show();
        Notice->move(pos().x(),pos().y());
 
-        QDialog *dlg = new QDialog(this);
+//        QDialog *dlg = new QDialog(this);
 
-        dlg->resize(400,200);
+//        dlg->resize(400,200);
 
-        QLabel *ql = new QLabel(dlg);
-        ql->setGeometry(110,10,250,100);
-        ql->setText(tr("信息未填写完整！！"));
+//        QLabel *ql = new QLabel(dlg);
+//        ql->setGeometry(110,10,250,100);
+//        ql->setText(tr("信息未填写完整！！"));
 
-        QPushButton *qb = new QPushButton(dlg);
-        qb->setGeometry(250,120,60,25);
-        qb->setText(tr("确定"));
+//        QPushButton *qb = new QPushButton(dlg);
+//        qb->setGeometry(250,120,60,25);
+//        qb->setText(tr("确定"));
 
-        connect(qb,SIGNAL(clicked()),dlg,SLOT(close()));
-        dlg->exec();
-        Learn->show();
-        Learn->move(pos().x(),pos().y());
-        this->hide();
+//        connect(qb,SIGNAL(clicked()),dlg,SLOT(close()));
+//        dlg->exec();
+//        Learn->show();
+//        Learn->move(pos().x(),pos().y());
+//        this->hide();
     }
 }
 void Management::SaveData(){
@@ -694,18 +569,13 @@ void Management::SaveData(){
     p->setProductPackage(packflag);
     QString pntestflag=tr("%1").arg(PNTestFlag);
     p->setProductDetect(pntestflag);
-    if(PackFlag==0)
+    QString learnflag=tr("%1").arg(LearnFlag);
+    p->setProductFeatures(learnflag);
+    if(PackFlag==0||PackFlag==2)
     {
         p->setProductLength(ui->LengthEdit->text());
-        p->setProductFeatures("1/2/3/4/5/6/7/8/9");
-    }else if(PackFlag==1)
-    {
-         p->setProductFeatures("1/2/3/4/5/6/7/8/9");
-    }else if(PackFlag==2)
-    {
-      p->setProductLength(ui->LengthEdit->text());
-    }
 
+    }
     SQLITE sqlite;
     sqlite.openDatabase();
     sqlite.insertProduct(p->getProductName(),p->getProductName(),p->getProductLength(),p->getProductSpeed()
@@ -787,3 +657,47 @@ void Management::tableWidgtShowInformation(QModelIndex qmi)
     //qDebug()<<qmi.column();
 }
 
+
+//频率
+void Management::on_low_clicked(bool checked)
+{
+    if(checked==true)
+    {
+        LearnFlag=0;
+       ui->widget_2->hide();
+       ui->low->setStyleSheet("color: rgb(33, 28, 23);");
+        ui->high->setStyleSheet("color:#a1a3a6");
+    }
+}
+void Management::on_high_clicked(bool checked)
+{
+    if(checked==true)
+    {
+        LearnFlag=1;
+        ui->widget_2->show();
+        ui->high->setStyleSheet("color: rgb(33, 28, 23);");
+         ui->low->setStyleSheet("color:#a1a3a6");
+    }
+}
+void Management::on_one_p_clicked(bool checked)
+{
+    if(checked==true)
+    {
+        LearnFlag=1;
+    }
+}
+void Management::on_two_p_clicked(bool checked)
+{
+    if(checked==true)
+    {
+        LearnFlag=2;
+    }
+}
+
+void Management::on_three_p_clicked(bool checked)
+{
+    if(checked==true)
+    {
+        LearnFlag=3;
+    }
+}

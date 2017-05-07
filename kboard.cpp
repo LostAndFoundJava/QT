@@ -1,17 +1,24 @@
-#include "keyboard.h"
-#include "ui_keyboard.h"
+#include "kboard.h"
+#include "ui_kboard.h"
 #include <Qt>
 #include <QtGui>
 #include <QPalette>
 #include <qtextedit.h>
 #include <QLineEdit>
 #include <config.h>
-extern bool n;
-Keyboard::Keyboard(QWidget *parent, bool num) :
-    QMainWindow(parent),
-    ui1(new Ui::Keyboard)
+kboard::kboard(QWidget *parent,bool num) :
+    QWidget(parent),
+    ui1(new Ui::kboard)
 {
     ui1->setupUi(this);
+
+    //设置背景色
+    QPalette Pal(palette());
+    Pal.setColor(QPalette::Background, "#cccccc");
+    this->setAutoFillBackground(true);
+    this->setPalette(Pal);
+    //this->setGeometry(300,100,600,280);
+
     Flag_InputMode = LETTER;   //输入格式变量
     Flag_Mid_Mode  = LETTER;   //输入格式中转变量
 
@@ -100,14 +107,14 @@ Keyboard::Keyboard(QWidget *parent, bool num) :
     m_srf = srf.split("\r\n");
     //用QString的split函数将字库文件划分成一段一段，每个拼音对应一段字库
     InitKeyBoard();
-}
 
-void Keyboard::InitKeyBoard()
+}
+void kboard::InitKeyBoard()
 {
 
 }
 
-void Keyboard::paintEvent(QPaintEvent *)
+void kboard::paintEvent(QPaintEvent *)
 {
     QPainter dc(this);
     QRect r = QRect(0, 0, this->width(), this->height());
@@ -119,7 +126,7 @@ void Keyboard::paintEvent(QPaintEvent *)
 **QString PinYin 输入的拼音
 **QString &Chinese 拼音所对应的汉字
 **********************************/
-bool Keyboard::FindChinese(QString PinYin, QString &Chinese)
+bool kboard::FindChinese(QString PinYin, QString &Chinese)
 {
     QStringList lst;
     QString Line;
@@ -139,7 +146,7 @@ bool Keyboard::FindChinese(QString PinYin, QString &Chinese)
     return false;
 }
 
-void Keyboard::hanzi_zk_set()
+void kboard::hanzi_zk_set()
 //此函数对所取得的字符所对应的汉字按字放在汉字显示框中。
 {
     QString HzList;
@@ -190,7 +197,7 @@ void Keyboard::hanzi_zk_set()
 
 }
 /******************鼠标拖动键盘处理部分*******************************/
-void Keyboard::mouseMoveEvent(QMouseEvent *event)  //键盘拖动
+void kboard::mouseMoveEvent(QMouseEvent *event)  //键盘拖动
 {
     if (event->buttons() == Qt::LeftButton && m_MouseDown)
     {
@@ -199,7 +206,7 @@ void Keyboard::mouseMoveEvent(QMouseEvent *event)  //键盘拖动
     }
 }
 
-void Keyboard::mousePressEvent(QMouseEvent *event) //读取键盘左击位置
+void kboard::mousePressEvent(QMouseEvent *event) //读取键盘左击位置
 {
     if (event->button() == Qt::LeftButton)
     {
@@ -210,7 +217,7 @@ void Keyboard::mousePressEvent(QMouseEvent *event) //读取键盘左击位置
     }
 }
 
-void Keyboard::mouseReleaseEvent(QMouseEvent *event) //鼠标释放。
+void kboard::mouseReleaseEvent(QMouseEvent *event) //鼠标释放。
 {
     Q_UNUSED(event);
 
@@ -219,7 +226,7 @@ void Keyboard::mouseReleaseEvent(QMouseEvent *event) //鼠标释放。
 //------------------
 
 /*********************通过键盘输入字符QLineEdit********************************/
-void Keyboard::Input_letter_to_linEdit(const QString letter)
+void kboard::Input_letter_to_linEdit(const QString letter)
 {
 //    if(Flag_InputMode==LETTER)
     //QWidget *q = QApplication::focusWidget();
@@ -240,7 +247,7 @@ void Keyboard::Input_letter_to_linEdit(const QString letter)
 //Input_letter_to_linEdit--end
 
 /*******存储输入的字符到拼音框中********************************/
-void Keyboard::get_key_letter(QString letter)
+void kboard::get_key_letter(QString letter)
 {
     m_Page=0;
     if(k_letter_index++<6)
@@ -254,7 +261,7 @@ void Keyboard::get_key_letter(QString letter)
 //get_key_letter____end
 
 
-void Keyboard::on_pushButton_esc_clicked()
+void kboard::on_pushButton_esc_clicked()
 {
 //    ui1-> pushButton_en_ch->setText("中文");
 //    Flag_InputMode=HANZI;
@@ -276,7 +283,7 @@ void Keyboard::on_pushButton_esc_clicked()
     this->hide();
 }
 
-void Keyboard::on_pushButton_en_ch_clicked()//中英切换button
+void kboard::on_pushButton_en_ch_clicked()//中英切换button
 {
     if(Flag_InputMode==HANZI)
     {
@@ -292,7 +299,7 @@ void Keyboard::on_pushButton_en_ch_clicked()//中英切换button
     }
 }
 
-void Keyboard::on_pushButton_cap_clicked()//大小写字母输入切换
+void kboard::on_pushButton_cap_clicked()//大小写字母输入切换
 {
     //初始化汉字部分的button
     clean_piy_and_hanzi_while_clicked();
@@ -326,7 +333,7 @@ void Keyboard::on_pushButton_cap_clicked()//大小写字母输入切换
     }
 }
 
-void Keyboard::clean_piy_and_hanzi_while_clicked(void)
+void kboard::clean_piy_and_hanzi_while_clicked(void)
 //当选择汉字后清除拼音栏和汉字栏，执行此函数清除
 {
     m_Page=0;//清当前页。
@@ -336,7 +343,7 @@ void Keyboard::clean_piy_and_hanzi_while_clicked(void)
     hanzi_zk_set();
 }
 
-void Keyboard::on_pushButton_q_clicked()
+void kboard::on_pushButton_q_clicked()
 {
     ui1->pushButton_q->setFocusPolicy(Qt::NoFocus);
     if(Flag_InputMode == HANZI)
@@ -353,7 +360,7 @@ void Keyboard::on_pushButton_q_clicked()
     }
 
 }
-void Keyboard::on_pushButton_w_clicked()
+void kboard::on_pushButton_w_clicked()
 {
     if(Flag_InputMode == HANZI)
     {
@@ -368,7 +375,7 @@ void Keyboard::on_pushButton_w_clicked()
         Input_letter_to_linEdit("W");
     }
 }
-void Keyboard::on_pushButton_e_clicked()
+void kboard::on_pushButton_e_clicked()
 {
 
     if(Flag_InputMode == HANZI)
@@ -384,7 +391,7 @@ void Keyboard::on_pushButton_e_clicked()
         Input_letter_to_linEdit("E");
     }
 }
-void Keyboard::on_pushButton_r_clicked()
+void kboard::on_pushButton_r_clicked()
 {
     if(Flag_InputMode == HANZI)
     {
@@ -399,7 +406,7 @@ void Keyboard::on_pushButton_r_clicked()
         Input_letter_to_linEdit("R");
     }
 }
-void Keyboard::on_pushButton_t_clicked()
+void kboard::on_pushButton_t_clicked()
 {
     if(Flag_InputMode == HANZI)
         get_key_letter("t");
@@ -412,7 +419,7 @@ void Keyboard::on_pushButton_t_clicked()
         Input_letter_to_linEdit("T");
     }
 }
-void Keyboard::on_pushButton_y_clicked()
+void kboard::on_pushButton_y_clicked()
 {
     if(Flag_InputMode == HANZI)
         get_key_letter("y");
@@ -425,7 +432,7 @@ void Keyboard::on_pushButton_y_clicked()
         Input_letter_to_linEdit("Y");
     }
 }
-void Keyboard::on_pushButton_u_clicked()
+void kboard::on_pushButton_u_clicked()
 {
     if(Flag_InputMode == HANZI)
         get_key_letter("u");
@@ -438,7 +445,7 @@ void Keyboard::on_pushButton_u_clicked()
         Input_letter_to_linEdit("U");
     }
 }
-void Keyboard::on_pushButton_i_clicked()
+void kboard::on_pushButton_i_clicked()
 {
     if(Flag_InputMode == HANZI)
         get_key_letter("i");
@@ -451,7 +458,7 @@ void Keyboard::on_pushButton_i_clicked()
         Input_letter_to_linEdit("I");
     }
 }
-void Keyboard::on_pushButton_o_clicked()
+void kboard::on_pushButton_o_clicked()
 {
     if(Flag_InputMode == HANZI)
         get_key_letter("o");
@@ -464,7 +471,7 @@ void Keyboard::on_pushButton_o_clicked()
         Input_letter_to_linEdit("O");
     }
 }
-void Keyboard::on_pushButton_p_clicked()
+void kboard::on_pushButton_p_clicked()
 {
     if(Flag_InputMode == HANZI)
         get_key_letter("p");
@@ -477,7 +484,7 @@ void Keyboard::on_pushButton_p_clicked()
         Input_letter_to_linEdit("P");
     }
 }
-void Keyboard::on_pushButton_a_clicked()
+void kboard::on_pushButton_a_clicked()
 {
     if(Flag_InputMode == HANZI)
     {
@@ -492,7 +499,7 @@ void Keyboard::on_pushButton_a_clicked()
         Input_letter_to_linEdit("A");
     }
 }
-void Keyboard::on_pushButton_s_clicked()
+void kboard::on_pushButton_s_clicked()
 {
     if(Flag_InputMode == HANZI)
         get_key_letter("s");
@@ -505,7 +512,7 @@ void Keyboard::on_pushButton_s_clicked()
         Input_letter_to_linEdit("S");
     }
 }
-void Keyboard::on_pushButton_d_clicked()
+void kboard::on_pushButton_d_clicked()
 {
     if(Flag_InputMode == HANZI)
      {
@@ -520,7 +527,7 @@ void Keyboard::on_pushButton_d_clicked()
         Input_letter_to_linEdit("D");
     }
 }
-void Keyboard::on_pushButton_f_clicked()
+void kboard::on_pushButton_f_clicked()
 {
     if(Flag_InputMode == HANZI)
         get_key_letter("f");
@@ -533,7 +540,7 @@ void Keyboard::on_pushButton_f_clicked()
         Input_letter_to_linEdit("F");
     }
 }
-void Keyboard::on_pushButton_g_clicked()
+void kboard::on_pushButton_g_clicked()
 {
     if(Flag_InputMode == HANZI)
         get_key_letter("g");
@@ -546,7 +553,7 @@ void Keyboard::on_pushButton_g_clicked()
         Input_letter_to_linEdit("G");
     }
 }
-void Keyboard::on_pushButton_h_clicked()
+void kboard::on_pushButton_h_clicked()
 {
     if(Flag_InputMode == HANZI)
         get_key_letter("h");
@@ -559,7 +566,7 @@ void Keyboard::on_pushButton_h_clicked()
         Input_letter_to_linEdit("H");
     }
 }
-void Keyboard::on_pushButton_j_clicked()
+void kboard::on_pushButton_j_clicked()
 {
     if(Flag_InputMode == HANZI)
         get_key_letter("j");
@@ -572,7 +579,7 @@ void Keyboard::on_pushButton_j_clicked()
         Input_letter_to_linEdit("J");
     }
 }
-void Keyboard::on_pushButton_k_clicked()
+void kboard::on_pushButton_k_clicked()
 {
     if(Flag_InputMode == HANZI)
         get_key_letter("k");
@@ -585,7 +592,7 @@ void Keyboard::on_pushButton_k_clicked()
         Input_letter_to_linEdit("K");
     }
 }
-void Keyboard::on_pushButton_l_clicked()
+void kboard::on_pushButton_l_clicked()
 {
     if(Flag_InputMode == HANZI)
         get_key_letter("l");
@@ -598,7 +605,7 @@ void Keyboard::on_pushButton_l_clicked()
         Input_letter_to_linEdit("L");
     }
 }
-void Keyboard::on_pushButton_z_clicked()
+void kboard::on_pushButton_z_clicked()
 {
     if(Flag_InputMode == HANZI)
         get_key_letter("z");
@@ -611,7 +618,7 @@ void Keyboard::on_pushButton_z_clicked()
         Input_letter_to_linEdit("Z");
     }
 }
-void Keyboard::on_pushButton_x_clicked()
+void kboard::on_pushButton_x_clicked()
 {
     if(Flag_InputMode == HANZI)
         get_key_letter("x");
@@ -624,7 +631,7 @@ void Keyboard::on_pushButton_x_clicked()
         Input_letter_to_linEdit("X");
     }
 }
-void Keyboard::on_pushButton_c_clicked()
+void kboard::on_pushButton_c_clicked()
 {
     if(Flag_InputMode == HANZI)
         get_key_letter("c");
@@ -637,7 +644,7 @@ void Keyboard::on_pushButton_c_clicked()
         Input_letter_to_linEdit("C");
     }
 }
-void Keyboard::on_pushButton_v_clicked()
+void kboard::on_pushButton_v_clicked()
 {
     if(Flag_InputMode == HANZI)
         get_key_letter("v");
@@ -650,7 +657,7 @@ void Keyboard::on_pushButton_v_clicked()
         Input_letter_to_linEdit("V");
     }
 }
-void Keyboard::on_pushButton_b_clicked()
+void kboard::on_pushButton_b_clicked()
 {
     if(Flag_InputMode == HANZI)
         get_key_letter("b");
@@ -663,7 +670,7 @@ void Keyboard::on_pushButton_b_clicked()
         Input_letter_to_linEdit("B");
     }
 }
-void Keyboard::on_pushButton_n_clicked()
+void kboard::on_pushButton_n_clicked()
 {
     if(Flag_InputMode == HANZI)
         get_key_letter("n");
@@ -676,7 +683,7 @@ void Keyboard::on_pushButton_n_clicked()
         Input_letter_to_linEdit("N");
     }
 }
-void Keyboard::on_pushButton_m_clicked()
+void kboard::on_pushButton_m_clicked()
 {
     if(Flag_InputMode == HANZI)
         get_key_letter("m");
@@ -689,7 +696,7 @@ void Keyboard::on_pushButton_m_clicked()
         Input_letter_to_linEdit("M");
     }
 }
-void Keyboard::on_hz_1_clicked()
+void kboard::on_hz_1_clicked()
 {
     m_Page=0;
     QString hz_n=ui1->hz_1->text();
@@ -700,7 +707,7 @@ void Keyboard::on_hz_1_clicked()
     }
 
 }
-void Keyboard::on_hz_2_clicked()
+void kboard::on_hz_2_clicked()
 {
     m_Page=0;
     QString hz_n=ui1->hz_2->text();
@@ -710,7 +717,7 @@ void Keyboard::on_hz_2_clicked()
         clean_piy_and_hanzi_while_clicked();
     }
 }
-void Keyboard::on_hz_3_clicked()
+void kboard::on_hz_3_clicked()
 {
     m_Page=0;
     QString hz_n=ui1->hz_3->text();
@@ -720,7 +727,7 @@ void Keyboard::on_hz_3_clicked()
         clean_piy_and_hanzi_while_clicked();
     }
 }
-void Keyboard::on_hz_4_clicked()
+void kboard::on_hz_4_clicked()
 {
     m_Page=0;
     QString hz_n=ui1->hz_4->text();
@@ -730,7 +737,7 @@ void Keyboard::on_hz_4_clicked()
         clean_piy_and_hanzi_while_clicked();
     }
 }
-void Keyboard::on_hz_5_clicked()
+void kboard::on_hz_5_clicked()
 {
     m_Page=0;
     QString hz_n=ui1->hz_5->text();
@@ -740,7 +747,7 @@ void Keyboard::on_hz_5_clicked()
         clean_piy_and_hanzi_while_clicked();
     }
 }
-void Keyboard::on_hz_6_clicked()
+void kboard::on_hz_6_clicked()
 {
     m_Page=0;
     QString hz_n=ui1->hz_6->text();
@@ -750,7 +757,7 @@ void Keyboard::on_hz_6_clicked()
         clean_piy_and_hanzi_while_clicked();
     }
 }
-void Keyboard::on_hz_7_clicked()
+void kboard::on_hz_7_clicked()
 {
     QString hz_n=ui1->hz_7->text();
     Input_letter_to_linEdit(hz_n);
@@ -759,7 +766,7 @@ void Keyboard::on_hz_7_clicked()
         clean_piy_and_hanzi_while_clicked();
     }
 }
-void Keyboard::on_hz_8_clicked()
+void kboard::on_hz_8_clicked()
 {
     QString hz_n=ui1->hz_8->text();
     Input_letter_to_linEdit(hz_n);
@@ -768,7 +775,7 @@ void Keyboard::on_hz_8_clicked()
         clean_piy_and_hanzi_while_clicked();
     }
 }
-void Keyboard::on_hz_9_clicked()
+void kboard::on_hz_9_clicked()
 {
     QString hz_n=ui1->hz_9->text();
     Input_letter_to_linEdit(hz_n);
@@ -777,7 +784,7 @@ void Keyboard::on_hz_9_clicked()
         clean_piy_and_hanzi_while_clicked();
     }
 }
-void Keyboard::on_hz_10_clicked()
+void kboard::on_hz_10_clicked()
 {
     QString hz_n=ui1->hz_10->text();
     Input_letter_to_linEdit(hz_n);
@@ -787,7 +794,7 @@ void Keyboard::on_hz_10_clicked()
     }
 }
 
-void Keyboard::on_pushButton_next_clicked()//下一页
+void kboard::on_pushButton_next_clicked()//下一页
 {
     if(Flag_InputMode == HANZI)
     {
@@ -799,14 +806,14 @@ void Keyboard::on_pushButton_next_clicked()//下一页
     }
 
 }
-void Keyboard::on_pushButton_pre_clicked()//上一页
+void kboard::on_pushButton_pre_clicked()//上一页
 {
     if(m_Page==0) return;
     m_Page--;
     hanzi_zk_set();
 }
 
-void Keyboard::on_pushButton_del_clicked()//删除button
+void kboard::on_pushButton_del_clicked()//删除button
 {
     if(m_CurPY=="")//如果当前拼音为空
     {
@@ -837,31 +844,31 @@ void Keyboard::on_pushButton_del_clicked()//删除button
 }
 
 
-void Keyboard::on_pushButton_sign_tan_clicked()
+void kboard::on_pushButton_sign_tan_clicked()
 //感叹号！或者加号，如果是数字时为加号+
 {
     Input_letter_to_linEdit(ui1->pushButton_sign_tan->text());
 }
-void Keyboard::on_pushButton_sign_wen_clicked()
+void kboard::on_pushButton_sign_wen_clicked()
 //问号？或者减号，如果是数字时为-号
 {
     Input_letter_to_linEdit(ui1->pushButton_sign_wen->text());
 }
-void Keyboard::on_pushButton_sign_dou_clicked()//逗号， 或者*，如果是数字时为*
+void kboard::on_pushButton_sign_dou_clicked()//逗号， 或者*，如果是数字时为*
 {
     Input_letter_to_linEdit(ui1->pushButton_sign_dou->text());
 }
-void Keyboard::on_pushButton_sign_ju_clicked()//句号。或者/，如果是数字时为/
+void kboard::on_pushButton_sign_ju_clicked()//句号。或者/，如果是数字时为/
 {
     Input_letter_to_linEdit(ui1->pushButton_sign_ju->text());
 }
-void Keyboard::on_pushButton_sign_fen_clicked()
+void kboard::on_pushButton_sign_fen_clicked()
 //分号；或者等号，如果是数字时为=
 {
     Input_letter_to_linEdit(ui1->pushButton_sign_fen->text());
 }
 
-void Keyboard::on_pushButton_space_clicked()//空格
+void kboard::on_pushButton_space_clicked()//空格
 {
     if(m_CurPY=="")//如果当前拼音为空
     {
@@ -874,7 +881,7 @@ void Keyboard::on_pushButton_space_clicked()//空格
 
 }
 
-void Keyboard::on_pushButton_Enter_clicked()
+void kboard::on_pushButton_Enter_clicked()
 {
     if(m_CurPY=="")//如果当前拼音为空
     {
@@ -887,7 +894,7 @@ void Keyboard::on_pushButton_Enter_clicked()
     }
 }
 
-void Keyboard::KeyBoardStartMode(int Mode)   //进入键盘初始输入法
+void kboard::KeyBoardStartMode(int Mode)   //进入键盘初始输入法
 {
     if(Mode == CAP_LETTER)
     {
@@ -908,7 +915,7 @@ void Keyboard::KeyBoardStartMode(int Mode)   //进入键盘初始输入法
 
 }
 
-void Keyboard::KeyBoardHanziMode()           //键盘输入汉字模式
+void kboard::KeyBoardHanziMode()           //键盘输入汉字模式
 {
     ui1-> pushButton_en_ch->setText(tr("Chinese"));
     Flag_InputMode=HANZI;
@@ -929,7 +936,7 @@ void Keyboard::KeyBoardHanziMode()           //键盘输入汉字模式
     }
 }
 
-void Keyboard::KeyBoardNumMode()            //键盘输入数字模式
+void kboard::KeyBoardNumMode()            //键盘输入数字模式
 {
     ui1-> pushButton_en_ch->setText("NUM");
     Flag_InputMode=NUMBER;
@@ -953,7 +960,7 @@ void Keyboard::KeyBoardNumMode()            //键盘输入数字模式
     }
 }
 
-void Keyboard::KeyBoardLetterMode()              //键盘输入小写字母模式
+void kboard::KeyBoardLetterMode()              //键盘输入小写字母模式
 {
     Flag_InputMode=LETTER;
     k_letter_index=0;
@@ -974,12 +981,12 @@ void Keyboard::KeyBoardLetterMode()              //键盘输入小写字母模�
     }
 }
 
-void Keyboard::setEditUi(QWidget *edit)
+void kboard::setEditUi(QWidget *edit)
 {
     this->edit = edit;
 }
 
-void Keyboard::Draw3dFrame(QRect &r, QPainter &dc)//画一个矩形框
+void kboard::Draw3dFrame(QRect &r, QPainter &dc)//画一个矩形框
 {
     QRect rect = r;
 
@@ -1009,9 +1016,7 @@ void Keyboard::Draw3dFrame(QRect &r, QPainter &dc)//画一个矩形框
     dc.drawLine(rect.left(), rect.bottom(), rect.right(), rect.bottom());
     dc.drawLine(rect.right(), rect.top(), rect.right(), rect.bottom());
 }
-
-
-Keyboard::~Keyboard()
+kboard::~kboard()
 {
     delete ui1;
 }

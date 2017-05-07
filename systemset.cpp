@@ -20,6 +20,8 @@ Systemset::Systemset(QWidget *parent) :
     this->setAutoFillBackground(true);
     this->setPalette(Pal);
 
+    this->setWindowFlags(Qt::FramelessWindowHint);
+
    // ui->stackedWidget->setCurrentIndex(0);
 
 //    buttonGroup = new QButtonGroup(this);

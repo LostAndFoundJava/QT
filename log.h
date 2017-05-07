@@ -9,6 +9,7 @@
 #include "globl_data.h"
 #include <input.h>
 #include <record.h>
+#include<mainwindow.h>
 namespace Ui {
 class Log;
 }
@@ -29,7 +30,7 @@ private slots:
 
     void on_LoadLog_2_clicked();
 
-    void on_tableWidget_2_cellClicked(int row, int column);
+   // void on_tableWidget_2_cellClicked(int row, int column);
 
     void on_USBOuput_clicked();
 
@@ -42,15 +43,22 @@ private:
     input *Input;
     void valueInt(void);
     //QLineEdit *n;
+    class MainWindow *mainWindow;
+    int row1;
+    int column1;
     QTableWidget *tableWidget;
     QTableWidget *tableWidget_2;
 public slots:
     void ShowTime(void);
     void ContentInput();
     char UsbRead ();
-    void getData(QString,QLineEdit *,int row,int colum);
     void saveData(void);
-    void LogInput(QLineEdit *,int row,int colum);
+    void getData(QString,QLineEdit *,int row,int column);
+    void LogInput(QLineEdit *,int row,int column);
+    void getCell(int row,int column);
+    void getData_2(QString,QLineEdit *,int row,int column);
+    void LogInput_2(QLineEdit *,int row,int column);
+    void getCell_2(int row,int column);
 };
 
 #endif // LOG_H

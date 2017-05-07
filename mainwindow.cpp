@@ -57,7 +57,6 @@ MainWindow::MainWindow(QWidget *parent) :
     sprintf(str,"%d",CO_OD_RAM.readInput8Bit[0]);
     qDebug(str);
 
-    management = new Management;
     log = new Log;
 }
 
@@ -224,7 +223,7 @@ void MainWindow::on_Log_clicked()
 
 void MainWindow::on_Management_clicked()
 {
-
+    management = new Management;
     management->show();
     management->move(pos().x(),pos().y());
 }

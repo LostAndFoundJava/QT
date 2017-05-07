@@ -45,69 +45,89 @@ Log::Log(QWidget *parent) :
     timer->start(500);
 
     tableWidget = new QTableWidget(1,2,ui->tableWidget);
+    tableWidget->resize(765,321);
+    tableWidget->setRowHeight(0,55);
+    tableWidget->setColumnWidth(0,382);
+    tableWidget->setColumnWidth(1,382);
+     QStringList header;
+    tableWidget->setShowGrid(true); //设置表格边框
+    header<<"年/月/日/时/分 "<<"操作人";
+    tableWidget->setHorizontalHeaderLabels(header);
+    tableWidget->verticalHeader()->hide();
+
     tableWidget_2 = new QTableWidget(1,7,ui->tableWidget_2);
     tableWidget_2->resize(438,311);
-     QStringList header;
+    tableWidget_2->setRowHeight(0,48);
+    tableWidget_2->setColumnWidth(0,73);
+    tableWidget_2->setColumnWidth(1,73);
+    tableWidget_2->setColumnWidth(2,73);
+    tableWidget_2->setColumnWidth(3,73);
+    tableWidget_2->setColumnWidth(4,73);
+    tableWidget_2->setColumnWidth(5,73);
+     QStringList header_2;
     tableWidget_2->setShowGrid(true); //设置表格边框
-    header<<"序号 "<<" 产品编号  "<<" 产品名称  "<<"NG时间"<<"信号 "<<"操作人";
-    tableWidget_2->setHorizontalHeaderLabels(header);
+    header_2<<"序号 "<<" 产品编号  "<<" 产品名称  "<<"NG时间"<<"信号 "<<"操作人";
+    tableWidget_2->setHorizontalHeaderLabels(header_2);
     tableWidget_2->verticalHeader()->hide();
+
+    connect(tableWidget_2,SIGNAL(cellClicked(int,int)),this,SLOT(getCell_2(int,int)));
+    connect(tableWidget,SIGNAL(cellClicked(int,int)),this,SLOT(getCell(int,int)));
     //从数据库读出已存入的基本信息
 
-//  /*  SQLITE sqlite1;
-//    sqlite1.openDatabase();
-//   QLis*/t<Record*> *ql1 = sqlite1.queryRecord();
-//    if(ql1->size()>0)
-//    {
-//        ui->tableWidget->setRowCount(ql1->size());
-//        ui->tableWidget_2->setRowCount(ql1->size());
-//        ui->tableWidget->setColumnCount(2);
-//        ui->tableWidget_2->setColumnCount(6);
-//        for(int i = 0;i < ql1->size();i++)
-//        {
-//            Record *r = ql1->at(i);
-//            //qDebug()<<"+++++++++++++++++++";
-//            //qDebug()<<p->getProductNumber();
-//            //qDebug()<<"+++++++++++++++++++";
-//            ui->tableWidget->setRowHeight(i,55);
-//            ui->tableWidget->setColumnWidth(0,382);
-//            ui->tableWidget->setColumnWidth(1,382);
+  SQLITE sqlite;
+   sqlite.openDatabase();
+  QList<Record*> *ql1 = sqlite.queryRecord();
+    if(ql1->size()>0)
+    {
+        tableWidget->setRowCount(ql1->size());
+        tableWidget_2->setRowCount(ql1->size());
+        tableWidget->setColumnCount(2);
+        tableWidget_2->setColumnCount(6);
+        for(int i = 0;i < ql1->size();i++)
+        {
+            Record *r = ql1->at(i);
+            //qDebug()<<"+++++++++++++++++++";
+            //qDebug()<<p->getProductNumber();
+            //qDebug()<<"+++++++++++++++++++";
+            tableWidget->setRowHeight(i,55);
+            tableWidget->setColumnWidth(0,382);
+            tableWidget->setColumnWidth(1,382);
 
-//            ui->tableWidget->setItem(i,0,new QTableWidgetItem(r->getLogTime()));
-//            ui->tableWidget->setItem(i,1,new QTableWidgetItem(r->getLogOperator()));
+            tableWidget->setItem(i,0,new QTableWidgetItem(r->getLogTime()));
+            tableWidget->setItem(i,1,new QTableWidgetItem(r->getLogOperator()));
 
-//            ui->tableWidget_2->setRowHeight(i,48);
-//            ui->tableWidget_2->setColumnWidth(0,73);
-//            ui->tableWidget_2->setColumnWidth(1,73);
-//            ui->tableWidget_2->setColumnWidth(2,73);
-//            ui->tableWidget_2->setColumnWidth(3,73);
-//            ui->tableWidget_2->setColumnWidth(4,73);
-//            ui->tableWidget_2->setColumnWidth(5,73);
+            tableWidget_2->setRowHeight(i,48);
+            tableWidget_2->setColumnWidth(0,73);
+            tableWidget_2->setColumnWidth(1,73);
+            tableWidget_2->setColumnWidth(2,73);
+            tableWidget_2->setColumnWidth(3,73);
+            tableWidget_2->setColumnWidth(4,73);
+            tableWidget_2->setColumnWidth(5,73);
 
-//            ui->tableWidget_2->setItem(i,0,new QTableWidgetItem(QString("%1").arg(i)));
-//            ui->tableWidget_2->setItem(i,1,new QTableWidgetItem(r->getNgProductNumber()));
-//            ui->tableWidget_2->setItem(i,2,new QTableWidgetItem(r->getNgProductName()));
-//            ui->tableWidget_2->setItem(i,3,new QTableWidgetItem(r->getNgTime()));
-//            ui->tableWidget_2->setItem(i,4,new QTableWidgetItem(r->getNgSignal()));
-//            ui->tableWidget_2->setItem(i,5,new QTableWidgetItem(r->getNgOperator())); }
+            tableWidget_2->setItem(i,0,new QTableWidgetItem(QString("%1").arg(i)));
+            tableWidget_2->setItem(i,1,new QTableWidgetItem(r->getNgProductNumber()));
+            tableWidget_2->setItem(i,2,new QTableWidgetItem(r->getNgProductName()));
+            tableWidget_2->setItem(i,3,new QTableWidgetItem(r->getNgTime()));
+            tableWidget_2->setItem(i,4,new QTableWidgetItem(r->getNgSignal()));
+            tableWidget_2->setItem(i,5,new QTableWidgetItem(r->getNgOperator())); }
 
-//    }else{
-//        ui->tableWidget->setRowCount(1);
-//        ui->tableWidget_2->setRowCount(1);
-//        ui->tableWidget->setColumnCount(2);
-//        ui->tableWidget_2->setColumnCount(6);
-//        ui->tableWidget->setRowHeight(0,55);
-//        ui->tableWidget->setColumnWidth(0,382);
-//        ui->tableWidget->setColumnWidth(1,382);
-//        ui->tableWidget_2->setRowHeight(0,48);
-//        ui->tableWidget_2->setColumnWidth(0,73);
-//        ui->tableWidget_2->setColumnWidth(1,73);
-//        ui->tableWidget_2->setColumnWidth(2,73);
-//        ui->tableWidget_2->setColumnWidth(3,73);
-//        ui->tableWidget_2->setColumnWidth(4,73);
-//        ui->tableWidget_2->setColumnWidth(5,73);
-//    }
-//    sqlite1.closeDatabase();
+    }else{
+        tableWidget->setRowCount(1);
+        tableWidget_2->setRowCount(1);
+        tableWidget->setColumnCount(2);
+        tableWidget_2->setColumnCount(6);
+        tableWidget->setRowHeight(0,55);
+        tableWidget->setColumnWidth(0,382);
+        tableWidget->setColumnWidth(1,382);
+        tableWidget_2->setRowHeight(0,48);
+        tableWidget_2->setColumnWidth(0,73);
+        tableWidget_2->setColumnWidth(1,73);
+        tableWidget_2->setColumnWidth(2,73);
+        tableWidget_2->setColumnWidth(3,73);
+        tableWidget_2->setColumnWidth(4,73);
+        tableWidget_2->setColumnWidth(5,73);
+    }
+    sqlite.closeDatabase();
 
 }
 
@@ -160,14 +180,9 @@ void Log::ContentInput(){
 }
 void Log::getData(QString text,QLineEdit *n,int row,int column)
 {
-   // n=ui->lineEdit;
-  //ui->tableWidget_2->itemAt(row,column)->setText(text);
-
-    n->insert(text);
-   QTableWidgetItem *m = tableWidget_2->item(row,column);
-   m->setText(text);
-   //m->text();
-
+   QTableWidgetItem *m = new QTableWidgetItem;
+      m->setText(text);
+    tableWidget->setItem(row,column,m);
 }
 void Log::LogInput(QLineEdit *n,int row,int column)
 {
@@ -177,11 +192,32 @@ void Log::LogInput(QLineEdit *n,int row,int column)
     Input->show();
     connect(Input,SIGNAL(setData(QString,QLineEdit *,int,int)),this,SLOT(getData(QString,QLineEdit *,int,int)));
 }
-void Log::on_tableWidget_2_cellClicked(int row, int column)
+void Log::getCell(int row,int column)
 {
-     LogInput( ui->lineEdit,row,column);
+    this->row1=row;
+    this->column1=column;
+    LogInput(ui->lineEdit,row1,column1);
 }
-
+void Log::getData_2(QString text,QLineEdit *n,int row,int column)
+{
+   QTableWidgetItem *m_2 = new QTableWidgetItem;
+      m_2->setText(text);
+    tableWidget_2->setItem(row,column,m_2);
+}
+void Log::LogInput_2(QLineEdit *n,int row,int column)
+{
+    Input=new input();
+    Input->setLogReference(n,row,column);
+    Input->move(pos().x(),pos().y());
+    Input->show();
+    connect(Input,SIGNAL(setData(QString,QLineEdit *,int,int)),this,SLOT(getData_2(QString,QLineEdit *,int,int)));
+}
+void Log::getCell_2(int row,int column)
+{
+    this->row1=row;
+    this->column1=column;
+    LogInput_2(ui->lineEdit,row1,column1);
+}
 
 void Log::on_USBOuput_clicked()
 {

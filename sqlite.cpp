@@ -225,9 +225,9 @@ QList<Product*> *SQLITE::queryProduct()
     }
     return ql;
 }
-void SQLITE::insertRecord(QString logTime1,QString logOperator1,QString ngProductorNumber1,QString ngProductorName1,
+void SQLITE::insertRecord(QString logTime1,QString logOperator1,QString ngProductNumber1,QString ngProductName1,
                        QString ngTime1,QString ngSignal1,QString ngOperator1){
-    QString insert_sql = "insert into record (logTime,logOperator,ngProductorNumber,ngProductorName,ngTime,ngSignal,ngOperator) values (?,?,?,?,?,?,?)";
+    QString insert_sql = "insert into record (logTime,logOperator,ngProductNumber,ngProductName,ngTime,ngSignal,ngOperator) values (?,?,?,?,?,?,?)";
 
     sql_query->prepare(insert_sql);
 
@@ -240,11 +240,11 @@ void SQLITE::insertRecord(QString logTime1,QString logOperator1,QString ngProduc
     QVariantList logOperator;
    logOperator.append(logOperator1);
 
-    QVariantList ngProductorNumber;
-    ngProductorNumber.append(ngProductorNumber1);
+    QVariantList ngProductNumber;
+    ngProductNumber.append(ngProductNumber1);
 
-    QVariantList ngProductorName;
-    ngProductorName.append(ngProductorName1);
+    QVariantList ngProductName;
+    ngProductName.append(ngProductName1);
 
     QVariantList ngTime;
     ngTime.append(ngTime1);
@@ -257,11 +257,11 @@ void SQLITE::insertRecord(QString logTime1,QString logOperator1,QString ngProduc
 
 
 
-    //sql_query->addBindValue(id);
+
     sql_query->addBindValue(logTime);
     sql_query->addBindValue(logOperator);
-    sql_query->addBindValue(ngProductorNumber);
-    sql_query->addBindValue(ngProductorName);
+    sql_query->addBindValue(ngProductNumber);
+    sql_query->addBindValue(ngProductName);
     sql_query->addBindValue(ngTime);
     sql_query->addBindValue(ngSignal);
     sql_query->addBindValue(ngOperator);
@@ -280,11 +280,12 @@ QList<Record*> *SQLITE::queryRecord()
 {
     QList<Record*> *ql1 = new QList<Record*>;
     QString select_all_sql1 = "select * from record";
-
     sql_query->prepare(select_all_sql1);
-    qDebug()<<sql_query;
-    if(sql_query->exec())
+
+    if(!sql_query->exec())
     {
+        qDebug()<<sql_query->lastError();
+    }else{
         while(sql_query->next())
         {
             Record *r = new Record;
@@ -300,9 +301,6 @@ QList<Record*> *SQLITE::queryRecord()
         }
 
     }
-    else
-    {
-        qDebug()<<sql_query->lastError();
-    }
+
     return ql1;
 }

@@ -53,9 +53,7 @@ MainWindow::MainWindow(QWidget *parent) :
     //
 
 
-    char str[15];
-    sprintf(str,"%d",CO_OD_RAM.readInput8Bit[0]);
-    qDebug(str);
+
 
     log = new Log;
 }

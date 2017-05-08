@@ -14,10 +14,10 @@ Management::Management(QWidget *parent) :
     QWidget(parent),
     ui(new Ui::Management)
 {
-    qDebug("0x600001:%Xh 0x600002:%Xh 0x620001:%Xh 0x620002:%Xh\n",CO_OD_RAM.readInput8Bit[0],
-           CO_OD_RAM.readInput8Bit[1],CO_OD_RAM.writeOutput8Bit[0],CO_OD_RAM.writeOutput8Bit[1]);
-    qDebug("0x640101:%Xh 0x640102:%Xh ",CO_OD_RAM.readAnalogueInput32Bit[0],
-           CO_OD_RAM.readAnalogueInput32Bit[1]);
+//    qDebug("0x600001:%Xh 0x600002:%Xh 0x620001:%Xh 0x620002:%Xh\n",CO_OD_RAM.readInput8Bit[0],
+//           CO_OD_RAM.readInput8Bit[1],CO_OD_RAM.writeOutput8Bit[0],CO_OD_RAM.writeOutput8Bit[1]);
+//    qDebug("0x640101:%Xh 0x640102:%Xh ",CO_OD_RAM.readAnalogueInput32Bit[0],
+//           CO_OD_RAM.readAnalogueInput32Bit[1]);
 
     ui->setupUi(this);
     setWindowTitle(tr("产品管理"));

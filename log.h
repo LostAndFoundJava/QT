@@ -10,6 +10,7 @@
 #include <input.h>
 #include <record.h>
 #include<mainwindow.h>
+#include<QStringList>
 namespace Ui {
 class Log;
 }
@@ -44,8 +45,14 @@ private:
     void valueInt(void);
     //QLineEdit *n;
     class MainWindow *mainWindow;
+    int rowlist[];
+    QStringList rowlist_2;
+    int j;
     int row1;
     int column1;
+    int row_2;
+    int column_2;
+    int ngflag;
     QTableWidget *tableWidget;
     QTableWidget *tableWidget_2;
 public slots:

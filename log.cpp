@@ -59,29 +59,29 @@ Log::Log(QWidget *parent) :
     //--------------------------------------------------------------------------//
 
     //-------------------------------发送SDO-------------------------------------//
-    dataTx[0]=0x60;
-    if(err1 == 0) {
-        err1 = sdoClientDownload(
-                CO->SDOclient,
-                2,
-                0x6000,
-                0x01,
-                dataTx,
-                dataTxLen,
-                &SDOabortCode,
-                500,
-                0);
-        if(err1==0)
-            qDebug("send SDO to node 2 success");
-        else
-            qDebug("send SDO to node 2 failed in error:%d",err1);
-    }
+//    dataTx[0]=0x60;
+//    if(err1 == 0) {
+//        err1 = sdoClientDownload(
+//                CO->SDOclient,
+//                2,
+//                0x6000,
+//                0x01,
+//                dataTx,
+//                dataTxLen,
+//                &SDOabortCode,
+//                500,
+//                0);
+//        if(err1==0)
+//            qDebug("send SDO to node 2 success");
+//        else
+//            qDebug("send SDO to node 2 failed in error:%d",err1);
+  //  }
     //--------------------------------------------------------------------------//
 
-    qDebug("0x600001:%Xh 0x600002:%Xh 0x620001:%Xh 0x620002:%Xh",CO_OD_RAM.readInput8Bit[0],
-           CO_OD_RAM.readInput8Bit[1],CO_OD_RAM.writeOutput8Bit[0],CO_OD_RAM.writeOutput8Bit[1]);
-    qDebug("0x640101:%Xh 0x640102:%Xh ",CO_OD_RAM.readAnalogueInput32Bit[0],
-           CO_OD_RAM.readAnalogueInput32Bit[1]);
+//    qDebug("0x600001:%Xh 0x600002:%Xh 0x620001:%Xh 0x620002:%Xh",CO_OD_RAM.readInput8Bit[0],
+//           CO_OD_RAM.readInput8Bit[1],CO_OD_RAM.writeOutput8Bit[0],CO_OD_RAM.writeOutput8Bit[1]);
+//    qDebug("0x640101:%Xh 0x640102:%Xh ",CO_OD_RAM.readAnalogueInput32Bit[0],
+//           CO_OD_RAM.readAnalogueInput32Bit[1]);
 
     //时间显示
     valueInt();
@@ -119,19 +119,17 @@ Log::Log(QWidget *parent) :
     connect(tableWidget_2,SIGNAL(cellClicked(int,int)),this,SLOT(getCell_2(int,int)));
     connect(tableWidget,SIGNAL(cellClicked(int,int)),this,SLOT(getCell(int,int)));
     //从数据库读出已存入的基本信息
-
+//登录日志数据库读取
   SQLITE sqlite;
    sqlite.openDatabase();
-  QList<Record*> *ql1 = sqlite.queryRecord();
-    if(ql1->size()>0)
+  QList<Record*> *ql = sqlite.queryLogRecord();
+    if(ql->size()>0)
     {
-        tableWidget->setRowCount(ql1->size());
-        tableWidget_2->setRowCount(ql1->size());
+        tableWidget->setRowCount(ql->size());
         tableWidget->setColumnCount(2);
-        tableWidget_2->setColumnCount(6);
-        for(int i = 0;i < ql1->size();i++)
+        for(int i = 0;i < ql->size();i++)
         {
-            Record *r = ql1->at(i);
+            Record *r = ql->at(i);
             //qDebug()<<"+++++++++++++++++++";
             //qDebug()<<p->getProductNumber();
             //qDebug()<<"+++++++++++++++++++";
@@ -142,38 +140,19 @@ Log::Log(QWidget *parent) :
             tableWidget->setItem(i,0,new QTableWidgetItem(r->getLogTime()));
             tableWidget->setItem(i,1,new QTableWidgetItem(r->getLogOperator()));
 
-            tableWidget_2->setRowHeight(i,48);
-            tableWidget_2->setColumnWidth(0,73);
-            tableWidget_2->setColumnWidth(1,73);
-            tableWidget_2->setColumnWidth(2,73);
-            tableWidget_2->setColumnWidth(3,73);
-            tableWidget_2->setColumnWidth(4,73);
-            tableWidget_2->setColumnWidth(5,73);
-
-            tableWidget_2->setItem(i,0,new QTableWidgetItem(QString("%1").arg(i)));
-            tableWidget_2->setItem(i,1,new QTableWidgetItem(r->getNgProductNumber()));
-            tableWidget_2->setItem(i,2,new QTableWidgetItem(r->getNgProductName()));
-            tableWidget_2->setItem(i,3,new QTableWidgetItem(r->getNgTime()));
-            tableWidget_2->setItem(i,4,new QTableWidgetItem(r->getNgSignal()));
-            tableWidget_2->setItem(i,5,new QTableWidgetItem(r->getNgOperator())); }
+            }
 
     }else{
         tableWidget->setRowCount(1);
-        tableWidget_2->setRowCount(1);
         tableWidget->setColumnCount(2);
-        tableWidget_2->setColumnCount(6);
         tableWidget->setRowHeight(0,55);
         tableWidget->setColumnWidth(0,382);
         tableWidget->setColumnWidth(1,382);
-        tableWidget_2->setRowHeight(0,48);
-        tableWidget_2->setColumnWidth(0,73);
-        tableWidget_2->setColumnWidth(1,73);
-        tableWidget_2->setColumnWidth(2,73);
-        tableWidget_2->setColumnWidth(3,73);
-        tableWidget_2->setColumnWidth(4,73);
-        tableWidget_2->setColumnWidth(5,73);
     }
     sqlite.closeDatabase();
+
+    ngflag=0;
+    j=0;
 
 }
 
@@ -201,9 +180,53 @@ void Log::ShowTime()
      ui->DateTime->setText((text+time.toString(" hh:mm")));
 }
 
-
+//ng
 void Log::on_NGButton_clicked()
 {
+    if(ngflag==0)
+    {
+        //NG日志数据库读取
+            SQLITE sqlite_2;
+             sqlite_2.openDatabase();
+            QList<Record*> *ql_2 = sqlite_2.queryNgRecord();
+              if(ql_2->size()>0)
+              {
+                  tableWidget_2->setRowCount(ql_2->size());
+                  tableWidget_2->setColumnCount(6);
+                  for(int i = 0;i < ql_2->size();i++)
+                  {
+                      Record *r = ql_2->at(i);
+
+
+                      tableWidget_2->setRowHeight(i,48);
+                      tableWidget_2->setColumnWidth(0,73);
+                      tableWidget_2->setColumnWidth(1,73);
+                      tableWidget_2->setColumnWidth(2,73);
+                      tableWidget_2->setColumnWidth(3,73);
+                      tableWidget_2->setColumnWidth(4,73);
+                      tableWidget_2->setColumnWidth(5,73);
+
+                      tableWidget_2->setItem(i,0,new QTableWidgetItem(QString("%1").arg(i)));
+                      tableWidget_2->setItem(i,1,new QTableWidgetItem(r->getNgProductNumber()));
+                      tableWidget_2->setItem(i,2,new QTableWidgetItem(r->getNgProductName()));
+                      tableWidget_2->setItem(i,3,new QTableWidgetItem(r->getNgTime()));
+                      tableWidget_2->setItem(i,4,new QTableWidgetItem(r->getNgSignal()));
+                      tableWidget_2->setItem(i,5,new QTableWidgetItem(r->getNgOperator())); }
+
+              }else{
+                  tableWidget_2->setRowCount(1);
+                  tableWidget_2->setColumnCount(6);
+                  tableWidget_2->setRowHeight(0,48);
+                  tableWidget_2->setColumnWidth(0,73);
+                  tableWidget_2->setColumnWidth(1,73);
+                  tableWidget_2->setColumnWidth(2,73);
+                  tableWidget_2->setColumnWidth(3,73);
+                  tableWidget_2->setColumnWidth(4,73);
+                  tableWidget_2->setColumnWidth(5,73);
+              }
+              sqlite_2.closeDatabase();
+    }
+    ngflag=1;
     ui->Stack->setCurrentIndex(1);
     ui->DisLabel->setText(tr("NG日志"));
 }
@@ -214,7 +237,7 @@ void Log::on_Return_clicked()
 }
 
 
-
+//登陆日志
 void Log::on_LoadLog_2_clicked()
 {
     ui->Stack->setCurrentIndex(0);
@@ -240,9 +263,17 @@ void Log::LogInput(QLineEdit *n,int row,int column)
 }
 void Log::getCell(int row,int column)
 {
-    this->row1=row;
+
+    if(row!=this->row1)
+    {
+          j++;
+         this->row1=row;
+        //QString row2=tr("%1").arg(row1);
+        rowlist[j]=this->row1;
+    }
     this->column1=column;
     LogInput(ui->lineEdit,row1,column1);
+
 }
 void Log::getData_2(QString text,QLineEdit *n,int row,int column)
 {
@@ -260,9 +291,14 @@ void Log::LogInput_2(QLineEdit *n,int row,int column)
 }
 void Log::getCell_2(int row,int column)
 {
-    this->row1=row;
-    this->column1=column;
-    LogInput_2(ui->lineEdit,row1,column1);
+    if(row!=this->row_2)
+    {
+         this->row_2=row;
+        QString row3=tr("%1").arg(row_2);
+        rowlist_2.append(row3);
+    }
+    this->column_2=column;
+    LogInput_2(ui->lineEdit,row_2,column_2);
 }
 
 void Log::on_USBOuput_clicked()
@@ -299,9 +335,51 @@ void Log::on_USBOuput_clicked()
 
 void Log::on_Save_clicked()
 {
-
+    saveData();
 }
 void Log::saveData(){
-//    Record *r = new Record;
+
+    Record *r = new Record;
+    qDebug()<<ui->Stack->currentIndex();
+    if(ui->Stack->currentIndex()==0)
+   {
+        for(int i=0;i<=j;i++)
+        {
+             QTableWidgetItem *item1=new QTableWidgetItem;
+             item1=tableWidget->item(rowlist[j],0);
+            r->setLogTime(item1->text());
+            QTableWidgetItem *item2=new QTableWidgetItem;
+            item2=tableWidget->item(rowlist[j],0);
+             r->setLogOperator(item2->text());
+            SQLITE sqlite;
+            sqlite.openDatabase();
+            sqlite.insertLogRecord(r->getLogTime(),r->getLogOperator());
+            sqlite.closeDatabase();
+        }
+   }else if(ui->Stack->currentIndex()==1)
+   {
+        for(int i=0;i<=rowlist_2.count();i++)
+        {
+//            QString list_2=rowlist_2[i];
+//            bool ok;
+//            int list1_2;
+//           list1_2= list_2.toInt(&ok,10);
+//           QTableWidgetItem*item2=new QTableWidgetItem;
+//                   item2=tableWidget_2->item(list1_2,1);
+//            r->setNgProductNumber(item2->text());
+//            QTableWidgetItem *item3=tableWidget_2->item(list1_2,2);
+//            r->setNgProductName(item3->text());
+//            QTableWidgetItem *item4=tableWidget_2->item(list1_2,3);
+//            r->setNgTime(item4->text());
+//            QTableWidgetItem *item5=tableWidget_2->item(list1_2,4);
+//            r->setNgSignal(item5->text());
+//            QTableWidgetItem *item6=tableWidget_2->item(list1_2,5);
+//            r->setNgOperator(item6->text());
+//            SQLITE sqlite_2;
+//            sqlite_2.openDatabase();
+//            sqlite_2.insertNgRecord(r->getNgProductNumber(), r->getNgProductName(),r->getNgTime(),r->getNgSignal(),r->getNgOperator());
+//            sqlite_2.closeDatabase();
+        }
+    }
 
 }

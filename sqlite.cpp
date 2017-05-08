@@ -225,9 +225,8 @@ QList<Product*> *SQLITE::queryProduct()
     }
     return ql;
 }
-void SQLITE::insertRecord(QString logTime1,QString logOperator1,QString ngProductNumber1,QString ngProductName1,
-                       QString ngTime1,QString ngSignal1,QString ngOperator1){
-    QString insert_sql = "insert into record (logTime,logOperator,ngProductNumber,ngProductName,ngTime,ngSignal,ngOperator) values (?,?,?,?,?,?,?)";
+void SQLITE::insertLogRecord(QString logTime1,QString logOperator1){
+    QString insert_sql = "insert into log_record(logTime,logOperator) values (?,?)";
 
     sql_query->prepare(insert_sql);
 
@@ -239,6 +238,53 @@ void SQLITE::insertRecord(QString logTime1,QString logOperator1,QString ngProduc
 
     QVariantList logOperator;
    logOperator.append(logOperator1);
+
+    sql_query->addBindValue(logTime);
+    sql_query->addBindValue(logOperator);
+
+
+
+    if(!sql_query->execBatch())
+    {
+        qDebug()<<sql_query->lastError();
+    }
+    else
+    {
+        qDebug()<<"success";
+    }
+}
+QList<Record*> *SQLITE::queryLogRecord()
+{
+    QList<Record*> *ql1 = new QList<Record*>;
+    QString select_all_sql1 = "select * from log_record";
+    sql_query->prepare(select_all_sql1);
+
+    if(!sql_query->exec())
+    {
+        qDebug()<<sql_query->lastError();
+    }else{
+        while(sql_query->next())
+        {
+            Record *r = new Record;
+            r->setLogTime(sql_query->value(1).toString());
+            r->setLogOperator(sql_query->value(2).toString());
+            qDebug()<<sql_query->value(2).toString();
+            ql1->append(r);
+        }
+
+    }
+
+    return ql1;
+}
+void SQLITE::insertNgRecord(QString ngProductNumber1,QString ngProductName1,
+                       QString ngTime1,QString ngSignal1,QString ngOperator1){
+    QString insert_sql = "insert into ng_record (ngProductNumber,ngProductName,ngTime,ngSignal,ngOperator) values (?,?,?,?,?)";
+
+    sql_query->prepare(insert_sql);
+
+//    QVariantList id;
+//    id.append();
+
 
     QVariantList ngProductNumber;
     ngProductNumber.append(ngProductNumber1);
@@ -258,8 +304,7 @@ void SQLITE::insertRecord(QString logTime1,QString logOperator1,QString ngProduc
 
 
 
-    sql_query->addBindValue(logTime);
-    sql_query->addBindValue(logOperator);
+
     sql_query->addBindValue(ngProductNumber);
     sql_query->addBindValue(ngProductName);
     sql_query->addBindValue(ngTime);
@@ -276,11 +321,11 @@ void SQLITE::insertRecord(QString logTime1,QString logOperator1,QString ngProduc
         qDebug()<<"success";
     }
 }
-QList<Record*> *SQLITE::queryRecord()
+QList<Record*> *SQLITE::queryNgRecord()
 {
-    QList<Record*> *ql1 = new QList<Record*>;
-    QString select_all_sql1 = "select * from record";
-    sql_query->prepare(select_all_sql1);
+    QList<Record*> *ql2 = new QList<Record*>;
+    QString select_all_sql2 = "select * from ng_record";
+    sql_query->prepare(select_all_sql2);
 
     if(!sql_query->exec())
     {
@@ -289,18 +334,16 @@ QList<Record*> *SQLITE::queryRecord()
         while(sql_query->next())
         {
             Record *r = new Record;
-            r->setLogTime(sql_query->value(1).toString());
-            r->setLogOperator(sql_query->value(2).toString());
-            r->setNgProductNumber(sql_query->value(3).toString());
-            r->setNgProductName(sql_query->value(4).toString());
-            r->setNgTime(sql_query->value(5).toString());
-            r->setNgSignal(sql_query->value(6).toString());
-            r->setNgOperator(sql_query->value(7).toString());
+            r->setNgProductNumber(sql_query->value(1).toString());
+            r->setNgProductName(sql_query->value(2).toString());
+            r->setNgTime(sql_query->value(3).toString());
+            r->setNgSignal(sql_query->value(4).toString());
+            r->setNgOperator(sql_query->value(5).toString());
             qDebug()<<sql_query->value(2).toString();
-            ql1->append(r);
+            ql2->append(r);
         }
 
     }
 
-    return ql1;
+    return ql2;
 }

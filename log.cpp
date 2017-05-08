@@ -16,6 +16,7 @@
 #include <QTableWidgetItem>
 #include<QTableWidget>
 #include<QHBoxLayout>
+#include<QDir>
 Log::Log(QWidget *parent) :
     QWidget(parent),
     ui(new Ui::Log)
@@ -158,7 +159,7 @@ Log::Log(QWidget *parent) :
 
 Log::~Log()
 {
-    delete ui;
+    //delete ui;
 }
 char Log::UsbRead ()
 {
@@ -303,34 +304,57 @@ void Log::getCell_2(int row,int column)
 
 void Log::on_USBOuput_clicked()
 {
+    if(QDir("/media/sda").exists())
+    {
+        QDir file("/media/sda");
 
-//    if(QFile::exists("/media/sda"))
-//    {
-//        qDebug("12");
-//        QFile file("/medis/sda");
-//        if(!file.open(QIODevice::WriteOnly | QIODevice::Text))
-//           { qDebug()<<file.errorString();}
-//        else{
-//           QFile file("a.txt");
-//           SQLITE sqlite;
-//           sqlite.openDatabase();
-//           QList<Record*> *ql = sqlite.queryRecord();
-//           for(int i=0;i<=ql->size();i++)
-//           {
-//               for(int j=0;j<=6;j++)
-//               {
+               QFile file1("a.txt");
+               if(!file1.open(QFile::WriteOnly | QFile::Truncate))
+               {
+                    qDebug()<<file.errorString();
+               }else
+               {
+                   QTextStream in(&file1);
+                   SQLITE sqlite;
+                   sqlite.openDatabase();
+                   QList<Record*> *ql = sqlite.queryLogRecord();
+                   for(int i=0;i<=ql->size();i++)
+                   {
+                           Record *record=ql->at(i);
+                            QString logtime=record->getLogTime();
+                            QString logoperator=record->getLogOperator();
+                            in<<logtime;
+                            in<<logoperator;
+                   }
+                   sqlite.closeDatabase();
+                   SQLITE sqlite_2;
+                   sqlite_2.openDatabase();
+                   QList<Record*> *ql_2 = sqlite.queryNgRecord();
+                   for(int i=0;i<=ql_2->size();i++)
+                   {
+                           Record *record_2=ql_2->at(i);
+                            QString ngproductnumber=record_2->getNgProductNumber();
+                            QString ngproductname=record_2->getNgProductName();
+                            QString ngtime=record_2->getNgTime();
+                            QString ngsignal=record_2->getNgSignal();
+                            QString ngoperator=record_2->getNgOperator();
+                            in<<ngproductnumber;
+                            in<<ngproductname;
+                            in<<ngtime;
+                            in<<ngsignal;
+                            in<<ngoperator<<'\n';
+                   }
+                   sqlite_2.closeDatabase();
+                   file1.close();
+               }
+               file1.copy("/media/sda");
+    }else{
 
-//               }
-//           }
+        QMessageBox::critical(0,"critical message","未检测到USB设备",
+                           QMessageBox::Ok | QMessageBox::Default,
+                              QMessageBox::Cancel | QMessageBox::Escape,0);
 
-//        }
-//    }else{
-
-//        QMessageBox::critical(0,"critical message","未检测到USB设备",
-//                           QMessageBox::Ok | QMessageBox::Default,
-//                              QMessageBox::Cancel | QMessageBox::Escape,0);
-
-//    }
+    }
 }
 
 void Log::on_Save_clicked()
@@ -346,15 +370,15 @@ void Log::saveData(){
         for(int i=0;i<=j;i++)
         {
              QTableWidgetItem *item1=new QTableWidgetItem;
-             item1=tableWidget->item(rowlist[j],0);
-            r->setLogTime(item1->text());
-            QTableWidgetItem *item2=new QTableWidgetItem;
-            item2=tableWidget->item(rowlist[j],0);
-             r->setLogOperator(item2->text());
-            SQLITE sqlite;
-            sqlite.openDatabase();
-            sqlite.insertLogRecord(r->getLogTime(),r->getLogOperator());
-            sqlite.closeDatabase();
+             item1=tableWidget->item(0,0);
+        //    r->setLogTime(item1->text());
+//            QTableWidgetItem *item2=new QTableWidgetItem;
+//            item2=tableWidget->item(rowlist[j],0);
+//             //r->setLogOperator(item2->text());
+//            SQLITE sqlite;
+//            sqlite.openDatabase();
+//            sqlite.insertLogRecord(r->getLogTime(),r->getLogOperator());
+//            sqlite.closeDatabase();
         }
    }else if(ui->Stack->currentIndex()==1)
    {

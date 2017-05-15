@@ -51,18 +51,25 @@ MainWindow::MainWindow(QWidget *parent) :
     timer->start(500);
 
     //
-
-
-
-
     log = new Log;
+
+    ui->stacked1->setCurrentIndex(0);
+    ui->stacked2->setCurrentIndex(0);
 }
 
 MainWindow::~MainWindow()
 {
     delete ui;
 }
-
+void MainWindow::learn(){
+    ui->stacked1->setCurrentIndex(1);
+    ui->stacked2->setCurrentIndex(1);
+}
+void MainWindow::on_FinishBtn_clicked()
+{
+    ui->stacked1->setCurrentIndex(2);
+    ui->stacked2->setCurrentIndex(2);
+}
 void MainWindow::valueInt(void)
 {
     System_RunTime.hour=0;
@@ -83,6 +90,8 @@ void MainWindow::ShowTime()
 //     else if(time.date().dayOfWeek() == 6) text=text+tr("星期六");
 //     else if(time.date().dayOfWeek() == 7) text=text+tr("星期日");
      ui->DateTime->setText((text+time.toString(" hh:mm")));
+     ui->DateTime_2->setText((text+time.toString(" hh:mm")));
+     ui->DateTime_3->setText((text+time.toString(" hh:mm")));
 }
 
 //触发的事件
@@ -239,9 +248,19 @@ void MainWindow::on_SetZero_clicked()
     ui->PassNum->setText(tr("通过数0"));
     ui->NoPassNum->setText(tr("未通过数0"));
 }
-
+void MainWindow::on_SetZero_3_clicked()
+{
+    ui->TestNum_3->setText(tr("检测数0"));
+    ui->PassNum_3->setText(tr("通过数0"));
+    ui->NoPassNum_3->setText(tr("未通过数0"));
+}
 
 void MainWindow::on_Quit_clicked()
 {
     this->close();
+}
+void MainWindow::on_Quit_3_clicked()
+{
+    ui->stacked1->setCurrentIndex(0);
+    ui->stacked2->setCurrentIndex(0);
 }

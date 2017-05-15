@@ -7,13 +7,13 @@
 #include <config.h>
 #include <QFileDialog>
 #include "globl_data.h"
-#include <learn.h>
 #include "product.h"
 #include <notice.h>
 #include <QDialog>
 #include <QMessageBox>
 #include<input.h>
 #include<QLineEdit>
+#include<mainwindow.h>
 class verify;
 namespace Ui {
 class Management;
@@ -66,9 +66,9 @@ private slots:
 private:
     Ui::Management *ui;
     QButtonGroup *PackingStyleGroup;
-    class learn *Learn;
     notice *Notice;
     input *Input;
+    class MainWindow *mainwindow;
     void valueInt(void);
 
 

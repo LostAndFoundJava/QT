@@ -33,7 +33,6 @@ HEADERS += application.h \
            dataset.h \
            globl_data.h \
            juxingkuang.h \
-           learn.h \
            log.h \
            mainwindow.h \
            management.h \
@@ -45,19 +44,16 @@ HEADERS += application.h \
            subwidget.h \
            systemset.h \
            thread_canopen.h \
-           varify.h \
            widget.h \
     input.h \
     kboard.h \
     record.h
 FORMS += dataset.ui \
-         learn.ui \
          log.ui \
          mainwindow.ui \
          management.ui \
          notice.ui \
          systemset.ui \
-         varify.ui \
          widget.ui \
     input.ui \
     kboard.ui
@@ -85,7 +81,6 @@ SOURCES += application.c \
            dataset.cpp \
            globl_data.cpp \
            juxingkuang.cpp \
-           learn.cpp \
            log.cpp \
            main.cpp \
            mainwindow.cpp \
@@ -97,7 +92,6 @@ SOURCES += application.c \
            subwidget.cpp \
            systemset.cpp \
            thread_canopen.cpp \
-           varify.cpp \
            widget.cpp \
     input.cpp \
     kboard.cpp \

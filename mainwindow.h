@@ -38,6 +38,7 @@ private:
 public slots:
     bool eventFilter(QObject *watched,QEvent *event);
     void ShowTime(void);
+     void learn();
 
 protected:
     void keyPressEvent(QKeyEvent *event);
@@ -50,7 +51,17 @@ private slots:
     void on_SetZero_clicked();
 
     void on_Quit_clicked();
+
+    void on_FinishBtn_clicked();
+    void on_Quit_3_clicked();
+    void on_SetZero_3_clicked();
 };
 
 extern MainWindow *w;
 #endif // MAINWINDOW_H
+
+
+
+
+
+

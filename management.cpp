@@ -91,7 +91,7 @@ Management::Management(QWidget *parent) :
     timer->start(500);
 
     //新建学习界面
-    Learn = new learn();
+    mainwindow = new MainWindow();
 
 
     //tablewidget设置数据
@@ -522,15 +522,17 @@ void Management::on_LearningButton_clicked()
             if(!(ui->LengthEdit->text().isEmpty()))
             {
                 SaveData();
-                Learn->show();
-                Learn->move(pos().x(),pos().y());
+                mainwindow->show();
+                mainwindow->move(pos().x(),pos().y());
+                mainwindow->learn();
                 this->hide();
             }
         }else if(PackFlag==1)
         {
             SaveData();
-            Learn->show();
-            Learn->move(pos().x(),pos().y());
+            mainwindow->show();
+            mainwindow->move(pos().x(),pos().y());
+            mainwindow->learn();
             this->hide();
         }
     }else{

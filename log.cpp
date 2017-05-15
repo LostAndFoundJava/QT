@@ -117,8 +117,7 @@ Log::Log(QWidget *parent) :
     tableWidget_2->setHorizontalHeaderLabels(header_2);
     tableWidget_2->verticalHeader()->hide();
 
-    connect(tableWidget_2,SIGNAL(cellClicked(int,int)),this,SLOT(getCell_2(int,int)));
-    connect(tableWidget,SIGNAL(cellClicked(int,int)),this,SLOT(getCell(int,int)));
+
     //从数据库读出已存入的基本信息
 //登录日志数据库读取
   SQLITE sqlite;
@@ -152,9 +151,6 @@ Log::Log(QWidget *parent) :
     }
     sqlite.closeDatabase();
 
-    ngflag=0;
-    j=0;
-
 }
 
 Log::~Log()
@@ -184,8 +180,6 @@ void Log::ShowTime()
 //ng
 void Log::on_NGButton_clicked()
 {
-    if(ngflag==0)
-    {
         //NG日志数据库读取
             SQLITE sqlite_2;
              sqlite_2.openDatabase();
@@ -226,8 +220,6 @@ void Log::on_NGButton_clicked()
                   tableWidget_2->setColumnWidth(5,73);
               }
               sqlite_2.closeDatabase();
-    }
-    ngflag=1;
     ui->Stack->setCurrentIndex(1);
     ui->DisLabel->setText(tr("NG日志"));
 }
@@ -244,63 +236,8 @@ void Log::on_LoadLog_2_clicked()
     ui->Stack->setCurrentIndex(0);
     ui->DisLabel->setText(tr("登陆日志"));
 }
-void Log::ContentInput(){
-    Input=new input();
 
-}
-void Log::getData(QString text,QLineEdit *n,int row,int column)
-{
-   QTableWidgetItem *m = new QTableWidgetItem;
-      m->setText(text);
-    tableWidget->setItem(row,column,m);
-}
-void Log::LogInput(QLineEdit *n,int row,int column)
-{
-    Input=new input();
-    Input->setLogReference(n,row,column);
-    Input->move(pos().x(),pos().y());
-    Input->show();
-    connect(Input,SIGNAL(setData(QString,QLineEdit *,int,int)),this,SLOT(getData(QString,QLineEdit *,int,int)));
-}
-void Log::getCell(int row,int column)
-{
 
-    if(row!=this->row1)
-    {
-          j++;
-         this->row1=row;
-        //QString row2=tr("%1").arg(row1);
-        rowlist[j]=this->row1;
-    }
-    this->column1=column;
-    LogInput(ui->lineEdit,row1,column1);
-
-}
-void Log::getData_2(QString text,QLineEdit *n,int row,int column)
-{
-   QTableWidgetItem *m_2 = new QTableWidgetItem;
-      m_2->setText(text);
-    tableWidget_2->setItem(row,column,m_2);
-}
-void Log::LogInput_2(QLineEdit *n,int row,int column)
-{
-    Input=new input();
-    Input->setLogReference(n,row,column);
-    Input->move(pos().x(),pos().y());
-    Input->show();
-    connect(Input,SIGNAL(setData(QString,QLineEdit *,int,int)),this,SLOT(getData_2(QString,QLineEdit *,int,int)));
-}
-void Log::getCell_2(int row,int column)
-{
-    if(row!=this->row_2)
-    {
-         this->row_2=row;
-        QString row3=tr("%1").arg(row_2);
-        rowlist_2.append(row3);
-    }
-    this->column_2=column;
-    LogInput_2(ui->lineEdit,row_2,column_2);
-}
 
 void Log::on_USBOuput_clicked()
 {
@@ -311,7 +248,7 @@ void Log::on_USBOuput_clicked()
                QFile file1("a.txt");
                if(!file1.open(QFile::WriteOnly | QFile::Truncate))
                {
-                    qDebug()<<file.errorString();
+                    qDebug()<<file1.errorString();
                }else
                {
                    QTextStream in(&file1);
@@ -355,55 +292,4 @@ void Log::on_USBOuput_clicked()
                               QMessageBox::Cancel | QMessageBox::Escape,0);
 
     }
-}
-
-void Log::on_Save_clicked()
-{
-    saveData();
-}
-void Log::saveData(){
-
-    Record *r = new Record;
-    qDebug()<<ui->Stack->currentIndex();
-    if(ui->Stack->currentIndex()==0)
-   {
-        for(int i=0;i<=j;i++)
-        {
-             QTableWidgetItem *item1=new QTableWidgetItem;
-             item1=tableWidget->item(0,0);
-        //    r->setLogTime(item1->text());
-//            QTableWidgetItem *item2=new QTableWidgetItem;
-//            item2=tableWidget->item(rowlist[j],0);
-//             //r->setLogOperator(item2->text());
-//            SQLITE sqlite;
-//            sqlite.openDatabase();
-//            sqlite.insertLogRecord(r->getLogTime(),r->getLogOperator());
-//            sqlite.closeDatabase();
-        }
-   }else if(ui->Stack->currentIndex()==1)
-   {
-        for(int i=0;i<=rowlist_2.count();i++)
-        {
-//            QString list_2=rowlist_2[i];
-//            bool ok;
-//            int list1_2;
-//           list1_2= list_2.toInt(&ok,10);
-//           QTableWidgetItem*item2=new QTableWidgetItem;
-//                   item2=tableWidget_2->item(list1_2,1);
-//            r->setNgProductNumber(item2->text());
-//            QTableWidgetItem *item3=tableWidget_2->item(list1_2,2);
-//            r->setNgProductName(item3->text());
-//            QTableWidgetItem *item4=tableWidget_2->item(list1_2,3);
-//            r->setNgTime(item4->text());
-//            QTableWidgetItem *item5=tableWidget_2->item(list1_2,4);
-//            r->setNgSignal(item5->text());
-//            QTableWidgetItem *item6=tableWidget_2->item(list1_2,5);
-//            r->setNgOperator(item6->text());
-//            SQLITE sqlite_2;
-//            sqlite_2.openDatabase();
-//            sqlite_2.insertNgRecord(r->getNgProductNumber(), r->getNgProductName(),r->getNgTime(),r->getNgSignal(),r->getNgOperator());
-//            sqlite_2.closeDatabase();
-        }
-    }
-
 }
